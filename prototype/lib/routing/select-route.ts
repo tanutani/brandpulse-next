@@ -28,7 +28,7 @@ const remediableMandatoryBlockers = (blockers: DecisionBlocker[]) =>
   mandatoryBlockers(blockers).filter((blocker) => blocker.remediation !== null);
 const watchConcern = (blockers: DecisionBlocker[]) => blockers.some((b) => WATCH_CODES.has(b.code));
 
-function weakest(...gates: GateAssessment[]): GateAssessment {
+export function getWeakestGate(...gates: GateAssessment[]): GateAssessment {
   return gates.reduce((current, gate) => (gate.score < current.score ? gate : current));
 }
 
@@ -43,7 +43,7 @@ function watchReasons(inputs: RouteInputs): string[] {
 }
 
 export function selectRoute(inputs: RouteInputs): RouteDecision {
-  const low = weakest(inputs.proof, inputs.permission, inputs.preparedness);
+  const low = getWeakestGate(inputs.proof, inputs.permission, inputs.preparedness);
   const base = { readiness: low.score, weakestGate: low.gate };
   const hours = (Date.parse(inputs.opportunity.usefulUntil) - Date.parse(inputs.evaluatedAt)) / 3_600_000;
 

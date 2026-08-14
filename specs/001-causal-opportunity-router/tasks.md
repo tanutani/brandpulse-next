@@ -9,13 +9,13 @@ end-to-end journey by the project constitution.
 
 **Purpose**: Create one pinned, Vercel-native TypeScript application and its quality commands.
 
-- [ ] T001 Scaffold the Next.js App Router TypeScript application in `app/layout.tsx`, `app/page.tsx`, `package.json`, `tsconfig.json`, and `next.config.ts`
-- [ ] T002 Install and pin Tailwind CSS, shadcn/ui prerequisites, XState 5, Zod, Recharts, Vercel AI SDK, and the Google provider in `package.json` and `package-lock.json`
-- [ ] T003 [P] Configure Vitest and React Testing Library in `vitest.config.ts` and `tests/setup.ts`
-- [ ] T004 [P] Configure Playwright with local and deployed base URL support in `playwright.config.ts`
-- [ ] T005 [P] Add lint, typecheck, unit, end-to-end, and production-build scripts to `package.json`
-- [ ] T006 [P] Add documented `DEMO_MODE`, `GOOGLE_GENERATIVE_AI_API_KEY`, and `BRANDPULSE_MODEL` placeholders to `.env.example`
-- [ ] T007 Add generated application artifacts and secret files to `.gitignore` without excluding `public/data/` fixtures
+- [X] T001 Scaffold the Next.js App Router TypeScript application in `app/layout.tsx`, `app/page.tsx`, `package.json`, `tsconfig.json`, and `next.config.ts`
+- [X] T002 Install and pin the approved Day 1 Tailwind, XState 5, Zod, `@xstate/react`, and Lucide dependencies in `package.json` and `package-lock.json`; defer Recharts and all model SDKs per the controlled-foundation scope
+- [X] T003 [P] Configure Vitest for deterministic domain and integration tests in `vitest.config.mts`
+- [X] T004 [P] Configure Playwright with local and deployed base URL support in `playwright.config.ts`
+- [X] T005 [P] Add lint, typecheck, unit, end-to-end, and production-build scripts to `package.json`
+- [X] T006 [P] Add the controlled-foundation `DEMO_MODE=static` and `LIVE_AI_ENABLED=false` placeholders to `.env.example`
+- [X] T007 Add generated application artifacts and secret files to `.gitignore` without excluding `public/data/` fixtures
 
 **Checkpoint**: A blank application builds locally and all quality commands are callable.
 
@@ -26,16 +26,16 @@ end-to-end journey by the project constitution.
 **Purpose**: Establish the contracts, fixtures, workflow, provenance system, and reusable UI shell
 that block every user story.
 
-- [ ] T008 Port `contracts/opportunity-contract.schema.json` into Zod and TypeScript contracts in `lib/contracts/opportunity.ts`
-- [ ] T009 [P] Create route, evidence type, freshness, blocker severity, and workflow event enums in `lib/contracts/enums.ts`
-- [ ] T010 [P] Create versioned P3 weights and route-threshold configuration in `lib/scoring/config.ts`
-- [ ] T011 [P] Implement fixture parsing and schema validation in `lib/fixtures/load-fixtures.ts`
-- [ ] T012 [P] Create public, synthetic, model-inference, and business-assumption label components in `components/evidence/provenance-badge.tsx`
-- [ ] T013 [P] Create the common app shell, guided-demo progress, mode badge, and disclosure banner in `components/shell/app-shell.tsx`
-- [ ] T014 Implement the guarded XState workflow and recovery states in `lib/state/opportunity-machine.ts`
-- [ ] T015 Add forbidden-transition and recovery-state unit tests in `tests/unit/opportunity-machine.test.ts`
-- [ ] T016 Implement typed browser persistence for contract versions and append-only decisions in `lib/persistence/local-contract-store.ts`
-- [ ] T017 Create checked-in precomputed synthesis loader and degraded-mode response in `lib/agents/fallback.ts`
+- [X] T008 Port `contracts/opportunity-contract.schema.json` into Zod and TypeScript contracts in `lib/contracts/opportunity.ts`
+- [X] T009 [P] Create route, evidence type, freshness, blocker severity, and workflow event enums in `lib/contracts/enums.ts`
+- [X] T010 [P] Create versioned P3 weights and route-threshold configuration in `lib/scoring/config.ts`
+- [X] T011 [P] Implement fixture parsing and schema validation in `lib/fixtures/load-fixtures.ts`
+- [X] T012 [P] Create public, synthetic, model-inference, and business-assumption label components in `components/evidence/provenance-badge.tsx`
+- [X] T013 [P] Create the Day 1 common app shell, static-mode badge, and disclosure banner in `components/shell/app-shell.tsx`
+- [X] T014 Implement the guarded XState workflow and recovery states in `lib/state/opportunity-machine.ts`
+- [X] T015 Add forbidden-transition and recovery-state unit tests in `tests/unit/opportunity-machine.test.ts`
+- [X] T016 Implement typed browser persistence for contract versions and append-only decisions in `lib/persistence/local-contract-store.ts`
+- [X] T017 Create checked-in precomputed synthesis loader and degraded-mode response in `lib/agents/fallback.ts`
 
 **Checkpoint**: A validated empty Opportunity Contract can enter only legal states and survives a
 browser refresh without any external service.
@@ -50,17 +50,17 @@ Act Now, Test, Incubate, Watch, or Ignore route.
 **Independent test**: With no API key, open the hero and noise opportunities, view every decisive
 input, change one assumption, and observe a deterministic route change or stable rejection.
 
-- [ ] T018 [P] [US1] Create hero, durable-shift, and single-source-noise signal fixtures in `public/data/signals.json`
-- [ ] T019 [P] [US1] Create labeled synthetic consumer-connect and commerce/off-take fixtures in `public/data/consumer-connects.jsonl` and `public/data/commerce-offtake.json`
-- [ ] T020 [P] [US1] Write Proof component, penalty, weakest-link, and route-boundary tests in `tests/unit/proof-and-routing.test.ts`
-- [ ] T021 [US1] Implement Proof component calculations and manipulation/source-concentration penalties in `lib/scoring/proof.ts`
-- [ ] T022 [US1] Implement non-compensating route selection and reason codes in `lib/routing/select-route.ts`
-- [ ] T023 [P] [US1] Implement deterministic topic clustering, freshness, evidence-family independence, and counter-evidence selection in `lib/evidence/cluster-opportunity.ts` and `lib/evidence/evaluate-evidence.ts`
-- [ ] T024 [P] [US1] Create precomputed Evidence Analyst and Skeptic outputs in `public/data/precomputed-synthesis.json`
-- [ ] T025 [US1] Build opportunity cards with signal class, countdown, evidence coverage, weakest link, and route in `app/opportunities/page.tsx`
-- [ ] T026 [US1] Build the Opportunity Contract evidence chain, counter-evidence panel, and component explanations in `app/opportunities/[id]/page.tsx`
-- [ ] T027 [US1] Add editable source-concentration and commerce-evidence assumptions in `components/gates/assumption-control.tsx`
-- [ ] T028 [US1] Add a static-mode evidence-to-route integration test in `tests/integration/opportunity-route.test.tsx`
+- [X] T018 [P] [US1] Create hero, durable-shift, and single-source-noise signal fixtures in `public/data/signals.json`
+- [X] T019 [P] [US1] Create labeled synthetic consumer-connect and commerce/off-take fixtures in `public/data/consumer-connects.jsonl` and `public/data/commerce-offtake.json`
+- [X] T020 [P] [US1] Write Proof component, penalty, weakest-link, and route-boundary tests in `tests/unit/proof-and-routing.test.ts`
+- [X] T021 [US1] Implement Proof component calculations and manipulation/source-concentration penalties in `lib/scoring/proof.ts`
+- [X] T022 [US1] Implement non-compensating route selection and reason codes in `lib/routing/select-route.ts`
+- [X] T023 [P] [US1] Implement deterministic topic clustering, freshness, evidence-family independence, and counter-evidence selection in `lib/evidence/cluster-opportunity.ts` and `lib/evidence/evaluate-evidence.ts`
+- [X] T024 [P] [US1] Create precomputed Evidence Analyst and Skeptic outputs in `public/data/precomputed-synthesis.json`
+- [X] T025 [US1] Build opportunity cards with signal class, countdown, evidence coverage, weakest link, and route in `app/opportunities/page.tsx`
+- [X] T026 [US1] Build the Opportunity Contract evidence chain, counter-evidence panel, and component explanations in `app/opportunities/[id]/page.tsx`
+- [X] T027 [US1] Add an editable source-concentration assumption with persisted deterministic recalculation in `components/gates/assumption-control.tsx`
+- [X] T028 [US1] Add static fixture-to-Proof-to-route and refresh-persistence integration tests in `tests/integration/fixture-route.test.ts` and `tests/integration/persistence.test.ts`
 - [ ] T029 [US1] Add the MVP guided journey from Pulse Board to explained route in `tests/e2e/mvp-route.spec.ts`
 
 **Checkpoint**: User Story 1 is a deployable MVP that distinguishes corroborated opportunity from
@@ -76,8 +76,8 @@ channel readiness determine ownership and scope.
 **Independent test**: Compare Rexona, Dove, and Axe for the same opportunity; switch from national
 scope to four in-stock cities and confirm Preparedness and the route update.
 
-- [ ] T030 [P] [US2] Create versioned Rexona, Dove, and Axe brand-memory fixtures with positioning, claims, taboos, history, and active campaigns in `public/data/brand-memory.json`
-- [ ] T031 [P] [US2] Create synthetic SKU inventory, service-level, channel, creator, and rights fixtures in `public/data/inventory.json` and `public/data/influencers.json`
+- [X] T030 [P] [US2] Create versioned Rexona, Dove, and Axe brand-memory fixtures with positioning, claims, taboos, history, and active campaigns in `public/data/brand-memory.json`
+- [X] T031 [P] [US2] Create synthetic SKU inventory, service-level, channel, creator, and rights fixtures in `public/data/inventory.json` and `public/data/influencers.json`
 - [ ] T032 [P] [US2] Write Permission, Preparedness, hard-blocker, and portfolio-conflict tests in `tests/unit/portfolio-assessment.test.ts`
 - [ ] T033 [US2] Implement Permission scoring and configured claims/cultural blockers in `lib/scoring/permission.ts`
 - [ ] T034 [US2] Implement Preparedness scoring for product, stock, channel, creator, approval, rights, and measurement inputs in `lib/scoring/preparedness.ts`
