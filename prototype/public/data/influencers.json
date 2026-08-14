@@ -1,0 +1,8 @@
+{
+  "fixtureVersion":"1.0.0","generatedAt":"2026-08-15T08:30:00.000Z","disclosure":"Invented aggregate creator profiles; no real people, HUL roster data, or individual targeting.",
+  "creators":[
+    {"id":"creator-agg-sport-west","audience":"urban sport viewers 18–34 aggregate","category":"sport and everyday performance","engagementRate":0.052,"safetyStatus":"demo-cleared","availability":"2026-08-15/2026-08-18","geography":["Mumbai-West","Bengaluru-Central"],"costInr":180000,"rightsScope":"original content only; no match footage, marks, or commentary audio","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"creator-agg-sport-north-south","audience":"urban sport viewers 18–34 aggregate","category":"sport reactions and confidence","engagementRate":0.047,"safetyStatus":"demo-cleared","availability":"2026-08-15/2026-08-18","geography":["Delhi-South","Hyderabad-Central"],"costInr":165000,"rightsScope":"original content only; no match footage, marks, or commentary audio","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"creator-agg-noise-source","audience":"broad entertainment followers aggregate","category":"challenge entertainment","engagementRate":0.081,"safetyStatus":"review_required","availability":"2026-08-15/2026-08-16","geography":["India"],"costInr":240000,"rightsScope":"creator post only; no downstream campaign rights","signalSharePct":90,"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"}
+  ]
+}

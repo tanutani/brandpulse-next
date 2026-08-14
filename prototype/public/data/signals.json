@@ -1,0 +1,61 @@
+{
+  "fixtureVersion": "1.0.0",
+  "generatedAt": "2026-08-15T08:30:00.000Z",
+  "disclosure": "Demo fixture. Public observations are dated and linked. Synthetic records are invented aggregates, not HUL facts.",
+  "opportunities": [
+    {
+      "id": "opp-extra-time-sweat-confidence",
+      "title": "Extra-time sweat confidence",
+      "signalClass": "live_moment",
+      "usefulUntil": "2026-08-18T18:30:00.000Z",
+      "proofInputs": {"persistence":70,"independentCorroboration":75,"behavioralProgression":60,"diffusion":70,"commercialSignal":55,"freshnessQuality":80,"sourceConcentration":0,"manipulationRisk":0},
+      "expectedRoundedProof": 68
+    },
+    {
+      "id": "opp-scalp-skinification",
+      "title": "Scalp skinification",
+      "signalClass": "durable_trend",
+      "usefulUntil": "2026-12-31T18:30:00.000Z",
+      "proofInputs": {"persistence":88,"independentCorroboration":72,"behavioralProgression":62,"diffusion":64,"commercialSignal":48,"freshnessQuality":76,"sourceConcentration":5,"manipulationRisk":0}
+    },
+    {
+      "id": "opp-single-creator-cooling-challenge",
+      "title": "Single-creator cooling challenge",
+      "signalClass": "fad_noise",
+      "usefulUntil": "2026-08-16T18:30:00.000Z",
+      "proofInputs": {"persistence":18,"independentCorroboration":12,"behavioralProgression":8,"diffusion":15,"commercialSignal":5,"freshnessQuality":78,"sourceConcentration":90,"manipulationRisk":45}
+    }
+  ],
+  "records": [
+    {
+      "id":"sig-hero-search","opportunityId":"opp-extra-time-sweat-confidence","observedAt":"2026-08-14T15:00:00.000Z","capturedAt":"2026-08-15T08:00:00.000Z","sourceType":"search","sourceFamily":"google-trends","topic":"deodorant confidence heat","geography":"India","metrics":{"baselineIndex":42,"latestIndex":71,"sevenDayGrowthPct":69},"sourceUrl":"https://trends.google.com/trends/explore?date=now%207-d&geo=IN&q=deodorant","evidenceType":"public","synthetic":false,"displayLabel":"Public Observation"
+    },
+    {
+      "id":"sig-hero-weather","opportunityId":"opp-extra-time-sweat-confidence","observedAt":"2026-08-15T06:00:00.000Z","capturedAt":"2026-08-15T08:05:00.000Z","sourceType":"news","sourceFamily":"imd-weather","topic":"urban heat and humidity","geography":"Selected metros","metrics":{"metroPagesReviewed":4,"highHumidityMetroCount":3},"sourceUrl":"https://mausam.imd.gov.in/","evidenceType":"public","synthetic":false,"displayLabel":"Public Observation"
+    },
+    {
+      "id":"sig-hero-news","opportunityId":"opp-extra-time-sweat-confidence","observedAt":"2026-08-14T18:30:00.000Z","capturedAt":"2026-08-15T08:10:00.000Z","sourceType":"news","sourceFamily":"gdelt-news-index","topic":"sport heat pressure","geography":"India","metrics":{"snapshotResultCount":24,"independentDomains":8},"sourceUrl":"https://api.gdeltproject.org/api/v2/doc/doc?query=sport%20heat&mode=artlist&format=html","evidenceType":"public","synthetic":false,"displayLabel":"Public Observation"
+    },
+    {
+      "id":"sig-hero-consumer","opportunityId":"opp-extra-time-sweat-confidence","observedAt":"2026-08-14T19:00:00.000Z","capturedAt":"2026-08-15T08:15:00.000Z","sourceType":"consumer_connect","sourceFamily":"synthetic-consumer-connects","topic":"confidence despite sweat","geography":"Four-city aggregate","metrics":{"aggregateMentions":17,"syntheticInterviewCount":24},"sourceUrl":null,"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"
+    },
+    {
+      "id":"sig-hero-commerce","opportunityId":"opp-extra-time-sweat-confidence","observedAt":"2026-08-14T23:59:00.000Z","capturedAt":"2026-08-15T08:20:00.000Z","sourceType":"commerce","sourceFamily":"synthetic-q-commerce","topic":"deodorant category progression","geography":"Four-city aggregate","metrics":{"unitGrowthPct":9,"searchIndexGrowthPct":14,"basketAttachGrowthPct":4},"sourceUrl":null,"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"
+    },
+    {
+      "id":"sig-durable-search","opportunityId":"opp-scalp-skinification","observedAt":"2026-08-01T00:00:00.000Z","capturedAt":"2026-08-15T08:00:00.000Z","sourceType":"search","sourceFamily":"google-trends","topic":"scalp care routine","geography":"India","metrics":{"baselineIndex":36,"latestIndex":58,"ninetyDayGrowthPct":61},"sourceUrl":"https://trends.google.com/trends/explore?date=today%203-m&geo=IN&q=scalp%20care","evidenceType":"public","synthetic":false,"displayLabel":"Public Observation"
+    },
+    {
+      "id":"sig-durable-news","opportunityId":"opp-scalp-skinification","observedAt":"2026-08-10T00:00:00.000Z","capturedAt":"2026-08-15T08:12:00.000Z","sourceType":"news","sourceFamily":"gdelt-news-index","topic":"scalp skinification","geography":"India","metrics":{"snapshotResultCount":19,"independentDomains":7},"sourceUrl":"https://api.gdeltproject.org/api/v2/doc/doc?query=scalp%20care&mode=artlist&format=html","evidenceType":"public","synthetic":false,"displayLabel":"Public Observation"
+    },
+    {
+      "id":"sig-durable-consumer","opportunityId":"opp-scalp-skinification","observedAt":"2026-08-12T12:00:00.000Z","capturedAt":"2026-08-15T08:15:00.000Z","sourceType":"consumer_connect","sourceFamily":"synthetic-consumer-connects","topic":"scalp-first routines","geography":"Six-city aggregate","metrics":{"aggregateMentions":21,"syntheticInterviewCount":30},"sourceUrl":null,"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"
+    },
+    {
+      "id":"sig-noise-social","opportunityId":"opp-single-creator-cooling-challenge","observedAt":"2026-08-15T04:00:00.000Z","capturedAt":"2026-08-15T08:18:00.000Z","sourceType":"social","sourceFamily":"youtube-single-creator","topic":"cooling deodorant challenge","geography":"India","metrics":{"visibleViews":480000,"visibleComments":3200,"creatorSharePct":90},"sourceUrl":"https://www.youtube.com/results?search_query=cooling+deodorant+challenge","evidenceType":"public","synthetic":false,"displayLabel":"Public Observation"
+    },
+    {
+      "id":"sig-noise-commerce","opportunityId":"opp-single-creator-cooling-challenge","observedAt":"2026-08-15T06:00:00.000Z","capturedAt":"2026-08-15T08:20:00.000Z","sourceType":"commerce","sourceFamily":"synthetic-q-commerce","topic":"cooling challenge category progression","geography":"Four-city aggregate","metrics":{"unitGrowthPct":0,"searchIndexGrowthPct":1,"basketAttachGrowthPct":0},"sourceUrl":null,"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "fixtureVersion":"1.0.0","generatedAt":"2026-08-22T18:30:00.000Z","disclosure":"Illustrative later result generated for the demo. It is synthetic, not an HUL campaign result.",
+  "results":[{"id":"result-hero-sprint-later","sprintId":"sprint-extra-time-four-city","observedAt":"2026-08-22T18:00:00.000Z","primaryMetric":"incremental q-commerce conversion","treatmentRate":0.071,"comparisonRate":0.059,"incrementalEffect":0.012,"confidenceInterval":{"lower":0.003,"upper":0.021},"serviceLevelGuardrail":0.95,"decision":"scale","reasonCodes":["PRIMARY_METRIC_ABOVE_LOCKED_SCALE_THRESHOLD","SERVICE_GUARDRAIL_PASSED"],"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"}]
+}

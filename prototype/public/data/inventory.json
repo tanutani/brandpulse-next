@@ -1,0 +1,20 @@
+{
+  "fixtureVersion":"1.0.0","generatedAt":"2026-08-15T08:30:00.000Z","disclosure":"Invented aggregate stock, service, channel, and rights records; not HUL operational data.",
+  "records":[
+    {"id":"inv-rex-national","sku":"REX-AP-150-DEMO","brandId":"rexona","cell":"India national demo scope","daysCover":9,"serviceLevel":0.74,"outOfStockRate":0.18,"timestamp":"2026-08-15T06:00:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"inv-rex-mumbai","sku":"REX-AP-150-DEMO","brandId":"rexona","cell":"Mumbai-West","daysCover":24,"serviceLevel":0.96,"outOfStockRate":0.04,"timestamp":"2026-08-15T06:00:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"inv-rex-delhi","sku":"REX-AP-150-DEMO","brandId":"rexona","cell":"Delhi-South","daysCover":21,"serviceLevel":0.94,"outOfStockRate":0.06,"timestamp":"2026-08-15T06:00:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"inv-rex-bengaluru","sku":"REX-AP-150-DEMO","brandId":"rexona","cell":"Bengaluru-Central","daysCover":26,"serviceLevel":0.96,"outOfStockRate":0.04,"timestamp":"2026-08-15T06:00:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"inv-rex-hyderabad","sku":"REX-AP-150-DEMO","brandId":"rexona","cell":"Hyderabad-Central","daysCover":23,"serviceLevel":0.95,"outOfStockRate":0.05,"timestamp":"2026-08-15T06:00:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"inv-dove-national","sku":"DOVE-DEO-150-DEMO","brandId":"dove","cell":"India national demo scope","daysCover":14,"serviceLevel":0.82,"outOfStockRate":0.12,"timestamp":"2026-08-15T06:00:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"inv-axe-national","sku":"AXE-BS-150-DEMO","brandId":"axe","cell":"India national demo scope","daysCover":18,"serviceLevel":0.9,"outOfStockRate":0.08,"timestamp":"2026-08-15T06:00:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"}
+  ],
+  "channelReadiness":[
+    {"scope":"India national demo scope","channel":"q_commerce","coverageScore":54,"measurementReady":true,"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"scope":"Mumbai-West, Delhi-South, Bengaluru-Central, Hyderabad-Central","channel":"q_commerce","coverageScore":88,"measurementReady":true,"evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"}
+  ],
+  "rights":[
+    {"id":"rights-match-footage","asset":"live or replayed match footage","status":"unavailable","blockerCode":"RIGHTS_MATCH_FOOTAGE_UNAVAILABLE","remediation":"Use original creator-led reaction content with no event footage, marks, or commentary audio.","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"},
+    {"id":"rights-original-creator","asset":"original creator-led confidence-under-pressure content","status":"cleared_for_demo","expiresAt":"2026-08-18T18:30:00.000Z","evidenceType":"synthetic_internal","synthetic":true,"displayLabel":"Synthetic HUL-like Data"}
+  ]
+}
