@@ -1,4 +1,5 @@
 export * from "./decision";
+export * from "./day2";
 export * from "./enums";
 export * from "./fixtures";
 export * from "./minimal-contract";

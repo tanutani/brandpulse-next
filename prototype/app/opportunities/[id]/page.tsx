@@ -1,4 +1,4 @@
-import { ArrowLeft, ExternalLink, ShieldAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, ShieldAlert } from "lucide-react";
 import Link from "next/link";
 
 import { ProvenanceBadge } from "@/components/evidence/provenance-badge";
@@ -106,6 +106,12 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
           ))}
         </div>
       </section>
+      {isHero ? (
+        <div className="journey-next">
+          <div><p className="eyebrow">Step 1 complete</p><strong>Now decide which brand can responsibly own the opportunity.</strong></div>
+          <Link className="primary-action" href={`/resolver/${id}`}>Resolve portfolio ownership <ArrowRight aria-hidden="true" size={17} /></Link>
+        </div>
+      ) : null}
     </main>
   );
 }

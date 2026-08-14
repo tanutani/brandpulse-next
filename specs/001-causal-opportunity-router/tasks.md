@@ -78,13 +78,13 @@ scope to four in-stock cities and confirm Preparedness and the route update.
 
 - [X] T030 [P] [US2] Create versioned Rexona, Dove, and Axe brand-memory fixtures with positioning, claims, taboos, history, and active campaigns in `public/data/brand-memory.json`
 - [X] T031 [P] [US2] Create synthetic SKU inventory, service-level, channel, creator, and rights fixtures in `public/data/inventory.json` and `public/data/influencers.json`
-- [ ] T032 [P] [US2] Write Permission, Preparedness, hard-blocker, and portfolio-conflict tests in `tests/unit/portfolio-assessment.test.ts`
-- [ ] T033 [US2] Implement Permission scoring and configured claims/cultural blockers in `lib/scoring/permission.ts`
-- [ ] T034 [US2] Implement Preparedness scoring for product, stock, channel, creator, approval, rights, and measurement inputs in `lib/scoring/preparedness.ts`
-- [ ] T035 [US2] Implement brand ranking, weakest-link readiness, cannibalization warnings, and eligible-route derivation in `lib/portfolio/resolve-owner.ts`
-- [ ] T036 [US2] Build the three-brand Portfolio Resolver comparison in `app/resolver/[id]/page.tsx`
-- [ ] T037 [US2] Add national/city scope and rights-safe alternative controls in `components/portfolio/scope-control.tsx`
-- [ ] T038 [US2] Add portfolio ranking and geography-to-route integration coverage in `tests/integration/portfolio-resolver.test.tsx`
+- [X] T032 [P] [US2] Write Permission, Preparedness, hard-blocker, and portfolio-conflict tests in `tests/unit/portfolio-assessment.test.ts`
+- [X] T033 [US2] Implement Permission scoring and configured claims/cultural blockers in `lib/scoring/permission.ts`
+- [X] T034 [US2] Implement Preparedness scoring for product, stock, channel, creator, approval, rights, and measurement inputs in `lib/scoring/preparedness.ts`
+- [X] T035 [US2] Implement brand ranking, weakest-link readiness, cannibalization warnings, and eligible-route derivation in `lib/portfolio/resolve-owner.ts`
+- [X] T036 [US2] Build the three-brand Portfolio Resolver comparison in `app/resolver/[id]/page.tsx`
+- [X] T037 [US2] Add national/city scope and rights-safe alternative controls in `components/portfolio/scope-control.tsx`
+- [X] T038 [US2] Add portfolio ranking and geography-to-route integration coverage in `tests/integration/portfolio-resolver.test.tsx`
 - [ ] T039 [US2] Add the public-demo ownership/readiness interaction to `tests/e2e/portfolio-route.spec.ts`
 
 **Checkpoint**: A public trend tool cannot reproduce the displayed decision without the synthetic
