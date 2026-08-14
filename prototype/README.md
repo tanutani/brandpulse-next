@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BrandPulse NEXT
 
-## Getting Started
+BrandPulse NEXT is a static-first case-competition prototype that turns a market signal into an evidence-backed, human-approved causal test. All HUL-like operational records and outcomes are invented aggregates and are visibly labeled synthetic.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Prerequisites: Node.js 24.x and npm.
+
+```powershell
+npm.cmd install
+npm.cmd run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`. No API key, database, authentication, or networked AI service is required.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Judged path
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Use **Start guided demo** or open:
 
-## Learn More
+```text
+/opportunities/opp-extra-time-sweat-confidence
+```
 
-To learn more about Next.js, take a look at the following resources:
+1. Inspect supporting and contradictory evidence.
+2. Open Portfolio Resolver; switch from national to four in-stock cities and from match footage to rights-safe creator content.
+3. Confirm the route becomes Test and lock the Causal Sprint.
+4. Observe `RIGHTS-001` block the unsafe variant, select the corrected variant, and record maker-checker approval.
+5. Reveal the synthetic result and inspect the persisted Learning Ledger.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Browser decisions are stored in versioned `localStorage`. Clearing site storage resets the journey.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Quality gates
 
-## Deploy on Vercel
+```powershell
+npm.cmd run lint
+npm.cmd run typecheck
+npm.cmd run test
+npm.cmd run build
+npm.cmd run test:e2e
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`test:e2e` creates a production build, starts it on `127.0.0.1:3000`, runs the golden, guarded, and release-smoke journeys, and shuts the server down. Chromium must be installed once with `npx.cmd playwright install chromium`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Static Vercel deployment
+
+Deployment is intentionally not automatic.
+
+1. Push a green commit to the approved GitHub repository.
+2. Import it into Vercel with **Root Directory** set to `prototype`.
+3. Use Node.js 24.x and keep `DEMO_MODE=static` and `LIVE_AI_ENABLED=false`.
+4. Deploy without any provider key.
+5. Verify the direct hero URL in an incognito window and on a second network.
+6. Use that exact deep link as the QR target.
+
+The competition build contains no Gemini, OpenRouter, Supabase, authentication, scraping, publishing, or private HUL integration.
+
+## Evidence boundaries
+
+- Public Observation: linked snapshot sources with capture dates.
+- Synthetic HUL-like Data: invented aggregate consumer, commerce, inventory, creator, brand-memory, and outcome records.
+- Model Inference: checked-in explanatory text only; it cannot alter scores or decisions.
+- Business Assumption: explicit illustrative thresholds or scenario choices.
+
+See [docs/DEMO_QA.md](docs/DEMO_QA.md) for verified checks and [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md) for external items still requiring human confirmation.

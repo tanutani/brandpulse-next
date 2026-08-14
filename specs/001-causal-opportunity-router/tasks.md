@@ -61,7 +61,7 @@ input, change one assumption, and observe a deterministic route change or stable
 - [X] T026 [US1] Build the Opportunity Contract evidence chain, counter-evidence panel, and component explanations in `app/opportunities/[id]/page.tsx`
 - [X] T027 [US1] Add an editable source-concentration assumption with persisted deterministic recalculation in `components/gates/assumption-control.tsx`
 - [X] T028 [US1] Add static fixture-to-Proof-to-route and refresh-persistence integration tests in `tests/integration/fixture-route.test.ts` and `tests/integration/persistence.test.ts`
-- [ ] T029 [US1] Add the MVP guided journey from Pulse Board to explained route in `tests/e2e/mvp-route.spec.ts`
+- [X] T029 [US1] Add the MVP guided journey from Pulse Board to explained route in `tests/e2e/mvp-route.spec.ts`
 
 **Checkpoint**: User Story 1 is a deployable MVP that distinguishes corroborated opportunity from
 single-source noise and explains why.
@@ -85,7 +85,7 @@ scope to four in-stock cities and confirm Preparedness and the route update.
 - [X] T036 [US2] Build the three-brand Portfolio Resolver comparison in `app/resolver/[id]/page.tsx`
 - [X] T037 [US2] Add national/city scope and rights-safe alternative controls in `components/portfolio/scope-control.tsx`
 - [X] T038 [US2] Add portfolio ranking and geography-to-route integration coverage in `tests/integration/portfolio-resolver.test.tsx`
-- [ ] T039 [US2] Add the public-demo ownership/readiness interaction to `tests/e2e/portfolio-route.spec.ts`
+- [X] T039 [US2] Add the public-demo ownership/readiness interaction to `tests/e2e/portfolio-route.spec.ts`
 
 **Checkpoint**: A public trend tool cannot reproduce the displayed decision without the synthetic
 HUL-like portfolio and operational inputs.
@@ -107,7 +107,7 @@ lock a valid design, and prevent its primary rule from changing after results ar
 - [X] T044 [US3] Build Causal Sprint Studio with treatment/comparison cells and validation messages in `app/sprint/[id]/page.tsx`
 - [X] T045 [US3] Add a synthetic result fixture and pre-registered Scale/Iterate/Kill evaluator in `lib/experiment/evaluate-outcome.ts`
 - [X] T046 [US3] Add valid, blocked, and post-result-lock integration coverage in `tests/integration/causal-sprint.test.tsx`
-- [ ] T047 [US3] Add the sprint-creation and result-lock journey to `tests/e2e/causal-sprint.spec.ts`
+- [X] T047 [US3] Add the sprint-creation and result-lock journey to `tests/e2e/causal-sprint.spec.ts`
 
 **Checkpoint**: Uncertainty creates a disciplined learning action rather than an AI recommendation
 to spend.
@@ -130,7 +130,7 @@ decision.
 - [X] T052 [US4] Implement append-only maker-checker decisions and current-version checks in `lib/governance/approve-contract.ts`
 - [X] T053 [US4] Build the activation package, policy results, maker-checker action, and audit history in `app/review/[id]/page.tsx`
 - [X] T054 [US4] Add no-approval, blocked-variant, corrected-variant, and persisted-audit integration coverage in `tests/integration/governed-review.test.tsx`
-- [ ] T055 [US4] Add the governed activation path to `tests/e2e/governed-activation.spec.ts`
+- [X] T055 [US4] Add the governed activation path to `tests/e2e/governed-activation.spec.ts`
 
 **Checkpoint**: Fluent content cannot pass an explicit failed rule or activate without an
 accountable human.
@@ -150,7 +150,7 @@ exact contract version and any override rationale.
 - [X] T058 [US5] Build the hypothesis-versus-outcome and human-override timeline in `components/governance/learning-ledger.tsx`
 - [X] T059 [US5] Integrate the Learning Ledger into the completed review page in `app/review/[id]/page.tsx`
 - [X] T060 [US5] Add replay-after-refresh integration coverage in `tests/integration/learning-ledger.test.tsx`
-- [ ] T061 [US5] Complete the guided end-to-end journey through the learned state in `tests/e2e/full-guided-demo.spec.ts`
+- [X] T061 [US5] Complete the guided end-to-end journey through the learned state in `tests/e2e/full-guided-demo.spec.ts`
 
 **Checkpoint**: The product closes the loop and retains what humans and the test taught the system.
 
@@ -164,13 +164,13 @@ judge-ready.
 - [ ] T062 [P] Implement Zod-validated live Evidence Analyst and Skeptic structured generation with timeout and one retry in `app/api/synthesize/route.ts`
 - [ ] T063 [P] Add contract tests for valid, malformed, timed-out, and fallback synthesis in `tests/integration/synthesis-api.test.ts`
 - [ ] T064 Route live and precomputed synthesis through one typed interface and expose its mode in `lib/agents/synthesize.ts`
-- [ ] T065 [P] Add accessible focus order, labels, contrast, reduced-motion behavior, and keyboard operation across `app/` and `components/`
-- [ ] T066 [P] Add loading, empty, insufficient-evidence, expired, policy-blocked, and service-degraded UI states in `components/governance/system-state.tsx`
-- [ ] T067 [P] Add a `Start guided demo` landing experience and public/synthetic disclosure in `app/page.tsx`
+- [X] T065 [P] Add accessible focus order, labels, contrast, reduced-motion behavior, and keyboard operation across `app/` and `components/`
+- [X] T066 [P] Add loading, empty, insufficient-evidence, expired, policy-blocked, and service-degraded UI states in `components/governance/system-state.tsx`
+- [X] T067 [P] Add a `Start guided demo` landing experience and public/synthetic disclosure in `app/page.tsx`
 - [ ] T068 Add a second-network/private-window Playwright deployment profile and screenshot checkpoints in `tests/e2e/deployed-smoke.spec.ts`
-- [ ] T069 Audit the client bundle and repository for API keys, private data, and unlabeled synthetic records; document the result in `docs/DEMO_QA.md`
-- [ ] T070 Document environment setup, static fallback, Vercel deployment, and backup recording procedure in `README.md`
-- [ ] T071 Run lint, typecheck, unit, integration, end-to-end, static-mode, hybrid-fallback, and production-build checks and record outcomes in `docs/DEMO_QA.md`
+- [X] T069 Audit the client bundle and repository for API keys, private data, and unlabeled synthetic records; document the result in `docs/DEMO_QA.md`
+- [X] T070 Document environment setup, static fallback, Vercel deployment, and backup recording procedure in `README.md`
+- [X] T071 Run lint, typecheck, unit, integration, end-to-end, static-mode, hybrid-fallback, and production-build checks and record outcomes in `docs/DEMO_QA.md`
 - [ ] T072 Conduct five proxy-user completion tests, verify at least four can explain the route unaided, and document timings, failures, and resulting changes in `docs/USABILITY_TEST.md`
 - [ ] T073 Verify slide claims, product behavior, official rubric, deadline, three-member eligibility, citations, QR link, and four-minute timing against `BRANDPULSE_NEXT_BLUEPRINT.md` in `docs/SUBMISSION_CHECKLIST.md`
 

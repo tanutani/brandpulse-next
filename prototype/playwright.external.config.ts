@@ -11,9 +11,4 @@ export default defineConfig({
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
-  webServer: process.env.PLAYWRIGHT_BASE_URL ? undefined : {
-    command: "node node_modules/next/dist/bin/next start --hostname 127.0.0.1",
-    url: "http://127.0.0.1:3000",
-    reuseExistingServer: false,
-  },
 });
