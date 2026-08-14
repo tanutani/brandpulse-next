@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: BrandPulse NEXT Prototype API
+  version: 1.0.0
+  description: >-
+    Optional server endpoint for typed synthesis. Consequential gate, route, approval, and local
+    persistence logic remains deterministic in shared TypeScript code.
+servers:
+  - url: /api
+paths:
+  /synthesize:
+    post:
+      summary: Synthesize evidence and counter-evidence
+      operationId: synthesizeOpportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SynthesisRequest'
+      responses:
+        '200':
+          description: Structured live or fallback synthesis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SynthesisResponse'
+        '400':
+          description: Invalid input
+        '503':
+          description: Both provider and bundled fallback unavailable
+components:
+  schemas:
+    Evidence:
+      type: object
+      required: [id, claim, stance, evidenceType, freshness]
+      properties:
+        id: { type: string }
+        claim: { type: string }
+        stance: { type: string, enum: [support, contradict, neutral] }
+        evidenceType:
+          type: string
+          enum: [public, synthetic_internal, model_inference, business_assumption]
+        freshness: { type: string, enum: [live, recent, aging, stale] }
+        sourceUrl: { type: [string, 'null'], format: uri }
+    SynthesisRequest:
+      type: object
+      required: [opportunityId, hypothesis, evidence]
+      properties:
+        opportunityId: { type: string }
+        hypothesis: { type: string }
+        evidence:
+          type: array
+          minItems: 1
+          items: { $ref: '#/components/schemas/Evidence' }
+    SynthesisResponse:
+      type: object
+      required: [mode, summary, strongestSupport, strongestCounterEvidence, missingEvidence]
+      properties:
+        mode: { type: string, enum: [live, precomputed_fallback] }
+        summary: { type: string }
+        strongestSupport:
+          type: array
+          items: { type: string }
+        strongestCounterEvidence:
+          type: array
+          minItems: 1
+          items: { type: string }
+        missingEvidence:
+          type: array
+          items: { type: string }

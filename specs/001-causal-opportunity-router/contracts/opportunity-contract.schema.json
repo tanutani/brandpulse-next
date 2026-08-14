@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandpulse-next.example/schemas/opportunity-contract.json",
+  "title": "BrandPulse Opportunity Contract",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "version",
+    "opportunity",
+    "brandAssessments",
+    "recommendedRoute",
+    "routeReasonCodes",
+    "assumptions",
+    "humanDecisions"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "contractId": { "type": "string", "minLength": 1 },
+    "version": { "type": "integer", "minimum": 1 },
+    "opportunity": { "$ref": "#/$defs/opportunity" },
+    "selectedBrandId": { "type": ["string", "null"] },
+    "brandAssessments": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "$ref": "#/$defs/brandAssessment" }
+    },
+    "recommendedRoute": { "$ref": "#/$defs/route" },
+    "routeReasonCodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "value", "evidenceType"],
+        "properties": {
+          "label": { "type": "string" },
+          "value": {},
+          "evidenceType": { "$ref": "#/$defs/evidenceType" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "causalSprint": { "anyOf": [{ "$ref": "#/$defs/causalSprint" }, { "type": "null" }] },
+    "humanDecisions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/humanDecision" }
+    },
+    "outcome": { "type": ["object", "null"] }
+  },
+  "$defs": {
+    "evidenceType": {
+      "enum": ["public", "synthetic_internal", "model_inference", "business_assumption"]
+    },
+    "route": { "enum": ["act_now", "test", "incubate", "watch", "ignore"] },
+    "opportunity": {
+      "type": "object",
+      "required": ["id", "title", "hypothesis", "signalClass", "usefulUntil", "evidence"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "hypothesis": { "type": "string" },
+        "signalClass": {
+          "enum": ["live_moment", "emerging_shift", "durable_trend", "fad_noise", "unresolved"]
+        },
+        "usefulUntil": { "type": "string", "format": "date-time" },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "stance", "claim", "evidenceType", "freshness"],
+            "properties": {
+              "id": { "type": "string" },
+              "stance": { "enum": ["support", "contradict", "neutral"] },
+              "claim": { "type": "string" },
+              "evidenceType": { "$ref": "#/$defs/evidenceType" },
+              "freshness": { "enum": ["live", "recent", "aging", "stale"] },
+              "sourceUrl": { "type": ["string", "null"], "format": "uri" }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "componentScore": {
+      "type": "object",
+      "required": ["name", "value", "weight", "evidenceIds"],
+      "properties": {
+        "name": { "type": "string" },
+        "value": { "type": "number", "minimum": 0, "maximum": 100 },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidenceIds": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "gateAssessment": {
+      "type": "object",
+      "required": ["gate", "score", "components", "blockers", "rulesetVersion"],
+      "properties": {
+        "gate": { "enum": ["proof", "permission", "preparedness"] },
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "components": { "type": "array", "items": { "$ref": "#/$defs/componentScore" } },
+        "blockers": { "type": "array", "items": { "type": "string" } },
+        "rulesetVersion": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "brandAssessment": {
+      "type": "object",
+      "required": ["brandId", "proof", "permission", "preparedness", "readiness"],
+      "properties": {
+        "brandId": { "type": "string" },
+        "proof": { "$ref": "#/$defs/gateAssessment" },
+        "permission": { "$ref": "#/$defs/gateAssessment" },
+        "preparedness": { "$ref": "#/$defs/gateAssessment" },
+        "readiness": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "portfolioConflicts": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "causalSprint": {
+      "type": "object",
+      "required": [
+        "id", "hypothesis", "treatmentCells", "comparisonCells", "channel", "budgetCapInr",
+        "primaryMetric", "measurementWindow", "scaleThreshold", "killThreshold", "validationStatus"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "hypothesis": { "type": "string" },
+        "treatmentCells": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "comparisonCells": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "channel": { "type": "string" },
+        "budgetCapInr": { "type": "number", "exclusiveMinimum": 0 },
+        "primaryMetric": { "type": "string" },
+        "measurementWindow": {
+          "type": "object",
+          "required": ["start", "end"],
+          "properties": {
+            "start": { "type": "string", "format": "date-time" },
+            "end": { "type": "string", "format": "date-time" }
+          },
+          "additionalProperties": false
+        },
+        "scaleThreshold": { "type": "object" },
+        "killThreshold": { "type": "object" },
+        "validationStatus": { "enum": ["draft", "valid", "blocked"] }
+      },
+      "additionalProperties": true
+    },
+    "humanDecision": {
+      "type": "object",
+      "required": ["id", "actor", "decision", "rationale", "decidedAt", "contractVersion"],
+      "properties": {
+        "id": { "type": "string" },
+        "actor": { "type": "string" },
+        "decision": { "enum": ["approve_test", "request_changes", "watch", "reject", "override"] },
+        "rationale": { "type": "string", "minLength": 1 },
+        "decidedAt": { "type": "string", "format": "date-time" },
+        "contractVersion": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
