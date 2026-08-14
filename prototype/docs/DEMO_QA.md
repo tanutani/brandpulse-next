@@ -40,5 +40,6 @@ The Playwright suite covers the full Learning Ledger journey, the non-bypassable
 ## Pending external checks
 
 - Vercel deployment, incognito URL, second-network test, and QR are pending explicit deployment approval.
-- Official case/rulebook requirements and public-source numerical claims require verification from the supplied PDFs before submission.
+- Official case/rulebook requirements were verified page by page and recorded in `OFFICIAL_REQUIREMENTS_AUDIT.md`.
+- Unstop-only upload details and transcript/public-source numerical claims still require verification before submission.
 - Proxy-user sessions and presentation timing require the registered team.

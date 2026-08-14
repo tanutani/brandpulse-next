@@ -1223,7 +1223,7 @@ because product/claim lead time—not activation speed—is the constraint.”
 - Avoid framework names on-slide unless needed; let the visual embody them.
 - Prefer one large screenshot over five tiny screens.
 - Do not add appendix slides unless the portal explicitly permits them within the three-slide rule.
-- Export PDF and inspect at 100% on a laptop and phone before submitting.
+- Export PPTX and PDF for QA, inspect both at 100% on a laptop and phone, and submit only a format accepted by Unstop. The supplied rulebook calls Stage 1 a “3-slider PPT solution” but does not state accepted extensions.
 
 ---
 
@@ -1282,7 +1282,7 @@ the public capability comparison and bounded novelty statement.
 
 - [ ] Slide headlines alone communicate problem, product, and scale plan.
 - [ ] The case quote/page is reverified.
-- [ ] Official rubric weights match the supplied rulebook.
+- [ ] Official rubric weights match the supplied case study.
 - [ ] Option-score math is checked.
 - [ ] Slide 2 screenshot is from the actual release URL/build.
 - [ ] Synthetic scores/results are labeled.

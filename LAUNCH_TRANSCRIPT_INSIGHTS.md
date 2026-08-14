@@ -382,12 +382,12 @@ Suggested team split: product/user research; data/AI and prototype; business cas
 
 ## 14. Evidence gaps to close before committing
 
-1. The exact official case wording, submission format, deadline, prototype link rules, and judging criteria.
-2. Whether participants are expected to focus on a specified brand, category, geography, or stage of brand management.
-3. Which data sources may legally and practically be used in the prototype.
-4. Whether the 60% cost figure and other spoken examples appear in official materials and may be cited.
-5. Primary evidence that trend validation is a more acute user pain than other brand-management activities.
-6. Baseline decision cycle time and measurable willingness to adopt the proposed workflow.
+The official case study and rulebook were reviewed page by page on 15 August 2026. They resolve the deadline (20 August 2026), three-slide rule, mandatory prototype, eligible-school and three-member rules, official case ask, and judging weights. They do not specify the cutoff time/timezone, accepted upload extension, file-size limit, filename convention, or prototype-link field; those remain Unstop checks.
+
+1. Which data sources may legally and practically be used in a production pilot.
+2. Whether the 60% cost figure and other spoken examples have independently verifiable sources. They do not appear in the supplied case study or rulebook.
+3. Primary evidence that trend validation is a more acute user pain than other brand-management activities.
+4. Baseline decision cycle time and measurable willingness to adopt the proposed workflow.
 
 ## Source note
 
