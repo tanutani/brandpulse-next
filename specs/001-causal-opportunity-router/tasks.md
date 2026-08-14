@@ -123,13 +123,13 @@ decision before any simulated activation.
 passes; activation remains unavailable until the current contract version has an approving human
 decision.
 
-- [ ] T048 [P] [US4] Create versioned claim, rights, disclosure, inclusion, expiry, and approval policies in `lib/policies/brand-rules.ts`
-- [ ] T049 [P] [US4] Write policy, stale-version, and no-approval transition tests in `tests/unit/governance.test.ts`
-- [ ] T050 [US4] Implement deterministic policy evaluation with rule IDs and remediation in `lib/policies/evaluate-package.ts`
-- [ ] T051 [US4] Implement deterministic activation-brief templating with one blocked and two rights-safe precomputed variants in `lib/activation/draft-package.ts` and `public/data/activation-packages.json`
-- [ ] T052 [US4] Implement append-only maker-checker decisions and current-version checks in `lib/governance/approve-contract.ts`
-- [ ] T053 [US4] Build the activation package, policy results, maker-checker action, and audit history in `app/review/[id]/page.tsx`
-- [ ] T054 [US4] Add no-approval, blocked-variant, corrected-variant, and persisted-audit integration coverage in `tests/integration/governed-review.test.tsx`
+- [X] T048 [P] [US4] Create versioned claim, rights, disclosure, inclusion, expiry, and approval policies in `lib/policies/brand-rules.ts`
+- [X] T049 [P] [US4] Write policy, stale-version, and no-approval transition tests in `tests/unit/governance.test.ts`
+- [X] T050 [US4] Implement deterministic policy evaluation with rule IDs and remediation in `lib/policies/evaluate-package.ts`
+- [X] T051 [US4] Implement deterministic activation-brief templating with one blocked and two rights-safe precomputed variants in `lib/activation/draft-package.ts` and `public/data/activation-packages.json`
+- [X] T052 [US4] Implement append-only maker-checker decisions and current-version checks in `lib/governance/approve-contract.ts`
+- [X] T053 [US4] Build the activation package, policy results, maker-checker action, and audit history in `app/review/[id]/page.tsx`
+- [X] T054 [US4] Add no-approval, blocked-variant, corrected-variant, and persisted-audit integration coverage in `tests/integration/governed-review.test.tsx`
 - [ ] T055 [US4] Add the governed activation path to `tests/e2e/governed-activation.spec.ts`
 
 **Checkpoint**: Fluent content cannot pass an explicit failed rule or activate without an
@@ -145,11 +145,11 @@ result so future decisions can learn from outcomes and overrides.
 **Independent test**: Complete a synthetic test, record Scale/Iterate/Kill, refresh, and replay the
 exact contract version and any override rationale.
 
-- [ ] T056 [P] [US5] Write outcome-to-threshold, override-retention, and version-replay tests in `tests/unit/learning-ledger.test.ts`
-- [ ] T057 [US5] Implement immutable contract version assembly and outcome linkage in `lib/learning/build-ledger-entry.ts`
-- [ ] T058 [US5] Build the hypothesis-versus-outcome and human-override timeline in `components/governance/learning-ledger.tsx`
-- [ ] T059 [US5] Integrate the Learning Ledger into the completed review page in `app/review/[id]/page.tsx`
-- [ ] T060 [US5] Add replay-after-refresh integration coverage in `tests/integration/learning-ledger.test.tsx`
+- [X] T056 [P] [US5] Write outcome-to-threshold, override-retention, and version-replay tests in `tests/unit/learning-ledger.test.ts`
+- [X] T057 [US5] Implement immutable contract version assembly and outcome linkage in `lib/learning/build-ledger-entry.ts`
+- [X] T058 [US5] Build the hypothesis-versus-outcome and human-override timeline in `components/governance/learning-ledger.tsx`
+- [X] T059 [US5] Integrate the Learning Ledger into the completed review page in `app/review/[id]/page.tsx`
+- [X] T060 [US5] Add replay-after-refresh integration coverage in `tests/integration/learning-ledger.test.tsx`
 - [ ] T061 [US5] Complete the guided end-to-end journey through the learned state in `tests/e2e/full-guided-demo.spec.ts`
 
 **Checkpoint**: The product closes the loop and retains what humans and the test taught the system.

@@ -1,0 +1,44 @@
+{
+  "fixtureVersion": "1.0.0",
+  "generatedAt": "2026-08-15T12:20:00.000Z",
+  "disclosure": "Illustrative activation copy and rights states created for this competition demo; not approved HUL creative.",
+  "sprintId": "sprint-extra-time-four-city",
+  "variants": [
+    {
+      "id": "variant-match-footage-blocked",
+      "label": "Match-reaction cut",
+      "channel": "paid_social",
+      "copy": "Extra time. Full pressure. Keep moving with confidence.",
+      "usesMatchFootage": true,
+      "rightsStatus": "unavailable",
+      "claim": "confidence under pressure",
+      "disclosure": "#ad · Synthetic demo creative",
+      "inclusionSafe": true,
+      "rightsExpiresAt": null
+    },
+    {
+      "id": "variant-creator-rights-safe",
+      "label": "Creator-led pressure moment",
+      "channel": "paid_social",
+      "copy": "When the moment runs long, keep moving with confidence.",
+      "usesMatchFootage": false,
+      "rightsStatus": "cleared_for_demo",
+      "claim": "confidence and odour protection when substantiated",
+      "disclosure": "#ad · Original creator content · Synthetic demo creative",
+      "inclusionSafe": true,
+      "rightsExpiresAt": "2026-08-18T18:30:00.000Z"
+    },
+    {
+      "id": "variant-commerce-rights-safe",
+      "label": "Four-city commerce card",
+      "channel": "q_commerce",
+      "copy": "Ready for extra time? Shop Rexona in four selected demo cities.",
+      "usesMatchFootage": false,
+      "rightsStatus": "cleared_for_demo",
+      "claim": "availability in selected in-stock demo cells",
+      "disclosure": "Synthetic availability · Competition demo",
+      "inclusionSafe": true,
+      "rightsExpiresAt": "2026-08-18T18:30:00.000Z"
+    }
+  ]
+}

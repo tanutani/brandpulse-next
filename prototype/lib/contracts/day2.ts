@@ -132,23 +132,27 @@ export interface ApprovalRequest {
   decidedAt: string;
 }
 
-export interface SyntheticOutcome {
-  id: string;
-  sprintId: string;
-  observedAt: string;
-  primaryMetric: string;
-  treatmentRate: number;
-  comparisonRate: number;
-  incrementalEffect: number;
-  confidenceInterval: { lower: number; upper: number };
-  serviceLevelGuardrail: number;
-  synthetic: true;
-}
+export const SyntheticOutcomeSchema = z.object({
+  id: z.string(),
+  sprintId: z.string(),
+  observedAt: z.iso.datetime({ offset: true }),
+  primaryMetric: z.string(),
+  treatmentRate: z.number(),
+  comparisonRate: z.number(),
+  incrementalEffect: z.number(),
+  confidenceInterval: z.object({ lower: z.number(), upper: z.number() }).strict(),
+  serviceLevelGuardrail: z.number().min(0).max(1),
+  synthetic: z.literal(true),
+}).strict();
 
-export interface OutcomeEvaluation extends SyntheticOutcome {
-  decision: "scale" | "iterate" | "kill" | "inconclusive";
-  reasonCodes: string[];
-}
+export type SyntheticOutcome = z.infer<typeof SyntheticOutcomeSchema>;
+
+export const OutcomeEvaluationSchema = SyntheticOutcomeSchema.extend({
+  decision: z.enum(["scale", "iterate", "kill", "inconclusive"]),
+  reasonCodes: z.array(z.string()),
+});
+
+export type OutcomeEvaluation = z.infer<typeof OutcomeEvaluationSchema>;
 
 export interface LearningLedgerEntry {
   schemaVersion: "1.0.0";
@@ -181,7 +185,7 @@ export const JourneyStateSchema = z.object({
     decidedAt: z.iso.datetime({ offset: true }),
     contractVersion: z.number().int().min(1),
   }).strict()),
-  outcome: z.record(z.string(), z.unknown()).nullable(),
+  outcome: OutcomeEvaluationSchema.nullable(),
 }).strict();
 
 export type JourneyState = z.infer<typeof JourneyStateSchema>;
