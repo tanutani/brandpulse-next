@@ -7,6 +7,7 @@ const AgentTraceSchema = z.object({
   generatedFrom: z.array(z.string()).optional(),
   alternativeExplanation: z.string().optional(),
   sensitivityNote: z.string().optional(),
+  rationale: z.string().optional(),
 });
 
 const SynthesisOutputSchema = z.object({
@@ -18,6 +19,7 @@ const SynthesisOutputSchema = z.object({
   missingEvidence: z.array(z.string()),
   evidenceAnalyst: AgentTraceSchema,
   skeptic: AgentTraceSchema,
+  experimentArchitect: AgentTraceSchema.optional(),
 });
 
 const FallbackFixtureSchema = z.object({

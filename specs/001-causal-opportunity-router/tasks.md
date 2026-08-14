@@ -100,13 +100,13 @@ measurement window, primary metric, guardrails, and scale/kill rules.
 **Independent test**: Generate a complete sprint, block a non-comparable or under-stocked design,
 lock a valid design, and prevent its primary rule from changing after results are revealed.
 
-- [ ] T040 [P] [US3] Write cell-comparability, stock-readiness, required-field, and threshold-lock tests in `tests/unit/causal-sprint.test.ts`
-- [ ] T041 [US3] Implement deterministic cell matching and comparability scoring in `lib/experiment/match-cells.ts`
-- [ ] T042 [US3] Implement sprint validation, budget cap, measurement window, and immutable scale/kill rules in `lib/experiment/validate-sprint.ts`
-- [ ] T043 [US3] Create the precomputed Experiment Architect rationale in `public/data/precomputed-synthesis.json`
-- [ ] T044 [US3] Build Causal Sprint Studio with treatment/comparison cells and validation messages in `app/sprint/[id]/page.tsx`
-- [ ] T045 [US3] Add a synthetic result fixture and pre-registered Scale/Iterate/Kill evaluator in `lib/experiment/evaluate-outcome.ts`
-- [ ] T046 [US3] Add valid, blocked, and post-result-lock integration coverage in `tests/integration/causal-sprint.test.tsx`
+- [X] T040 [P] [US3] Write cell-comparability, stock-readiness, required-field, and threshold-lock tests in `tests/unit/causal-sprint.test.ts`
+- [X] T041 [US3] Implement deterministic cell matching and comparability scoring in `lib/experiment/match-cells.ts`
+- [X] T042 [US3] Implement sprint validation, budget cap, measurement window, and immutable scale/kill rules in `lib/experiment/validate-sprint.ts`
+- [X] T043 [US3] Create the precomputed Experiment Architect rationale in `public/data/precomputed-synthesis.json`
+- [X] T044 [US3] Build Causal Sprint Studio with treatment/comparison cells and validation messages in `app/sprint/[id]/page.tsx`
+- [X] T045 [US3] Add a synthetic result fixture and pre-registered Scale/Iterate/Kill evaluator in `lib/experiment/evaluate-outcome.ts`
+- [X] T046 [US3] Add valid, blocked, and post-result-lock integration coverage in `tests/integration/causal-sprint.test.tsx`
 - [ ] T047 [US3] Add the sprint-creation and result-lock journey to `tests/e2e/causal-sprint.spec.ts`
 
 **Checkpoint**: Uncertainty creates a disciplined learning action rather than an AI recommendation
