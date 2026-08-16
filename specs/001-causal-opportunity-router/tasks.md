@@ -167,7 +167,7 @@ judge-ready.
 - [X] T065 [P] Add accessible focus order, labels, contrast, reduced-motion behavior, and keyboard operation across `app/` and `components/`
 - [X] T066 [P] Add loading, empty, insufficient-evidence, expired, policy-blocked, and service-degraded UI states in `components/governance/system-state.tsx`
 - [X] T067 [P] Add a `Start guided demo` landing experience and public/synthetic disclosure in `app/page.tsx`
-- [ ] T068 Add a second-network/private-window Playwright deployment profile and screenshot checkpoints in `tests/e2e/deployed-smoke.spec.ts`
+- [X] T068 Add a second-network/private-window Playwright deployment profile and screenshot checkpoints in `tests/e2e/deployed-smoke.spec.ts`
 - [X] T069 Audit the client bundle and repository for API keys, private data, and unlabeled synthetic records; document the result in `docs/DEMO_QA.md`
 - [X] T070 Document environment setup, static fallback, Vercel deployment, and backup recording procedure in `README.md`
 - [X] T071 Run lint, typecheck, unit, integration, end-to-end, static-mode, hybrid-fallback, and production-build checks and record outcomes in `docs/DEMO_QA.md`
@@ -176,6 +176,19 @@ judge-ready.
 
 **Checkpoint**: The public URL works with and without a provider, the critical path is under four
 minutes, and every competition claim has visible product or source support.
+
+---
+
+## Phase 9: Self-explaining public prototype
+
+**Purpose**: Make the production model and complete Rexona use case understandable without narration.
+
+- [X] T074 Add a plain-language landing thesis, six-stage model map, Rexona outcome preview, and prototype/production boundary in `app/page.tsx` and `components/model/`
+- [X] T075 Add reusable guided-demo steps, persistent progress rail, scoped reset control, and decision briefs across the hero journey in `components/shell/guided-journey.tsx` and hero routes
+- [X] T076 Show eight proposed production connection contracts, access patterns, decision uses, fixture substitutes, and later capabilities without implying current HUL API access
+- [X] T077 Extend Playwright coverage for first-visit comprehension, progress state, reset, business-value close, and deployed screenshot checkpoints
+
+**Checkpoint**: A first-time viewer can distinguish the working static prototype from the future production model and complete the governed Rexona path without narration.
 
 ---
 

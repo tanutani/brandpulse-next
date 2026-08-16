@@ -11,6 +11,8 @@ test("direct links, cleared storage, degraded state, and phone width remain usef
   await page.reload();
   await expect(page.getByRole("heading", { name: "Extra-time sweat confidence" })).toBeVisible();
   await expect(page.getByText(/Public observations and clearly labeled synthetic/i)).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Guided demo progress" })).toBeVisible();
+  await expect(page.locator('[aria-current="step"]')).toContainText("Understand the opportunity");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 
   await page.goto(`/review/${hero}`);

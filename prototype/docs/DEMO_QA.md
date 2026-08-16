@@ -12,9 +12,11 @@ Scope: local competition-complete release candidate
 | TypeScript | Pass |
 | Vitest | Pass — 14 files, 46 tests |
 | Production build | Pass — all judged routes statically generated |
-| Playwright | Pass — 3 tests in 2.2 seconds |
+| Playwright | Pass — 3 local tests in 2.4 seconds; deployed profile added and awaiting the public URL |
 
 The Playwright suite covers the full Learning Ledger journey, the non-bypassable rights failure, refresh persistence, cleared storage, direct links, missing fixture state, phone-width overflow, and browser console errors.
+
+The judge-facing comprehension layer additionally verifies the landing thesis, six-stage model map, proposed production connection contracts, guided progress rail, business-value close, and demo reset.
 
 ## Deterministic acceptance evidence
 
@@ -35,6 +37,7 @@ The Playwright suite covers the full Learning Ledger journey, the non-bypassable
 - All internal-like operational and outcome records carry synthetic disclosure.
 - Public fixture records carry a source URL and capture date.
 - No real person-level records, private HUL data, uploads, or runtime external data calls exist.
+- Every proposed production interface and access pattern is labeled as future architecture rather than a confirmed HUL endpoint.
 - Malformed-model behavior is not applicable: this release exposes no model endpoint and always uses checked-in synthesis.
 
 ## Pending external checks

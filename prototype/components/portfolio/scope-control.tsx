@@ -116,6 +116,11 @@ export function ScopeControl({ contract, evaluatedAt }: { contract: OpportunityC
           {selected.blockers.length ? <ShieldAlert aria-hidden="true" /> : <Check aria-hidden="true" />}
           <div><strong>{selected.blockers.length ? "Action constrained" : "Bounded test ready"}</strong><span>{selected.blockers[0]?.remediation ?? "Four-city stock, creator rights, and measurement checks pass."}</span></div>
         </div>
+        <div className="live-decision-note" aria-live="polite">
+          <span>What changed</span>
+          <strong>{journey.scope === "national" ? "National execution" : "Four-city execution"} · {journey.assetMode === "unlicensed_match_footage" ? "match footage" : "creator-led content"}</strong>
+          <p>{selected.decision.route === "test" ? "Preparedness clears the Test threshold; the smaller rights-safe plan can continue." : "A hard execution constraint keeps the route at Watch even though Rexona fits the moment."}</p>
+        </div>
       </section>
 
       <section aria-labelledby="comparison-title">

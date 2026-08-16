@@ -2,6 +2,8 @@
 
 BrandPulse NEXT is a static-first case-competition prototype that turns a market signal into an evidence-backed, human-approved causal test. All HUL-like operational records and outcomes are invented aggregates and are visibly labeled synthetic.
 
+The landing page explains both the current prototype and the proposed production model. Its eight connection contracts show where future access to signal, consumer, commerce, inventory, brand-policy, creator-rights, approval/activation, and experiment-outcome data would replace checked-in fixtures. These are proposed interfaces, not confirmed HUL API paths.
+
 ## Run locally
 
 Prerequisites: Node.js 24.x and npm.
@@ -28,6 +30,7 @@ Use **Start guided demo** or open:
 5. Reveal the synthetic result and inspect the persisted Learning Ledger.
 
 Browser decisions are stored in versioned `localStorage`. Clearing site storage resets the journey.
+The **Reset demo** control clears only BrandPulse contract and journey keys, then returns to the hero opportunity.
 
 ## Quality gates
 
@@ -40,6 +43,13 @@ npm.cmd run test:e2e
 ```
 
 `test:e2e` creates a production build, starts it on `127.0.0.1:3000`, runs the golden, guarded, and release-smoke journeys, and shuts the server down. Chromium must be installed once with `npx.cmd playwright install chromium`.
+
+After deployment, capture landing and hero checkpoints against the public URL:
+
+```powershell
+$env:PLAYWRIGHT_BASE_URL="https://your-project.vercel.app"
+npm.cmd run test:e2e:external -- tests/e2e/deployed-smoke.spec.ts
+```
 
 ## Static Vercel deployment
 

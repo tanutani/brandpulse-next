@@ -20,6 +20,11 @@ export function LearningLedger({ entry }: { entry: LearningLedgerEntry }) {
         <li><CheckCircle2 aria-hidden="true" /><div><span>Maker-checker</span><strong>{entry.approval.actor} approved current v{entry.approval.contractVersion}</strong><small>{entry.approval.rationale}</small></div></li>
         <li className="ledger-result"><Scale aria-hidden="true" /><div><span>Synthetic outcome</span><strong>{(entry.outcome.incrementalEffect * 100).toFixed(1)}pp lift · {entry.outcome.decision.toUpperCase()}</strong><small>95% interval {(entry.outcome.confidenceInterval.lower * 100).toFixed(1)} to {(entry.outcome.confidenceInterval.upper * 100).toFixed(1)}pp; service level {(entry.outcome.serviceLevelGuardrail * 100).toFixed(0)}%.</small></div></li>
       </ol>
+      <div className="business-value-summary">
+        <span>What BrandPulse changed</span>
+        <strong>Prevented unsafe national activation, redirected ₹5 lakh into a measurable four-city test, and retained the learning.</strong>
+        <small>Illustrative competition outcome using synthetic HUL-like operating data.</small>
+      </div>
     </section>
   );
 }

@@ -2,6 +2,8 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 import { SystemState } from "@/components/governance/system-state";
+import { DecisionBrief } from "@/components/model/decision-brief";
+import { GuidedJourney } from "@/components/shell/guided-journey";
 import { SprintStudio } from "@/components/sprint/sprint-studio";
 import { findOpportunityContract } from "@/lib/fixtures";
 
@@ -16,7 +18,14 @@ export default async function SprintPage({ params }: { params: Promise<{ id: str
   return (
     <main className="page-main page-frame">
       <Link className="back-link" href={`/resolver/${id}`}><ArrowLeft aria-hidden="true" size={16} /> Portfolio Resolver</Link>
-      <header className="flow-heading"><p className="eyebrow">Step 3 of 4 · Pre-register</p><h1>Uncertainty becomes a disciplined learning action.</h1><p>The metric, cells, window, budget, and decision rules are fixed before any simulated result is available.</p></header>
+      <GuidedJourney activeStep="test" />
+      <header className="flow-heading"><p className="eyebrow">Lock the experiment</p><h1>Turn uncertainty into a test—not a national campaign.</h1><p>Fix the metric, cities, window, budget, and decision rules before any synthetic result becomes available.</p></header>
+      <DecisionBrief
+        deciding="What is the smallest experiment that can prove whether the opportunity converts?"
+        considered="Treatment and comparison cities, stock, q-commerce conversion, budget, comparability, and service level."
+        changed="The proposed activation is now a ₹5 lakh, four-city causal test with fixed success and kill rules."
+        continuation="A valid design can continue only after every rule is locked before the result."
+      />
       <SprintStudio contract={contract} />
     </main>
   );

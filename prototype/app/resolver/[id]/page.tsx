@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { ScopeControl } from "@/components/portfolio/scope-control";
 import { SystemState } from "@/components/governance/system-state";
+import { DecisionBrief } from "@/components/model/decision-brief";
+import { GuidedJourney } from "@/components/shell/guided-journey";
 import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
 
 export function generateStaticParams() {
@@ -18,7 +20,14 @@ export default async function ResolverPage({ params }: { params: Promise<{ id: s
   return (
     <main className="page-main page-frame">
       <Link className="back-link" href={`/opportunities/${id}`}><ArrowLeft aria-hidden="true" size={16} /> Opportunity Contract</Link>
-      <header className="flow-heading"><p className="eyebrow">Step 2 of 4 · Own and prepare</p><h1>Permission without preparedness is not a green light.</h1><p>Compare the portfolio, then change geography and rights to create an executable Test.</p></header>
+      <GuidedJourney activeStep="choose" />
+      <header className="flow-heading"><p className="eyebrow">Choose brand and scope</p><h1>Brand fit is not enough. The plan must also be executable.</h1><p>Compare Rexona, Dove, and Axe, then change geography and creative rights to create a safe Test.</p></header>
+      <DecisionBrief
+        deciding="Which brand should own the moment, and where can it act safely?"
+        considered="Brand meaning, audience fit, portfolio conflict, stock, channel coverage, creator readiness, and rights."
+        changed="The default national plan uses unavailable match footage, so the model starts at Watch."
+        continuation="A Test unlocks only after you select four in-stock cities and rights-safe creator content."
+      />
       <ScopeControl contract={contract} evaluatedAt={loadFixtureBundle().generatedAt} />
     </main>
   );

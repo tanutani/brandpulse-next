@@ -6,6 +6,8 @@ import { AssumptionControl } from "@/components/gates/assumption-control";
 import { RouteBadge } from "@/components/gates/route-badge";
 import { ScoreBar } from "@/components/gates/score-bar";
 import { SystemState } from "@/components/governance/system-state";
+import { DecisionBrief } from "@/components/model/decision-brief";
+import { GuidedJourney } from "@/components/shell/guided-journey";
 import { getFallbackSynthesis } from "@/lib/agents/fallback";
 import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
 
@@ -37,6 +39,7 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
   return (
     <main className="contract-page page-frame">
       <Link className="back-link" href="/opportunities"><ArrowLeft aria-hidden="true" size={16} /> Pulse Board</Link>
+      {isHero ? <GuidedJourney activeStep="understand" /> : null}
       <header className="contract-hero">
         <div>
           <p className="eyebrow">Opportunity Contract · v{contract.version}</p>
@@ -49,6 +52,15 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
           <small>{isHero ? "46h useful window" : contract.opportunity.signalClass.replaceAll("_", " ")}</small>
         </div>
       </header>
+
+      {isHero ? (
+        <DecisionBrief
+          deciding="Is this sports moment credible enough to deserve brand time?"
+          considered="Dated search, weather, news, synthetic consumer and commerce evidence, plus a counter-explanation."
+          changed="Scattered observations now sit in one evidence chain with an explicit source-concentration penalty."
+          continuation="The signal is strong enough to compare brand ownership, but it is not permission to publish."
+        />
+      ) : null}
 
       <section className="contract-grid">
         <div className="evidence-column">

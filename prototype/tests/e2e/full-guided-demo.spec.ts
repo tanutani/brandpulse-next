@@ -8,8 +8,15 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("golden path reaches a persisted Learning Ledger without a key", async ({ page }) => {
-  await page.goto(`/opportunities/${hero}`);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Attention is not demand." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "From scattered signal to governed learning." })).toBeVisible();
+  await expect(page.getByText("SignalObservation[]", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Proposed interfaces—not confirmed HUL API paths/i)).toBeVisible();
+  await page.getByRole("link", { name: /Try the Rexona use case/i }).click();
   await expect(page.getByRole("heading", { name: "Extra-time sweat confidence" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Guided demo progress" })).toBeVisible();
+  await expect(page.getByText("Is this sports moment credible enough to deserve brand time?")).toBeVisible();
   await page.getByRole("link", { name: /Resolve portfolio ownership/i }).click();
   await expect(page.getByText("Action constrained")).toBeVisible();
   await expect(page.getByText(/original creator-led content/i)).toBeVisible();
@@ -22,7 +29,7 @@ test("golden path reaches a persisted Learning Ledger without a key", async ({ p
   await page.getByRole("button", { name: "Lock sprint rules" }).click();
   await expect(page.getByText(/Metric, window, cells, budget, and thresholds are immutable/i)).toBeVisible();
   await page.getByRole("link", { name: /Review activation package/i }).click();
-  await expect(page.getByText("RIGHTS-001")).toBeVisible();
+  await expect(page.getByText("RIGHTS-001", { exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /Approve corrected variant/i })).toBeDisabled();
   await page.getByRole("button", { name: /Creator-led pressure moment/i }).click();
   await expect(page.getByRole("button", { name: /Approve corrected variant/i })).toBeEnabled();
@@ -32,6 +39,12 @@ test("golden path reaches a persisted Learning Ledger without a key", async ({ p
   await expect(page.getByText(/1.2pp lift · SCALE/i)).toBeVisible();
   await page.reload();
   await expect(page.getByText(/1.2pp lift · SCALE/i)).toBeVisible();
+  await expect(page.getByText(/Prevented unsafe national activation/i)).toBeVisible();
+
+  await page.getByRole("button", { name: "Reset demo" }).click();
+  await expect(page.getByRole("heading", { name: "Extra-time sweat confidence" })).toBeVisible();
+  await page.getByRole("link", { name: /Resolve portfolio ownership/i }).click();
+  await expect(page.getByText("Action constrained")).toBeVisible();
 });
 
 test("guarded path cannot approve or reveal the blocked asset", async ({ page }) => {
@@ -44,7 +57,7 @@ test("guarded path cannot approve or reveal the blocked asset", async ({ page })
   await page.getByRole("link", { name: /Design the causal sprint/i }).click();
   await page.getByRole("button", { name: "Lock sprint rules" }).click();
   await page.getByRole("link", { name: /Review activation package/i }).click();
-  await expect(page.getByText("RIGHTS-001")).toBeVisible();
+  await expect(page.getByText("RIGHTS-001", { exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /Approve corrected variant/i })).toBeDisabled();
   await expect(page.getByRole("button", { name: /Reveal synthetic result/i })).toBeDisabled();
 });
