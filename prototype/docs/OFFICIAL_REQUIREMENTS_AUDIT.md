@@ -10,7 +10,7 @@ Sources: `Techtonic Rule Book Season 8.pdf` (8 pages) and `Techtonic Season 8 Ca
 | Stage 1 deadline is 20 August 2026 | Rule Book, p. 6 | Verified; no cutoff time or timezone is stated in the supplied PDFs. |
 | Stage 1 submission is exactly three slides | Rule Book, pp. 5–6; Case Study, p. 6 | Verified. The title and team line must fit inside Slide 1; do not add a cover or appendix unless the portal explicitly permits it. |
 | Submission is described as a “3-slider PPT solution” | Rule Book, p. 6 | Verified wording. The rulebook names Unstop for registration and case landing, but does not explicitly state the submission destination. Accepted extension, file-size limit, filename convention, destination, and upload field must still be checked in Unstop. |
-| A prototype is mandatory | Case Study, p. 6 | Verified. The local static prototype satisfies the product requirement; the public link and its submission field remain pending deployment and portal verification. |
+| A prototype is mandatory | Case Study, p. 6 | Verified. The public static prototype is live at `https://brandpulse-next.vercel.app`; its exact submission field remains pending portal verification. |
 | Teams must contain three members | Rule Book, p. 4 | Verified rule; team roster still requires human confirmation. |
 | Members must be first-year full-time MBA students from an eligible listed B-school and the same campus | Rule Book, pp. 3–4 | Verified rule; individual eligibility and campus details still require human confirmation. |
 | A student may join only one team and the registered team cannot be modified | Rule Book, p. 4 | Verified; registration state still requires human confirmation. |
@@ -30,7 +30,7 @@ The official ask is broader than a single feature. The three-slide story must sh
 | Explain AI technologies and agents | Bounded-agent responsibilities plus deterministic scoring, policy, approval, and outcome rules. |
 | Cover architecture, governance, and human oversight | Prototype/production boundary, rights and claims checks, maker-checker approval, and audit history. |
 | Include costs and implementation roadmap | Slide 3 value equation, cost assumptions, 12-week pilot, and scale gates. |
-| Demonstrate through prototype, mock-up, agent, or live demonstration | Green local static prototype; public deployment pending explicit approval. |
+| Demonstrate through prototype, mock-up, agent, or live demonstration | Green public static prototype with a verified direct Rexona journey. |
 | Recommend process change, not merely foundational models | Opportunity Contract, Causal Sprint, governed activation, and Learning Ledger form the operating model. |
 
 ## Official judging weights

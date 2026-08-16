@@ -11,6 +11,8 @@
 - [x] Current-version maker-checker approval is required.
 - [x] Synthetic outcome and Learning Ledger survive refresh.
 - [x] Lint, typecheck, unit/integration tests, production build, and Playwright pass.
+- [x] Private GitHub source and public static Vercel deployment are live.
+- [x] A clean-browser smoke test passes for the landing page and direct Rexona route.
 
 ## Official documents — verified
 
@@ -25,8 +27,8 @@
 
 - [ ] Check Unstop for the exact cutoff time/timezone, accepted extension, file-size limit, filename convention, upload field, and prototype-link mechanism; these are absent from the supplied PDFs.
 - [ ] Confirm three eligible registered members and exact team/institute identifiers.
-- [ ] Approve the GitHub target and Vercel deployment.
-- [ ] Verify the release deep link in incognito and on a second network/device.
+- [x] Approve the GitHub target and Vercel deployment.
+- [ ] Verify the release deep link on a physical second network/device. Automated clean-browser verification is complete.
 - [ ] Run three to five proxy-user sessions and record comprehension/timing.
 - [ ] Put the final release screenshot and direct-link QR on Slide 2.
 - [ ] Reverify every public claim and numeric reference; label prototype thresholds, scores, costs, and outcomes as assumptions or synthetic.
@@ -34,4 +36,10 @@
 - [ ] Rehearse the four-minute path three times and record the 90-second backup.
 - [ ] Export and inspect the final three-slide PPTX on a second device; also export PDF for QA, but submit only a portal-accepted format.
 
-Do not deploy, publish, or add live AI until the local release commit remains green and the user explicitly approves the external action.
+Release links:
+
+- Public prototype: <https://brandpulse-next.vercel.app>
+- Direct Rexona journey: <https://brandpulse-next.vercel.app/opportunities/opp-extra-time-sweat-confidence>
+- Private source: <https://github.com/tanutani/brandpulse-next>
+
+Do not add live AI, private HUL access, or autonomous publishing without a separate approved integration phase.
