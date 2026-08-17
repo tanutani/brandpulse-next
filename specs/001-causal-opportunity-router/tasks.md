@@ -244,6 +244,36 @@ retain precomputed synthesis. Do not skip the blocked path, human approval, or L
 - Day 8: T062-T071 as capacity permits
 - Days 9-10: T072-T073, user fixes, rehearsal, feature freeze, and submission
 
+## Phase 12: Live AI Product Demo (additive, v1.1)
+
+**Purpose**: Add a bounded live model, a synthetic live signal room, and a product-first interface
+without changing any deterministic decision. Completed after the static release gate.
+
+- [X] T074 Add `SyntheticSignalEvent`, `SynthesisRequest`, and `SynthesisResponse` contracts in `lib/contracts/live-ai.ts`
+- [X] T075 [P] Add the approved evidence registry and evidence version in `lib/evidence/evidence-registry.ts`
+- [X] T076 [P] Add the deterministic five-second Rexona replay in `public/data/signal-replay.json` and `lib/signals/signal-replay.ts`
+- [X] T077 Make the checked-in fallback conform to `SynthesisResponse` in `lib/agents/fallback.ts` and `public/data/precomputed-synthesis.json`
+- [X] T078 Add the bounded Gemini provider and failure classification in `lib/ai/gemini-provider.ts`
+- [X] T079 Add synthesis orchestration with a six-second budget, one retry, and fallback mapping in `lib/ai/synthesize.ts`
+- [X] T080 Add the strict `POST /api/synthesize` route handler in `app/api/synthesize/route.ts`
+- [X] T081 [P] Add the bounded in-process response cache in `lib/ai/synthesis-cache.ts`
+- [X] T082 Replace the design system with semantic tokens in `app/globals.css` and record the direction in `docs/VISUAL_SYSTEM.md`
+- [X] T083 [P] Add the continuous Decision Pulse in `components/shell/decision-pulse.tsx`
+- [X] T084 Rebuild the product shell, methodology drawer, and presentation mode in `components/shell/app-shell.tsx`
+- [X] T085 [P] Replace the long landing page with the short cover in `app/page.tsx`
+- [X] T086 Build the signal room and compact synthesis panel in `components/pulse/`
+- [X] T087 Compact the opportunity, resolver, sprint, and review screens and remove the permanent `DecisionBrief` blocks
+- [X] T088 Add the anchored guided conversation in `components/guide/guide-provider.tsx` and `components/guide/guide-bubble.tsx`
+- [X] T089 [P] Add the three bounded questions in `components/gates/ask-why.tsx`
+- [X] T090 Cover replay determinism and the model boundary in `tests/unit/signal-replay.test.ts`, `tests/unit/live-synthesis.test.ts`, `tests/unit/journey-shell.test.ts`, and `tests/integration/ai-decision-boundary.test.ts`
+- [X] T091 Cover the redesigned journey, guide, reset, presentation mode, phone sheet, keyboard, and reduced motion in `tests/e2e/`
+- [X] T092 Update Spec Kit spec, plan, data model, and contracts additively
+
+**Checkpoint**: The judged path completes with the model disabled, missing, slow, malformed, or
+quota-limited, and no model output can move a score, route, blocker, approval, or outcome.
+
+---
+
 ## Format validation
 
 All executable tasks use the required checklist form: checkbox, sequential task ID, optional `[P]`

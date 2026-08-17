@@ -203,3 +203,64 @@ CausalSprint 0 --- 1 Outcome
 5. Outcome evaluation uses the thresholds stored on the approved sprint version.
 6. The weakest of Proof, Permission, and Preparedness equals readiness.
 7. A model-generated explanation cannot write gate scores, route, approval, or outcome decision.
+8. Every identifier cited by a synthesis response must exist in the approved evidence set for that
+   opportunity. An unknown identifier invalidates the whole response.
+9. Live and fallback synthesis satisfy one schema, so decisions are identical in either mode.
+
+## Live signal room and synthesis (additive, v1.1)
+
+These entities were added for the live AI product demo. They do not alter any entity above.
+
+### SyntheticSignalEvent
+
+One event in the bundled Rexona replay. The replay is a fixed local sequence over checked-in
+fixtures; it makes no network request and reads no live feed.
+
+| Field | Type | Notes |
+|---|---|---|
+| id | string | Stable event ID |
+| offsetMs | integer 0-5000 | Position in the fixed five-second window |
+| sourceType | enum | sports_news, search, consumer_language, commerce, inventory, rights |
+| label | string | Short headline |
+| detail | string | One sentence of context |
+| value | number or string | Displayed figure |
+| delta | number or null | Movement, when meaningful |
+| evidenceIds | string[] | Must all exist in the approved evidence set |
+| evidenceType | enum | public or synthetic_internal only |
+| synthetic | boolean | Must agree with evidenceType |
+
+Invariants: offsets are strictly ascending and unique, all offsets fall inside the window, and the
+replay is resettable to an empty board.
+
+### SynthesisRequest
+
+| Field | Type | Notes |
+|---|---|---|
+| opportunityId | string | Must be a bundled opportunity |
+| evidenceVersion | string | Must match the server's approved evidence version |
+
+No other field is accepted. There is no caller-authored prompt and no caller-supplied evidence: the
+server loads approved public and synthetic-aggregate evidence itself.
+
+### SynthesisResponse
+
+| Field | Type | Notes |
+|---|---|---|
+| mode | enum | live or precomputed_fallback |
+| model | string or null | Null for the checked-in fallback |
+| promptVersion | string | Prompt lineage |
+| generatedAt | datetime | ISO 8601 UTC |
+| summary | string | At most 600 characters |
+| themes | Theme[] | 1-4 groupings, each citing evidence IDs |
+| counterHypothesis | object | Claim plus the evidence IDs that support the doubt |
+| missingEvidence | string[] | Up to four gaps |
+| fallbackReason | enum or absent | disabled, missing_key, timeout, quota, invalid_output |
+
+The response carries no route, score, blocker, approval, threshold, or outcome field. Extra fields
+are rejected rather than ignored, so a model cannot smuggle a decision through an unexpected key.
+
+### Approved evidence registry
+
+`getApprovedEvidence(opportunityId)` assembles the citable set from the bundled contracts plus the
+operational inventory, channel, and rights records. Model-inference items are deliberately excluded:
+prior inference is never recycled as grounding for new inference.

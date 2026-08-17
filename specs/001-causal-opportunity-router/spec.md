@@ -193,6 +193,27 @@ the system recommended, what humans changed, and whether the success threshold w
 - **FR-027**: The interface MUST distinguish the competition prototype from the envisioned HUL
   production system and MUST not imply access to real HUL data.
 
+### Functional Requirements — live AI product demo (additive, v1.1)
+
+- **FR-028**: The product MUST offer a labeled, resettable synthetic signal replay that performs no
+  network request and preserves a fixed order and timing.
+- **FR-029**: A synthesis request MUST accept only a known opportunity identifier and a known
+  evidence version; an arbitrary user prompt MUST NOT be accepted anywhere in the system.
+- **FR-030**: Approved evidence MUST be loaded server-side, and only public and synthetic aggregate
+  evidence may be sent to a model provider.
+- **FR-031**: A model response MUST be rejected unless it validates against a strict schema with no
+  additional fields and cites only known evidence identifiers.
+- **FR-032**: The complete journey MUST work when the model is disabled, missing, slow, malformed,
+  or quota-limited, and the interface MUST state which mode produced the synthesis.
+- **FR-033**: Live and fallback synthesis MUST produce identical scores, routes, blockers,
+  approvals, and outcomes.
+- **FR-034**: Guidance MUST appear as contextual messages anchored to real controls, advancing only
+  after the highlighted action succeeds, with skip, resume, restart, and reset available.
+- **FR-035**: Reset MUST remove only BrandPulse-owned storage keys and MUST preserve unrelated
+  browser storage.
+- **FR-036**: The product MUST present itself as an unofficial competition concept and MUST NOT
+  imply HUL endorsement or deployment.
+
 ### Key Entities
 
 - **Signal Record**: A dated public or synthetic observation such as search interest, conversation,
@@ -241,6 +262,10 @@ the system recommended, what humans changed, and whether the success threshold w
   led from the selected signal to the final simulated outcome.
 - **SC-010**: The submitted prototype demonstrates one credible scale decision and one caught failure
   or rejection within a five-minute walkthrough.
+- **SC-011**: The signal-to-learning path completes in under four minutes without narration on both
+  desktop and phone.
+- **SC-012**: An automated test proves that a model response asserting a route, a score, or an
+  approval changes none of them.
 
 ## Assumptions
 

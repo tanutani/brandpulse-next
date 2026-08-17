@@ -221,8 +221,53 @@ output. There is no autonomous agent-to-agent loop.
 - Deployment: no client bundle contains API keys; refresh preserves the local audit record; static
   mode works without external services; the public prototype has no broken navigation.
 
+## Live AI product demo (additive, v1.1)
+
+### Pipeline
+
+```text
+Approved evidence -> Gemini synthesis -> schema validation -> evidence-ID validation
+  -> deterministic P3 rules -> human approval
+```
+
+A fluent model response remains model inference, not evidence, and is labelled as such wherever it
+appears.
+
+### Provider boundary
+
+`POST /api/synthesize` is the only route that may reach a provider. It accepts a strict
+`SynthesisRequest` of `{ opportunityId, evidenceVersion }` and nothing else; there is no
+caller-authored prompt anywhere in the system. Evidence is loaded server-side by the approved
+evidence registry.
+
+- Model `gemini-3.5-flash-lite` via the official `@google/genai` server SDK, overridable with
+  `BRANDPULSE_MODEL`.
+- Live AI requires **both** `LIVE_AI_ENABLED=true` and `DEMO_MODE=hybrid`, plus `GEMINI_API_KEY`.
+- Six-second total budget with at most one retry for quota, timeout, and 5xx.
+- Fallback on disabled mode, missing key, timeout, quota, provider failure, malformed output, or an
+  unknown evidence identifier. 200 for live and fallback, 400 for an invalid request, 503 only when
+  the fallback is also unavailable.
+- Provider errors, keys, and stack traces are never returned. Strings and arrays are bounded.
+- A small in-process cache keyed by opportunity and evidence version avoids duplicate calls; there
+  is no database.
+
+A missing key is not a blocker. Live behaviour is covered by provider mocks, and the no-key journey
+stays complete.
+
+### Additional verification gates
+
+- Replay schema, timing, ordering, and reset.
+- Request validation, extra-field rejection, unknown evidence-ID rejection.
+- Missing key, disabled, timeout, 429, 5xx, malformed body, and provider-exception fallbacks.
+- Identical scores and routes under live and fallback, including against a response that asserts a
+  route, a score, and an approval in prose.
+- Reset preserving unrelated browser storage.
+- Guided pop-up progression, skip, resume, restart, presentation mode, phone bottom sheet, keyboard
+  navigation, reduced motion, and no console errors.
+
 ## Complexity Tracking
 
-No constitution violations. Deferred items include authentication, multi-user collaboration,
-production connectors, long-term database storage, automated media buying, live publishing, and
-model fine-tuning.
+No constitution violations. `@google/genai` is the single added runtime dependency and is
+server-only; the client bundle contains no provider key, SDK, or provider endpoint. Deferred items
+include authentication, multi-user collaboration, production connectors, long-term database storage,
+automated media buying, live publishing, and model fine-tuning.
