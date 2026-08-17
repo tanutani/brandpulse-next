@@ -115,10 +115,10 @@ export function ScopeControl({
     new LocalJourneyStore(window.localStorage).save(nextJourney);
     setJourney(nextJourney);
 
-    if (scope === "four_city" && journey.scope !== "four_city") guide.completeAction("scope-four-city");
-    if (assetMode === "rights_safe_creator" && journey.assetMode !== "rights_safe_creator") {
-      guide.completeAction("asset-creator");
-    }
+    // Report the resulting state, not the transition: completeAction is a no-op
+    // unless it matches the current step, so either click order still advances.
+    if (scope === "four_city") guide.completeAction("scope-four-city");
+    if (assetMode === "rights_safe_creator") guide.completeAction("asset-creator");
   }
 
   const blocked = selected.blockers.length > 0;

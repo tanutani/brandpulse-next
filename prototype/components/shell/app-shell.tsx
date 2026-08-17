@@ -99,12 +99,18 @@ function ShellChrome({ children }: { children: ReactNode }) {
 
   function toggleGuide() {
     if (guide.status === "running") guide.skip();
+    // A finished tour restarts; a skipped one resumes where it stopped.
     else if (guide.status === "finished") guide.restart();
     else guide.start();
   }
 
-  const guideLabel =
-    guide.status === "running" ? "Stop guide" : guide.status === "inactive" ? "Start guide" : "Restart guide";
+  const GUIDE_LABELS = {
+    inactive: "Start guide",
+    running: "Skip guide",
+    skipped: "Resume guide",
+    finished: "Restart guide",
+  } as const;
+  const guideLabel = GUIDE_LABELS[guide.status];
 
   return (
     <div className={`app-shell${presenting ? " presentation-mode" : ""}`}>
