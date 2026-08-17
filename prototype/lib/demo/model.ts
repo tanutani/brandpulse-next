@@ -1,14 +1,7 @@
-export const HERO_OPPORTUNITY_ID = "opp-extra-time-sweat-confidence";
-
-export type DemoStepId = "understand" | "choose" | "test" | "approve";
-
-export interface DemoStep {
-  id: DemoStepId;
-  number: number;
-  label: string;
-  plainLanguage: string;
-  href: string;
-}
+/**
+ * Explanatory content for the "How BrandPulse works" drawer. Deliberately not
+ * rendered on any decision screen — it is reference material, not guidance.
+ */
 
 export interface ModelStage {
   id: string;
@@ -27,37 +20,6 @@ export interface ProductionConnection {
   decisionUse: string;
   prototypeSubstitute: string;
 }
-
-export const DEMO_STEPS: DemoStep[] = [
-  {
-    id: "understand",
-    number: 1,
-    label: "Understand the opportunity",
-    plainLanguage: "Check whether the signal is credible or only attention.",
-    href: `/opportunities/${HERO_OPPORTUNITY_ID}`,
-  },
-  {
-    id: "choose",
-    number: 2,
-    label: "Choose brand and scope",
-    plainLanguage: "Find the brand that fits and the market that can execute.",
-    href: `/resolver/${HERO_OPPORTUNITY_ID}`,
-  },
-  {
-    id: "test",
-    number: 3,
-    label: "Lock the experiment",
-    plainLanguage: "Fix the budget and success rules before seeing a result.",
-    href: `/sprint/${HERO_OPPORTUNITY_ID}`,
-  },
-  {
-    id: "approve",
-    number: 4,
-    label: "Approve and learn",
-    plainLanguage: "Block unsafe work, record approval, and retain the outcome.",
-    href: `/review/${HERO_OPPORTUNITY_ID}`,
-  },
-];
 
 export const MODEL_STAGES: ModelStage[] = [
   {

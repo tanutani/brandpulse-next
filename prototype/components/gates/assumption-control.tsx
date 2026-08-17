@@ -125,51 +125,60 @@ export function AssumptionControl({
   }, [assessment.brandId, contract, decision.readiness, decision.reasonCodes, decision.route, proof, sourceConcentration, storageReady]);
 
   return (
-    <section className="decision-panel" aria-labelledby="decision-panel-title">
-      <div className="decision-panel-heading">
-        <div>
-          <p className="eyebrow">Deterministic decision · Team thresholds</p>
-          <h2 id="decision-panel-title">The weakest gate determines the route.</h2>
+    <details className="detail-disclosure">
+      <summary>Test the evidence — change a documented assumption</summary>
+      <div className="detail-body">
+        <div className="section-head">
+          <div>
+            <p className="section-kicker">Sensitivity · team thresholds</p>
+            <h3>Concentrated evidence lowers Proof</h3>
+          </div>
+          <RouteBadge route={decision.route} />
         </div>
-        <RouteBadge route={decision.route} />
-      </div>
-      <div className="score-stack">
-        <ScoreBar label="Proof" score={proof.score} />
+
+        <ScoreBar label="Proof" score={proof.score} weakest />
         <ScoreBar label="Permission" score={assessment.permission.score} />
         <ScoreBar label="Preparedness" score={assessment.preparedness.score} />
-      </div>
-      <div className="assumption-box">
-        <div className="assumption-copy">
-          <label htmlFor="source-concentration">Assume evidence is concentrated in one source family</label>
-          <p>
-            {sourceConcentration}% concentration applies a {proof.penalties[0].points.toFixed(0)}-point
-            Proof penalty. At 70%, Proof falls from 68 to 54 and the route becomes Watch.
+
+        <div style={{ marginTop: "var(--s4)" }}>
+          <label className="small" htmlFor="source-concentration" style={{ fontWeight: 650 }}>
+            Assume evidence is concentrated in one source family
+          </label>
+          <p className="muted small" style={{ marginTop: 4 }}>
+            {sourceConcentration}% concentration applies a{" "}
+            {proof.penalties[0].points.toFixed(0)}-point Proof penalty. At 70%, Proof falls from 68
+            to 54 and the route becomes Watch.
           </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--s3)", marginTop: "var(--s2)" }}>
+            <input
+              id="source-concentration"
+              type="range"
+              min="0"
+              max="100"
+              step="10"
+              value={sourceConcentration}
+              style={{ flex: 1 }}
+              onInput={(event) => setSourceConcentration(Number(event.currentTarget.value))}
+            />
+            <output className="mono numeric" htmlFor="source-concentration">
+              {sourceConcentration}%
+            </output>
+            <button className="btn btn-quiet" type="button" onClick={() => setSourceConcentration(0)}>
+              <RotateCcw aria-hidden="true" size={13} /> Reset
+            </button>
+          </div>
         </div>
-        <output htmlFor="source-concentration">{sourceConcentration}%</output>
-        <input
-          id="source-concentration"
-          type="range"
-          min="0"
-          max="100"
-          step="10"
-          value={sourceConcentration}
-          onInput={(event) => setSourceConcentration(Number(event.currentTarget.value))}
-        />
-        <button className="reset-control" type="button" onClick={() => setSourceConcentration(0)}>
-          <RotateCcw aria-hidden="true" size={14} /> Reset
-        </button>
-      </div>
-      <div className="decision-foot">
-        <span>Readiness = min({proof.score}, {assessment.permission.score}, {assessment.preparedness.score}) = <strong>{decision.readiness}</strong></span>
-        <span aria-live="polite">
+
+        <p className="muted small" style={{ marginTop: "var(--s3) " }} aria-live="polite">
+          Readiness = min({proof.score}, {assessment.permission.score},{" "}
+          {assessment.preparedness.score}) = <strong>{decision.readiness}</strong> ·{" "}
           {!storageReady
             ? "Loading saved assumption…"
             : persistenceAvailable
               ? "Saved locally; reload restores your latest assumption"
               : "Persistence unavailable; deterministic controls still work"}
-        </span>
+        </p>
       </div>
-    </section>
+    </details>
   );
 }

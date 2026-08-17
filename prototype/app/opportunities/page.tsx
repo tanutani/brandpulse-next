@@ -1,51 +1,70 @@
-import { OpportunityCard } from "@/components/opportunities/opportunity-card";
+import { OpportunityList } from "@/components/pulse/opportunity-list";
+import { SignalRoom } from "@/components/pulse/signal-room";
+import { SynthesisPanel } from "@/components/pulse/synthesis-panel";
+import { HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
 import { loadFixtureBundle } from "@/lib/fixtures";
 import { getWeakestGate } from "@/lib/routing/select-route";
+import { getSignalReplay } from "@/lib/signals/signal-replay";
 
-const TONES = ["hero", "durable", "noise"] as const;
-
-export default function OpportunitiesPage() {
+/** The command centre: live signal replay, bounded synthesis, and open decisions. */
+export default function PulseRoomPage() {
   const contracts = loadFixtureBundle().contracts;
+  const replay = getSignalReplay(HERO_OPPORTUNITY_ID);
+
+  const opportunities = contracts.map((contract) => {
+    const assessment =
+      contract.brandAssessments.find(({ brandId }) => brandId === contract.selectedBrandId) ??
+      contract.brandAssessments[0];
+    const weakest = getWeakestGate(assessment.proof, assessment.permission, assessment.preparedness);
+
+    return {
+      id: contract.opportunity.id,
+      title: contract.opportunity.title,
+      signalClass: contract.opportunity.signalClass.replaceAll("_", " "),
+      evidenceCount: contract.opportunity.evidence.length,
+      weakestGate: `${weakest.gate} ${weakest.score}`,
+      route: contract.recommendedRoute,
+      primary: contract.opportunity.id === HERO_OPPORTUNITY_ID,
+    };
+  });
 
   return (
-    <main className="page-main page-frame">
-      <header className="page-heading">
+    <div className="shell-frame">
+      <header className="page-head">
         <div>
-          <p className="eyebrow">Pulse Board · Three different decisions</p>
-          <h1>Do not chase the feed.</h1>
+          <h1>Pulse Room</h1>
+          <p>
+            Signal arrives, evidence is grouped and challenged, then one decision moves forward. The
+            Rexona window is the live journey; the other two show what the router rejects and defers.
+          </p>
         </div>
-        <p>
-          Each card is a replayable decision contract. Open the live moment first, then compare it
-          with a durable shift and a concentrated spike the router rejects.
-        </p>
       </header>
-      <section className="card-grid" aria-label="Opportunity contracts">
-        {contracts.map((contract, index) => {
-          const assessment = contract.brandAssessments.find(
-            ({ brandId }) => brandId === contract.selectedBrandId,
-          ) ?? contract.brandAssessments[0];
-          const weakest = getWeakestGate(
-            assessment.proof,
-            assessment.permission,
-            assessment.preparedness,
-          );
 
-          return (
-            <OpportunityCard
-              key={contract.contractId}
-              id={contract.opportunity.id}
-              title={contract.opportunity.title}
-              hypothesis={contract.opportunity.hypothesis}
-              signalClass={contract.opportunity.signalClass.replaceAll("_", " ")}
-              usefulWindow={index === 0 ? "46h window" : index === 1 ? "Strategic" : "24h window"}
-              evidenceCount={contract.opportunity.evidence.length}
-              weakestGate={`${weakest.gate} · ${weakest.score}`}
-              route={contract.recommendedRoute}
-              tone={TONES[index]}
-            />
-          );
-        })}
-      </section>
-    </main>
+      <div className="pulse-room">
+        <div className="stack">
+          {replay ? (
+            <SignalRoom replay={replay} />
+          ) : (
+            <section className="system-state">
+              <h2>No bundled replay for this workspace</h2>
+              <p>The deterministic decision chain below is unaffected.</p>
+            </section>
+          )}
+          <SynthesisPanel opportunityId={HERO_OPPORTUNITY_ID} />
+        </div>
+
+        <div className="stack">
+          <section aria-labelledby="open-decisions-title">
+            <div className="section-head">
+              <div>
+                <p className="section-kicker">Open decisions</p>
+                <h2 id="open-decisions-title">Three signals, three different answers</h2>
+              </div>
+            </div>
+            <OpportunityList opportunities={opportunities} />
+          </section>
+        </div>
+      </div>
+    </div>
   );
 }

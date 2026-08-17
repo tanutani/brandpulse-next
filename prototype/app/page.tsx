@@ -1,60 +1,73 @@
-import { ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, Beaker, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
-import { ModelMap } from "@/components/model/model-map";
-import { ProductionConnections } from "@/components/model/production-connections";
-import { HERO_OPPORTUNITY_ID } from "@/lib/demo/model";
+import { HowItWorksLink } from "@/components/shell/how-it-works-link";
 
+/**
+ * The cover. One sentence, one preview, one primary action. Everything
+ * explanatory lives in the "How BrandPulse works" drawer.
+ */
 export default function Home() {
   return (
-    <main className="landing-page page-frame">
-      <section className="landing" aria-labelledby="landing-title">
-        <div className="landing-copy">
-          <p className="eyebrow">Decision system for brand teams · Static competition prototype</p>
-          <h1 id="landing-title">Attention is not demand.</h1>
-          <p className="landing-thesis">
-            BrandPulse tells a brand team whether, where, and how to respond to a market signal—before
-            it spends money or publishes unsafe work.
+    <div className="shell-frame">
+      <section className="cover" aria-labelledby="cover-title">
+        <div>
+          <p className="cover-eyebrow">Governed signal-to-action for brand teams</p>
+          <h1 id="cover-title">Attention is not demand.</h1>
+          <p className="cover-sentence">
+            BrandPulse turns a market signal into one accountable decision — whether to act, where it
+            can actually be executed, and what must be proven first.
           </p>
-          <div className="landing-actions">
-            <Link className="primary-action" href={`/opportunities/${HERO_OPPORTUNITY_ID}`}>
-              Try the Rexona use case <ArrowRight aria-hidden="true" size={18} />
+
+          <div className="cover-actions">
+            <Link className="btn btn-primary" href="/opportunities">
+              Open live decision room <ArrowRight aria-hidden="true" size={16} />
             </Link>
-            <Link className="secondary-action" href="/opportunities">
-              Explore other decisions <ArrowUpRight aria-hidden="true" size={15} />
-            </Link>
-            <span className="assurance-note">
-              <ShieldCheck aria-hidden="true" size={17} /> No login or API key
+            <HowItWorksLink />
+          </div>
+
+          <div className="cover-note">
+            <span>
+              <ShieldCheck aria-hidden="true" size={14} /> No login, key, or database required
             </span>
+            <span>
+              <Beaker aria-hidden="true" size={14} /> Dated public snapshots and labelled synthetic
+              HUL-like data
+            </span>
+            <span>Unofficial Techtonic Season 8 concept · not an official HUL product</span>
           </div>
         </div>
-        <aside className="hero-use-case" aria-label="Rexona demo outcome preview">
-          <div className="hero-use-case-topline"><span>Live example</span><strong>Rexona · India</strong></div>
-          <h2>Extra-time sweat confidence</h2>
-          <p>A late-match sports moment looks relevant—but national stock and match-footage rights make immediate activation unsafe.</p>
-          <div className="route-shift"><span>National + match footage <strong>Watch</strong></span><ArrowRight aria-hidden="true" size={18} /><span>Four cities + creator content <strong>Test</strong></span></div>
-          <div className="hero-use-case-result"><span>Synthetic result</span><strong>+1.2pp lift · 95% service · Scale</strong></div>
+
+        <aside className="use-case-preview" aria-label="Rexona use case preview">
+          <div className="use-case-head">
+            <span>Use case</span>
+            <strong>Rexona · India</strong>
+          </div>
+          <div className="use-case-body">
+            <h2>Extra-time sweat confidence</h2>
+            <p>
+              A late-match heat window looks relevant. National stock and match-footage rights make
+              immediate activation unsafe.
+            </p>
+
+            <div className="use-case-shift">
+              <div>
+                <span>National + match footage</span>
+                <span className="route-badge route-watch">Watch</span>
+              </div>
+              <div>
+                <span>Four cities + creator content</span>
+                <span className="route-badge">Test</span>
+              </div>
+            </div>
+
+            <div className="use-case-result">
+              <span>Synthetic result</span>
+              <strong>+1.2pp · 95% service · Scale</strong>
+            </div>
+          </div>
         </aside>
       </section>
-
-      <section className="landing-answers" aria-label="BrandPulse explained">
-        <div><span>What is it?</span><strong>A governed market-signal decision system.</strong></div>
-        <div><span>Who uses it?</span><strong>Brand, insights, commerce, and legal teams.</strong></div>
-        <div><span>Why now?</span><strong>Fast attention can be temporary, unsafe, or impossible to execute.</strong></div>
-        <div><span>What comes out?</span><strong>Act, Test, Incubate, Watch, or Ignore—with reasons.</strong></div>
-      </section>
-
-      <ModelMap />
-
-      <section className="prototype-boundary" aria-labelledby="boundary-title">
-        <div className="boundary-heading"><p className="eyebrow">Honest product boundary</p><h2 id="boundary-title">The prototype proves the decision contract—not a live HUL integration.</h2></div>
-        <div className="boundary-columns">
-          <article><span>Prototype today</span><h3>Reliable enough to judge</h3><ul><li>Dated public and visibly synthetic snapshots</li><li>Deterministic TypeScript decision rules</li><li>Versioned browser-local journey history</li></ul></article>
-          <article><span>Production model</span><h3>Connected to the operating system</h3><ul><li>Listening, consumer, commerce, and inventory inputs</li><li>Brand memory, rights, claims, and campaign systems</li><li>Enterprise roles, lineage, approvals, and outcome store</li></ul></article>
-        </div>
-      </section>
-
-      <ProductionConnections />
-    </main>
+    </div>
   );
 }

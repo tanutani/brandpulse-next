@@ -1,15 +1,18 @@
-import { ArrowLeft, ArrowRight, ExternalLink, ShieldAlert } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 import { ProvenanceBadge } from "@/components/evidence/provenance-badge";
+import { AskWhy } from "@/components/gates/ask-why";
 import { AssumptionControl } from "@/components/gates/assumption-control";
 import { RouteBadge } from "@/components/gates/route-badge";
 import { ScoreBar } from "@/components/gates/score-bar";
-import { SystemState } from "@/components/governance/system-state";
-import { DecisionBrief } from "@/components/model/decision-brief";
-import { GuidedJourney } from "@/components/shell/guided-journey";
+import { NextActionLink } from "@/components/shell/next-action-link";
 import { buildFallbackSynthesis } from "@/lib/agents/fallback";
+import { HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
 import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
+import { createHeroPortfolioCandidates } from "@/lib/portfolio/hero-portfolio";
+import { getWeakestGate } from "@/lib/routing/select-route";
+import { ROUTE_THRESHOLDS } from "@/lib/scoring/config";
 
 export function generateStaticParams() {
   return loadFixtureBundle().contracts.map(({ opportunity }) => ({ id: opportunity.id }));
@@ -21,109 +24,189 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
 
   if (!contract) {
     return (
-      <main className="page-main page-frame">
-        <SystemState
-          title="This bundled contract is unavailable"
-          detail="Return to the Pulse Board and choose one of the three validated demo opportunities. No network request is required."
-        />
-      </main>
+      <div className="shell-frame">
+        <section className="system-state" style={{ marginTop: "var(--s6)" }}>
+          <h2>This bundled contract is unavailable</h2>
+          <p>
+            Return to the Pulse Room and choose one of the three validated demo opportunities. No
+            network request is required.
+          </p>
+          <Link className="btn btn-primary" href="/opportunities">
+            Back to Pulse Room
+          </Link>
+        </section>
+      </div>
     );
   }
 
   const synthesis = buildFallbackSynthesis(id, "disabled");
-  const assessment = contract.brandAssessments.find(
-    ({ brandId }) => brandId === contract.selectedBrandId,
-  ) ?? contract.brandAssessments[0];
-  const isHero = id === "opp-extra-time-sweat-confidence";
+  const assessment =
+    contract.brandAssessments.find(({ brandId }) => brandId === contract.selectedBrandId) ??
+    contract.brandAssessments[0];
+  const weakest = getWeakestGate(assessment.proof, assessment.permission, assessment.preparedness);
+  const isHero = id === HERO_OPPORTUNITY_ID;
+
+  // The blockers that apply at national scope with match footage, for "Ask why?".
+  const nationalBlockers = isHero
+    ? createHeroPortfolioCandidates(contract, "national", "unlicensed_match_footage")
+        .find(({ brandId }) => brandId === "rexona")!
+        .preparedness.blockers.map((blocker) => ({
+          code: blocker.code,
+          detail: blocker.message,
+          remediation: blocker.remediation,
+        }))
+    : [];
+
+  const support = contract.opportunity.evidence.filter(({ stance }) => stance !== "contradict");
+  const against = contract.opportunity.evidence.filter(({ stance }) => stance === "contradict");
 
   return (
-    <main className="contract-page page-frame">
-      <Link className="back-link" href="/opportunities"><ArrowLeft aria-hidden="true" size={16} /> Pulse Board</Link>
-      {isHero ? <GuidedJourney activeStep="understand" /> : null}
-      <header className="contract-hero">
-        <div>
-          <p className="eyebrow">Opportunity Contract · v{contract.version}</p>
-          <h1>{contract.opportunity.title}</h1>
-          <p className="contract-hypothesis">{contract.opportunity.hypothesis}</p>
-        </div>
-        <div className="contract-route">
-          <span>Recommended route</span>
-          <RouteBadge route={contract.recommendedRoute} />
-          <small>{isHero ? "46h useful window" : contract.opportunity.signalClass.replaceAll("_", " ")}</small>
-        </div>
-      </header>
+    <div className="shell-frame">
+      <Link className="back-link" href="/opportunities">
+        <ArrowLeft aria-hidden="true" size={15} /> Pulse Room
+      </Link>
 
-      {isHero ? (
-        <DecisionBrief
-          deciding="Is this sports moment credible enough to deserve brand time?"
-          considered="Dated search, weather, news, synthetic consumer and commerce evidence, plus a counter-explanation."
-          changed="Scattered observations now sit in one evidence chain with an explicit source-concentration penalty."
-          continuation="The signal is strong enough to compare brand ownership, but it is not permission to publish."
-        />
-      ) : null}
-
-      <section className="contract-grid">
-        <div className="evidence-column">
-          <div className="section-heading"><div><p className="eyebrow">Evidence chain</p><h2>Support before recommendation</h2></div><span>{contract.opportunity.evidence.length} records</span></div>
-          <div className="evidence-list">
-            {contract.opportunity.evidence.map((evidence) => (
-              <article className={`evidence-row evidence-${evidence.stance}`} key={evidence.id}>
-                <div className="evidence-row-top">
-                  <ProvenanceBadge type={evidence.evidenceType} />
-                  <span>{evidence.freshness}</span>
-                </div>
-                <p>{evidence.claim}</p>
-                {evidence.sourceUrl ? (
-                  <a href={evidence.sourceUrl} target="_blank" rel="noreferrer">
-                    Inspect public source <ExternalLink aria-hidden="true" size={12} />
-                  </a>
-                ) : null}
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <aside className="skeptic-panel">
-          <ShieldAlert aria-hidden="true" size={24} />
-          <p className="eyebrow">Skeptic · Model inference</p>
-          <h2>What could make this wrong?</h2>
-          <p>{synthesis?.counterHypothesis.claim}</p>
-          <div className="skeptic-alt"><span>Cited evidence</span>{synthesis?.counterHypothesis.evidenceIds.join(", ")}</div>
-          <ProvenanceBadge type="model_inference" />
-        </aside>
-      </section>
-
-      {isHero ? (
-        <AssumptionControl contract={contract} evaluatedAt={loadFixtureBundle().generatedAt} />
-      ) : (
-        <section className="decision-panel">
-          <div className="decision-panel-heading"><div><p className="eyebrow">Deterministic decision</p><h2>The weakest gate determines the route.</h2></div><RouteBadge route={contract.recommendedRoute} /></div>
-          <div className="score-stack">
-            <ScoreBar label="Proof" score={assessment.proof.score} />
-            <ScoreBar label="Permission" score={assessment.permission.score} />
-            <ScoreBar label="Preparedness" score={assessment.preparedness.score} />
-          </div>
-        </section>
-      )}
-
-      <section className="proof-explainer">
-        <div><p className="eyebrow">Proof calculation</p><h2>Every point has an input.</h2><p>Weighted evidence components, minus explicit manipulation and source-concentration penalties.</p></div>
-        <div className="component-grid">
-          {assessment.proof.components.map((component) => (
-            <div className="component-cell" key={component.name}>
-              <span>{component.name.replaceAll(/([A-Z])/g, " $1")}</span>
-              <strong>{component.value}</strong>
-              <small>{Math.round(component.weight * 100)}% weight</small>
+      <div className="journey-grid">
+        <div className="stack">
+          <section className="decision-surface">
+            <div className="decision-surface-head">
+              <div>
+                <p>
+                  Opportunity Contract · v{contract.version} ·{" "}
+                  {contract.opportunity.signalClass.replaceAll("_", " ")}
+                </p>
+                <h2>{contract.opportunity.title}</h2>
+              </div>
+              <RouteBadge route={contract.recommendedRoute} />
             </div>
-          ))}
+            <div className="decision-surface-body">
+              <p className="hypothesis-line">{contract.opportunity.hypothesis}</p>
+
+              <div style={{ marginTop: "var(--s5)" }}>
+                <ScoreBar
+                  label="Proof"
+                  score={assessment.proof.score}
+                  weakest={weakest.gate === "proof"}
+                />
+                <ScoreBar
+                  label="Permission"
+                  score={assessment.permission.score}
+                  weakest={weakest.gate === "permission"}
+                />
+                <ScoreBar
+                  label="Preparedness"
+                  score={assessment.preparedness.score}
+                  weakest={weakest.gate === "preparedness"}
+                />
+              </div>
+
+              <p className="muted small" style={{ marginTop: "var(--s3)" }}>
+                Readiness = min({assessment.proof.score}, {assessment.permission.score},{" "}
+                {assessment.preparedness.score}) = <strong>{assessment.readiness}</strong>
+              </p>
+
+              {isHero && synthesis ? (
+                <div style={{ marginTop: "var(--s5)" }}>
+                  <AskWhy
+                    actProofThreshold={ROUTE_THRESHOLDS.actNow.proof}
+                    nationalBlockers={nationalBlockers}
+                    opportunityId={id}
+                    permission={assessment.permission.score}
+                    preparedness={assessment.preparedness.score}
+                    proof={assessment.proof.score}
+                    readiness={assessment.readiness}
+                    reasonCodes={contract.routeReasonCodes}
+                    route={contract.recommendedRoute}
+                    synthesis={synthesis}
+                    weakestGate={weakest.gate}
+                  />
+                </div>
+              ) : null}
+            </div>
+          </section>
+
+          {isHero ? (
+            <NextActionLink
+              detail="Rexona, Dove and Axe are scored against the same evidence."
+              href={`/resolver/${id}`}
+              label="Decide which brand can responsibly own this"
+              cta="Open Portfolio Resolver"
+            />
+          ) : null}
+
+          {isHero ? (
+            <AssumptionControl contract={contract} evaluatedAt={loadFixtureBundle().generatedAt} />
+          ) : null}
         </div>
-      </section>
-      {isHero ? (
-        <div className="journey-next">
-          <div><p className="eyebrow">Step 1 complete</p><strong>Now decide which brand can responsibly own the opportunity.</strong></div>
-          <Link className="primary-action" href={`/resolver/${id}`}>Resolve portfolio ownership <ArrowRight aria-hidden="true" size={17} /></Link>
+
+        <div className="stack">
+          {synthesis ? (
+            <div className="inference-surface">
+              <ProvenanceBadge type="model_inference" />
+              <h3 style={{ marginTop: 6 }}>What could make this wrong?</h3>
+              <p style={{ marginTop: 4 }}>{synthesis.counterHypothesis.claim}</p>
+              <span className="mono muted" style={{ fontSize: 10.5 }}>
+                {synthesis.counterHypothesis.evidenceIds.join(" · ")}
+              </span>
+            </div>
+          ) : null}
+
+          <section className="surface surface-pad" aria-labelledby="evidence-title">
+            <div className="section-head">
+              <div>
+                <p className="section-kicker">Evidence chain</p>
+                <h2 id="evidence-title" style={{ fontSize: 17 }}>
+                  Support before recommendation
+                </h2>
+              </div>
+              <span className="muted small">{contract.opportunity.evidence.length} records</span>
+            </div>
+
+            <div className="scroll-panel" style={{ display: "grid", gap: "var(--s2)" }}>
+              {[...support, ...against].map((evidence) => (
+                <article
+                  className={`evidence-card evidence-${evidence.evidenceType} stance-${evidence.stance}`}
+                  key={evidence.id}
+                >
+                  <div className="evidence-card-top">
+                    <ProvenanceBadge type={evidence.evidenceType} />
+                    <span className="evidence-stance">
+                      {evidence.stance} · {evidence.freshness}
+                    </span>
+                  </div>
+                  <p>{evidence.claim}</p>
+                  <span className="evidence-id">{evidence.id}</span>
+                  {evidence.sourceUrl ? (
+                    <a href={evidence.sourceUrl} target="_blank" rel="noreferrer">
+                      Inspect public source <ExternalLink aria-hidden="true" size={11} />
+                    </a>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <details className="detail-disclosure">
+            <summary>Proof calculation — every point has an input</summary>
+            <div className="detail-body">
+              <p className="muted small">
+                Weighted evidence components, minus explicit manipulation and source-concentration
+                penalties. Ruleset{" "}
+                <span className="mono">{assessment.proof.rulesetVersion}</span>.
+              </p>
+              <div className="field-grid" style={{ marginTop: "var(--s3)" }}>
+                {assessment.proof.components.map((component) => (
+                  <div className="field" key={component.name}>
+                    <span>{component.name.replaceAll(/([A-Z])/g, " $1")}</span>
+                    <strong>{component.value}</strong>
+                    <span className="mono muted">{Math.round(component.weight * 100)}% weight</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </details>
         </div>
-      ) : null}
-    </main>
+      </div>
+    </div>
   );
 }
