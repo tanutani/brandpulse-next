@@ -93,6 +93,18 @@ try {
       await page.screenshot({ path: file, fullPage: true });
       console.log(`captured ${file}`);
     }
+    // The guided message is a bottom sheet at phone width, so capture it there.
+    if (label === "phone") {
+      await page.goto(`${base}/`);
+      await page.evaluate(() => window.localStorage.clear());
+      await page.goto(`${base}/opportunities`);
+      await page.getByRole("button", { name: "Start guide" }).click();
+      await page.waitForSelector("[data-testid='guide-bubble']");
+      const file = path.join(outDir, "07-guided-sheet-phone.png");
+      await page.screenshot({ path: file });
+      console.log(`captured ${file}`);
+    }
+
     await context.close();
   }
   await browser.close();
