@@ -8,7 +8,7 @@ import { ScoreBar } from "@/components/gates/score-bar";
 import { SystemState } from "@/components/governance/system-state";
 import { DecisionBrief } from "@/components/model/decision-brief";
 import { GuidedJourney } from "@/components/shell/guided-journey";
-import { getFallbackSynthesis } from "@/lib/agents/fallback";
+import { buildFallbackSynthesis } from "@/lib/agents/fallback";
 import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
 
 export function generateStaticParams() {
@@ -30,7 +30,7 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
     );
   }
 
-  const synthesis = getFallbackSynthesis(id);
+  const synthesis = buildFallbackSynthesis(id, "disabled");
   const assessment = contract.brandAssessments.find(
     ({ brandId }) => brandId === contract.selectedBrandId,
   ) ?? contract.brandAssessments[0];
@@ -87,8 +87,8 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
           <ShieldAlert aria-hidden="true" size={24} />
           <p className="eyebrow">Skeptic · Model inference</p>
           <h2>What could make this wrong?</h2>
-          <p>{synthesis.strongestCounterEvidence[0]}</p>
-          <div className="skeptic-alt"><span>Alternative explanation</span>{synthesis.skeptic.alternativeExplanation}</div>
+          <p>{synthesis?.counterHypothesis.claim}</p>
+          <div className="skeptic-alt"><span>Cited evidence</span>{synthesis?.counterHypothesis.evidenceIds.join(", ")}</div>
           <ProvenanceBadge type="model_inference" />
         </aside>
       </section>

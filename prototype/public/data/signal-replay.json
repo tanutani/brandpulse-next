@@ -1,0 +1,99 @@
+{
+  "fixtureVersion": "1.0.0",
+  "generatedAt": "2026-08-15T08:30:00.000Z",
+  "disclosure": "Simulated live replay of checked-in public snapshots and invented aggregate HUL-like operating records. No network request is made and no live feed is read.",
+  "replays": [
+    {
+      "opportunityId": "opp-extra-time-sweat-confidence",
+      "label": "Simulated live replay",
+      "durationMs": 5000,
+      "events": [
+        {
+          "id": "replay-hero-01-sports",
+          "offsetMs": 0,
+          "sourceType": "sports_news",
+          "label": "Extra-time attention",
+          "detail": "Dated public news and weather snapshots show a late-match heat and humidity window.",
+          "value": "3 source families",
+          "evidenceIds": ["sig-hero-news", "sig-hero-weather"],
+          "evidenceType": "public",
+          "synthetic": false
+        },
+        {
+          "id": "replay-hero-02-search",
+          "offsetMs": 800,
+          "sourceType": "search",
+          "label": "Category search acceleration",
+          "detail": "A dated public search snapshot shows directional deodorant-category acceleration.",
+          "value": 68,
+          "delta": 22,
+          "evidenceIds": ["sig-hero-search"],
+          "evidenceType": "public",
+          "synthetic": false
+        },
+        {
+          "id": "replay-hero-03-language",
+          "offsetMs": 1600,
+          "sourceType": "consumer_language",
+          "label": "\"Sweat confidence\" language",
+          "detail": "Invented aggregate consumer connects repeat confidence despite sweat across four city cells.",
+          "value": "4 city cells",
+          "evidenceIds": ["sig-hero-consumer"],
+          "evidenceType": "synthetic_internal",
+          "synthetic": true
+        },
+        {
+          "id": "replay-hero-04-commerce",
+          "offsetMs": 2400,
+          "sourceType": "commerce",
+          "label": "Q-commerce progression",
+          "detail": "Invented aggregate progression is positive but too weak to establish incrementality.",
+          "value": 11,
+          "delta": 3,
+          "evidenceIds": ["sig-hero-commerce"],
+          "evidenceType": "synthetic_internal",
+          "synthetic": true
+        },
+        {
+          "id": "replay-hero-05-inventory-ready",
+          "offsetMs": 3200,
+          "sourceType": "inventory",
+          "label": "Four cities can serve demand",
+          "detail": "Invented aggregate stock shows 21–26 days cover at 94–96% service level in four cells.",
+          "value": "95% service",
+          "evidenceIds": [
+            "inv-rex-mumbai",
+            "inv-rex-delhi",
+            "inv-rex-bengaluru",
+            "inv-rex-hyderabad"
+          ],
+          "evidenceType": "synthetic_internal",
+          "synthetic": true
+        },
+        {
+          "id": "replay-hero-06-inventory-national",
+          "offsetMs": 4000,
+          "sourceType": "inventory",
+          "label": "National stock cannot",
+          "detail": "Invented aggregate national scope holds 9 days cover at 74% service level.",
+          "value": "74% service",
+          "delta": -21,
+          "evidenceIds": ["inv-rex-national"],
+          "evidenceType": "synthetic_internal",
+          "synthetic": true
+        },
+        {
+          "id": "replay-hero-07-rights",
+          "offsetMs": 4700,
+          "sourceType": "rights",
+          "label": "Match footage unavailable",
+          "detail": "Invented rights record marks live or replayed match footage as unavailable for use.",
+          "value": "Blocked",
+          "evidenceIds": ["rights-match-footage"],
+          "evidenceType": "synthetic_internal",
+          "synthetic": true
+        }
+      ]
+    }
+  ]
+}

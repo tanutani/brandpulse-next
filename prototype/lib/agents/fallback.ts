@@ -1,56 +1,73 @@
 import { z } from "zod";
 
 import fallbackFixture from "@/public/data/precomputed-synthesis.json";
+import { SynthesisModelOutputSchema, SynthesisResponseSchema } from "@/lib/contracts/live-ai";
+import type { FallbackReason, SynthesisResponse } from "@/lib/contracts/live-ai";
+import { citesOnlyKnownEvidence } from "@/lib/evidence/evidence-registry";
+import { SYNTHESIS_PROMPT_VERSION } from "@/lib/ai/synthesis-prompt";
 
-const AgentTraceSchema = z.object({
-  evidenceType: z.literal("model_inference"),
-  generatedFrom: z.array(z.string()).optional(),
-  alternativeExplanation: z.string().optional(),
-  sensitivityNote: z.string().optional(),
-  rationale: z.string().optional(),
-});
+/**
+ * The checked-in synthesis. It satisfies exactly the same schema and the same
+ * evidence-grounding rule as a live response, so the journey is identical
+ * whether or not a provider is configured.
+ */
 
-const SynthesisOutputSchema = z.object({
-  opportunityId: z.string(),
-  mode: z.literal("precomputed_fallback"),
-  summary: z.string(),
-  strongestSupport: z.array(z.string()),
-  strongestCounterEvidence: z.array(z.string()).min(1),
-  missingEvidence: z.array(z.string()),
-  evidenceAnalyst: AgentTraceSchema,
-  skeptic: AgentTraceSchema,
-  experimentArchitect: AgentTraceSchema.optional(),
-});
+const FallbackOutputSchema = SynthesisModelOutputSchema.extend({
+  opportunityId: z.string().min(1),
+}).strict();
 
-const FallbackFixtureSchema = z.object({
-  fixtureVersion: z.literal("1.0.0"),
-  generatedAt: z.iso.datetime({ offset: true }),
-  disclosure: z.string(),
-  outputs: z.array(SynthesisOutputSchema).min(1),
-});
-
-export type PrecomputedSynthesis = z.infer<typeof SynthesisOutputSchema>;
+const FallbackFixtureSchema = z
+  .object({
+    fixtureVersion: z.literal("1.0.0"),
+    generatedAt: z.iso.datetime({ offset: true }),
+    disclosure: z.string().min(1),
+    outputs: z.array(FallbackOutputSchema).min(1),
+  })
+  .strict()
+  .superRefine((fixture, context) => {
+    fixture.outputs.forEach((output, index) => {
+      const cited = [
+        ...output.themes.flatMap((theme) => theme.evidenceIds),
+        ...output.counterHypothesis.evidenceIds,
+      ];
+      if (!citesOnlyKnownEvidence(output.opportunityId, cited)) {
+        context.addIssue({
+          code: "custom",
+          message: `Precomputed synthesis for ${output.opportunityId} cites evidence outside the approved set.`,
+          path: ["outputs", index],
+        });
+      }
+    });
+  });
 
 const parsedFixture = FallbackFixtureSchema.parse(fallbackFixture);
 
-export const precomputedSynthesis = parsedFixture.outputs;
+export const FALLBACK_DISCLOSURE = parsedFixture.disclosure;
 
-export function getFallbackSynthesis(opportunityId: string): PrecomputedSynthesis {
-  const output = precomputedSynthesis.find((item) => item.opportunityId === opportunityId);
-  if (!output) {
-    throw new Error(`No bundled synthesis for opportunity: ${opportunityId}`);
-  }
-  return output;
+export function hasFallbackSynthesis(opportunityId: string): boolean {
+  return parsedFixture.outputs.some((output) => output.opportunityId === opportunityId);
 }
 
-export function createDegradedSynthesisResponse(
+/**
+ * Returns the bundled synthesis as a full response, or null when no fixture
+ * exists. Callers turn null into a 503; every other path stays on 200.
+ */
+export function buildFallbackSynthesis(
   opportunityId: string,
-  reason: "provider_unavailable" | "timeout" | "invalid_response" = "provider_unavailable",
-) {
-  return {
-    ...getFallbackSynthesis(opportunityId),
-    degraded: true as const,
-    degradedReason: reason,
-    disclosure: parsedFixture.disclosure,
-  };
+  fallbackReason: FallbackReason,
+): SynthesisResponse | null {
+  const output = parsedFixture.outputs.find((item) => item.opportunityId === opportunityId);
+  if (!output) return null;
+
+  return SynthesisResponseSchema.parse({
+    summary: output.summary,
+    themes: output.themes,
+    counterHypothesis: output.counterHypothesis,
+    missingEvidence: output.missingEvidence,
+    mode: "precomputed_fallback",
+    model: null,
+    promptVersion: SYNTHESIS_PROMPT_VERSION,
+    generatedAt: parsedFixture.generatedAt,
+    fallbackReason,
+  });
 }

@@ -1,8 +1,71 @@
 {
-  "fixtureVersion":"1.0.0","generatedAt":"2026-08-15T08:30:00.000Z","disclosure":"Precomputed model-style interpretations of checked-in demo evidence. These outputs never set scores or routes.",
-  "outputs":[
-    {"opportunityId":"opp-extra-time-sweat-confidence","mode":"precomputed_fallback","summary":"Independent public snapshots and synthetic consumer language point to a time-bounded confidence-under-pressure opportunity; commerce progression is positive but modest.","strongestSupport":["Search direction, weather context, and news diffusion come from separate public source families.","Synthetic consumer connects repeat confidence despite sweat across four aggregate city cells."],"strongestCounterEvidence":["Synthetic category commerce progression is weak and cannot establish incrementality.","National stock and match-footage rights are not ready."],"missingEvidence":["Matched-cell incremental conversion result","Rights-safe creative response by city"],"evidenceAnalyst":{"evidenceType":"model_inference","generatedFrom":["sig-hero-search","sig-hero-weather","sig-hero-news","sig-hero-consumer","sig-hero-commerce"]},"skeptic":{"evidenceType":"model_inference","alternativeExplanation":"Seasonal heat and match attention may explain the movement without a brand-specific demand shift.","sensitivityNote":"If a later review assumes 70% source concentration, apply a deterministic 14-point penalty (70 × 0.20)."},"experimentArchitect":{"evidenceType":"model_inference","rationale":"Use preselected four-city cells, one incremental conversion metric, a service-level guardrail, and rules fixed before exposure."}},
-    {"opportunityId":"opp-scalp-skinification","mode":"precomputed_fallback","summary":"Persistent search language and synthetic routine narratives support a durable strategic shift, while claim and product readiness remain low.","strongestSupport":["The search pattern persists beyond one event window.","Synthetic consumers describe scalp-first routines and ingredient scrutiny."],"strongestCounterEvidence":["The fixture has no ready product-specific scalp claim.","Synthetic commerce intent is not yet strong enough for activation."],"missingEvidence":["Substantiated claim territory","Concept acceptance and repeat-intent test"],"evidenceAnalyst":{"evidenceType":"model_inference","generatedFrom":["sig-durable-search","sig-durable-news","sig-durable-consumer"]},"skeptic":{"evidenceType":"model_inference","alternativeExplanation":"Interest may remain informational and fail to convert to a distinct hair-care routine."}},
-    {"opportunityId":"opp-single-creator-cooling-challenge","mode":"precomputed_fallback","summary":"The visible spike is concentrated in one creator family and lacks search or commerce progression.","strongestSupport":["One public creator/search snapshot shows attention."],"strongestCounterEvidence":["Ninety percent of visible attention sits in one creator family.","Synthetic commerce and category-search progression are effectively flat."],"missingEvidence":["Independent source-family corroboration","Evidence of category behavior"],"evidenceAnalyst":{"evidenceType":"model_inference","generatedFrom":["sig-noise-social","sig-noise-commerce"]},"skeptic":{"evidenceType":"model_inference","alternativeExplanation":"Paid seeding, creator novelty, or entertainment value explains the spike better than category demand."}}
+  "fixtureVersion": "1.0.0",
+  "generatedAt": "2026-08-15T08:30:00.000Z",
+  "disclosure": "Precomputed model-style interpretations of checked-in demo evidence. These outputs never set scores, routes, blockers, approvals, or outcomes.",
+  "outputs": [
+    {
+      "opportunityId": "opp-extra-time-sweat-confidence",
+      "summary": "Three independent public source families and synthetic consumer language point to a time-bounded confidence-under-pressure moment for Rexona. Commerce progression is positive but modest, and the operating record shows execution is only credible in the four cells that can serve demand.",
+      "themes": [
+        {
+          "label": "Independent attention, not one feed",
+          "evidenceIds": ["sig-hero-search", "sig-hero-weather", "sig-hero-news"]
+        },
+        {
+          "label": "Consumers name the need, not the brand",
+          "evidenceIds": ["sig-hero-consumer"]
+        },
+        {
+          "label": "Execution is narrower than the attention",
+          "evidenceIds": ["inv-rex-national", "inv-rex-mumbai", "rights-match-footage"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Seasonal heat plus one-off match attention may explain the movement without any brand-specific demand shift; the commerce record is too weak to separate the two.",
+        "evidenceIds": ["sig-hero-commerce", "sig-hero-weather"]
+      },
+      "missingEvidence": [
+        "Matched-cell incremental conversion result",
+        "Rights-safe creative response by city"
+      ]
+    },
+    {
+      "opportunityId": "opp-scalp-skinification",
+      "summary": "Search language persists well beyond a single event window and synthetic consumer routines describe scalp-first behaviour, which supports a durable shift rather than a moment. Claim substantiation and product readiness remain the binding constraints.",
+      "themes": [
+        {
+          "label": "Persistence beyond one window",
+          "evidenceIds": ["sig-durable-search", "sig-durable-news"]
+        },
+        {
+          "label": "Routine change, not a spike",
+          "evidenceIds": ["sig-durable-consumer"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Interest may stay informational and never convert into a distinct paid hair-care routine, leaving the category with attention but no new demand.",
+        "evidenceIds": ["sig-durable-search", "sig-durable-consumer"]
+      },
+      "missingEvidence": ["Substantiated claim territory", "Concept acceptance and repeat-intent test"]
+    },
+    {
+      "opportunityId": "opp-single-creator-cooling-challenge",
+      "summary": "Visible attention is concentrated in a single creator family and is not accompanied by category search or commerce progression, so the spike does not currently describe category demand.",
+      "themes": [
+        {
+          "label": "One source family carries the spike",
+          "evidenceIds": ["sig-noise-social"]
+        },
+        {
+          "label": "No behavioural progression",
+          "evidenceIds": ["sig-noise-commerce"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Paid seeding, creator novelty, or entertainment value explains the spike better than any deodorant category demand shift.",
+        "evidenceIds": ["sig-noise-social", "sig-noise-commerce"]
+      },
+      "missingEvidence": ["Independent source-family corroboration", "Evidence of category behaviour"]
+    }
   ]
 }
