@@ -1,6 +1,7 @@
 "use client";
 
 import { SynthesisResponseSchema, type SynthesisResponse } from "@/lib/contracts/live-ai";
+import { isStaticMode } from "@/lib/demo/static-mode";
 import { EVIDENCE_VERSION } from "@/lib/evidence/evidence-registry";
 
 /**
@@ -30,7 +31,11 @@ export async function fetchSynthesis(opportunityId: string): Promise<SynthesisRe
       const response = await fetch("/api/synthesize", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ opportunityId, evidenceVersion: EVIDENCE_VERSION }),
+        body: JSON.stringify({
+          opportunityId,
+          evidenceVersion: EVIDENCE_VERSION,
+          forceStatic: isStaticMode(),
+        }),
       });
       if (!response.ok) return null;
 

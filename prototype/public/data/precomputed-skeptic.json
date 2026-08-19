@@ -1,0 +1,60 @@
+{
+  "fixtureVersion": "1.0.0",
+  "generatedAt": "2026-08-15T08:30:00.000Z",
+  "disclosure": "Precomputed counter-arguments over checked-in demo evidence. Used whenever the live Skeptic is unavailable. These outputs never set scores, routes, blockers, approvals, or outcomes.",
+  "outputs": [
+    {
+      "opportunityId": "opp-extra-time-sweat-confidence",
+      "headline": "Heat and a single televised match explain most of this movement without any brand-specific demand shift.",
+      "challenges": [
+        {
+          "claim": "Weather and match attention rose together, so neither record separates a genuine change in confidence-under-pressure behaviour from ordinary seasonal sweating during a widely watched event.",
+          "wouldChangeDecisionIf": "The same language appears in a comparable week with no match and no heat spike.",
+          "evidenceIds": ["sig-hero-weather", "sig-hero-news"]
+        },
+        {
+          "claim": "Commerce progression is positive but small enough to be consistent with normal week-to-week variation, so it cannot yet corroborate the attention signal.",
+          "wouldChangeDecisionIf": "Matched treatment and comparison cells show a gap outside normal variation.",
+          "evidenceIds": ["sig-hero-commerce"]
+        },
+        {
+          "claim": "Consumers describe the need without naming a brand, so the language may be a category-level observation that any competitor could answer equally well.",
+          "wouldChangeDecisionIf": "Consumer language shifts toward brand-specific requests rather than the need alone.",
+          "evidenceIds": ["sig-hero-consumer"]
+        }
+      ]
+    },
+    {
+      "opportunityId": "opp-scalp-skinification",
+      "headline": "Sustained search interest may stay informational and never become a paid routine.",
+      "challenges": [
+        {
+          "claim": "Persistent search can reflect ongoing curiosity or media coverage rather than a change in what people actually buy and use.",
+          "wouldChangeDecisionIf": "Repeat purchase or repeat-intent evidence appears alongside the search persistence.",
+          "evidenceIds": ["sig-durable-search"]
+        },
+        {
+          "claim": "Described routines are invented aggregates in this demo, so they illustrate a behaviour pattern rather than evidencing one.",
+          "wouldChangeDecisionIf": "Observed routine data replaces the synthetic stand-in.",
+          "evidenceIds": ["sig-durable-consumer"]
+        }
+      ]
+    },
+    {
+      "opportunityId": "opp-single-creator-cooling-challenge",
+      "headline": "One creator family carries the whole spike, which is what paid seeding looks like.",
+      "challenges": [
+        {
+          "claim": "Attention concentrated in a single source family is indistinguishable from a seeded or novelty-driven spike without independent corroboration.",
+          "wouldChangeDecisionIf": "A second, unrelated source family shows the same pattern.",
+          "evidenceIds": ["sig-noise-social"]
+        },
+        {
+          "claim": "No accompanying commerce movement means the visible activity has not yet touched category behaviour at all.",
+          "wouldChangeDecisionIf": "Category search or commerce progression follows the attention spike.",
+          "evidenceIds": ["sig-noise-commerce"]
+        }
+      ]
+    }
+  ]
+}

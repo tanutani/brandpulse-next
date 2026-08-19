@@ -636,6 +636,43 @@ p { margin: 0; }
 .signal-event.source-rights .signal-source, .signal-event.source-rights .signal-value { color: var(--block-red); }
 .signal-event.source-inventory .signal-source { color: var(--signal-teal-ink); }
 
+/* Live rows carry a glass tint and a tag, so a live signal never reads as a fixture. */
+.signal-event.is-live-row {
+  border-color: var(--glass-line);
+  background: linear-gradient(var(--glass-tint), var(--glass-tint)), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+}
+.live-tag {
+  margin-left: 6px; padding: 1px 6px; border-radius: var(--radius-pill);
+  background: var(--state-model-inference-fill); color: var(--state-model-inference);
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em;
+}
+.signal-source-link {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 2px;
+  color: var(--brand-primary); font-size: 11px; font-weight: 600; text-decoration: none;
+}
+.signal-source-link:hover { text-decoration: underline; }
+.signal-fallback-note { padding: 0 var(--s5) var(--s4); }
+
+/* The Skeptic argues against the recommendation, so it reads as a separate voice. */
+.skeptic-panel { border-left: 3px solid var(--portfolio-violet); }
+.skeptic-headline { margin-top: 6px; font-size: 14px; font-weight: 650; line-height: 1.5; }
+.skeptic-challenges {
+  display: grid; gap: var(--s3); margin: var(--s4) 0 0; padding-left: 20px;
+  list-style: decimal outside;
+}
+.skeptic-challenges > li {
+  padding: var(--s3); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); background: var(--surface);
+}
+.skeptic-challenges p { font-size: 13px; line-height: 1.5; }
+.skeptic-resolver { margin-top: 6px; color: var(--ink-muted); }
+.skeptic-resolver strong { color: var(--ink); font-weight: 650; }
+.skeptic-challenges .evidence-ids {
+  display: block; margin-top: 6px; font-family: var(--font-mono); font-size: 10.5px;
+  word-break: break-word;
+}
+
 .synthesis-panel-body { padding: var(--s4) var(--s5); }
 .synthesis-summary { font-size: 14px; line-height: 1.55; }
 .theme-list { display: grid; gap: var(--s2); margin-top: var(--s4); }

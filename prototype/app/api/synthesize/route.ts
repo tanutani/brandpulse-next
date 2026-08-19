@@ -30,17 +30,21 @@ export async function POST(request: Request): Promise<Response> {
   const parsed = SynthesisRequestSchema.safeParse(payload);
   if (!parsed.success) return json({ error: "invalid_request" }, 400);
 
-  const { opportunityId, evidenceVersion } = parsed.data;
+  const { opportunityId, evidenceVersion, forceStatic } = parsed.data;
   if (!isKnownOpportunityId(opportunityId) || !isKnownEvidenceVersion(evidenceVersion)) {
     return json({ error: "unknown_opportunity_or_evidence_version" }, 400);
   }
 
-  const cached = readCachedSynthesis(opportunityId, evidenceVersion);
+  // A static-mode caller must not be served a live answer cached by an earlier
+  // hybrid-mode caller, so it skips the cache entirely.
+  const cached = forceStatic ? null : readCachedSynthesis(opportunityId, evidenceVersion);
   if (cached) return json(cached, 200);
 
   const config = readSynthesisConfig();
   const provider =
-    config.liveAiEnabled && config.apiKey ? createGeminiProvider(config.apiKey) : null;
+    !forceStatic && config.liveAiEnabled && config.apiKey
+      ? createGeminiProvider(config.apiKey)
+      : null;
 
   let response;
   try {
@@ -53,6 +57,6 @@ export async function POST(request: Request): Promise<Response> {
 
   if (!response) return json({ error: "synthesis_unavailable" }, 503);
 
-  writeCachedSynthesis(opportunityId, evidenceVersion, response);
+  if (!forceStatic) writeCachedSynthesis(opportunityId, evidenceVersion, response);
   return json(response, 200);
 }

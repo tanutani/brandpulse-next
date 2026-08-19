@@ -1,5 +1,6 @@
 import { OpportunityList } from "@/components/pulse/opportunity-list";
 import { SignalRoom } from "@/components/pulse/signal-room";
+import { SkepticPanel } from "@/components/pulse/skeptic-panel";
 import { SynthesisPanel } from "@/components/pulse/synthesis-panel";
 import { HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
 import { loadFixtureBundle } from "@/lib/fixtures";
@@ -51,6 +52,7 @@ export default function PulseRoomPage() {
             </section>
           )}
           <SynthesisPanel opportunityId={HERO_OPPORTUNITY_ID} />
+          <SkepticPanel opportunityId={HERO_OPPORTUNITY_ID} />
         </div>
 
         <div className="stack">

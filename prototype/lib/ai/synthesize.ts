@@ -115,6 +115,8 @@ export async function runSynthesis(
   const fallback = (reason: FallbackReason) =>
     buildFallbackSynthesis(request.opportunityId, reason);
 
+  // The URL flag outranks the server config: it can only ever remove network access.
+  if (request.forceStatic) return fallback("disabled");
   if (!config.liveAiEnabled) return fallback("disabled");
   if (!config.apiKey || !provider) return fallback("missing_key");
 
