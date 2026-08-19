@@ -27,6 +27,30 @@ describe("portfolio assessment", () => {
     expect(axe.blockers.map(({ code }) => code)).toContain("PORTFOLIO_CONFLICT_ACTIVE_GAME_NIGHT_TERRITORY");
   });
 
+  it("names permission as the criterion that beat the higher-readiness runner-up", () => {
+    // The screen a judge questions: Rexona is recommended at readiness 63 while
+    // Dove shows 68. The rule must say why in the payload, not just in the sort.
+    const result = resolvePortfolio({
+      candidates: createHeroPortfolioCandidates(contract, "national", "unlicensed_match_footage"),
+      opportunity: contract.opportunity,
+      scope: "national",
+      assetMode: "unlicensed_match_footage",
+      evaluatedAt,
+    });
+    const rexona = result.candidates.find(({ brandId }) => brandId === "rexona")!;
+    const dove = result.candidates.find(({ brandId }) => brandId === "dove")!;
+
+    expect(result.selectedBrandId).toBe("rexona");
+    expect(dove.readiness).toBeGreaterThan(rexona.readiness);
+    expect(result.selectionOrder).not.toContain("readiness");
+    expect(result.selectionBasis).toMatchObject({
+      decidedBy: "permission",
+      runnerUpBrandId: "dove",
+      winnerValue: String(rexona.permission.score),
+      runnerUpValue: String(dove.permission.score),
+    });
+  });
+
   it("keeps national unlicensed scope non-actionable with exact remediation", () => {
     const result = resolvePortfolio({
       candidates: createHeroPortfolioCandidates(contract, "national", "unlicensed_match_footage"),

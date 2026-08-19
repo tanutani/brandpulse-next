@@ -3,6 +3,7 @@
 import { Check, ShieldAlert } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
+import { OwnerSelectionRule } from "@/components/portfolio/owner-selection-rule";
 import { RouteBadge } from "@/components/gates/route-badge";
 import { ScoreBar } from "@/components/gates/score-bar";
 import { useGuide } from "@/components/guide/guide-provider";
@@ -167,6 +168,8 @@ export function ScopeControl({
                 </article>
               ))}
             </div>
+
+            <OwnerSelectionRule resolution={resolution} />
 
             <p className="muted small" style={{ marginTop: "var(--s4)" }} aria-live="polite">
               {ready ? `Saved locally · contract v${journey.contractVersion}` : "Restoring saved decision…"}

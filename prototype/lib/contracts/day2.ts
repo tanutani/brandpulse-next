@@ -56,11 +56,36 @@ export interface PortfolioCandidateResult {
   portfolioConflicts: string[];
 }
 
+/** The ordered criteria used to pick an owner, in the order they are applied. */
+export type OwnerSelectionCriterion = "route" | "permission" | "preparedness" | "brandId";
+
+/**
+ * Why one brand was picked over the runner-up.
+ *
+ * Owner selection answers "who has the most right to own this?", which is a
+ * different question from "is this brand ready to act?". Readiness answers the
+ * second and is deliberately not a criterion here. Recording which criterion
+ * actually separated the top two keeps that distinction auditable on screen
+ * rather than implied by the sort order.
+ */
+export interface OwnerSelectionBasis {
+  /** The first criterion that separated the winner from the runner-up. */
+  decidedBy: OwnerSelectionCriterion;
+  runnerUpBrandId: string;
+  /** Winner and runner-up values for the deciding criterion, ready to display. */
+  winnerValue: string;
+  runnerUpValue: string;
+}
+
 export interface PortfolioResolution {
   rulesetVersion: "portfolio-1.0.0";
   scope: PortfolioScope;
   assetMode: AssetMode;
   selectedBrandId: string;
+  /** The tie-break order applied, so the UI can state the rule verbatim. */
+  selectionOrder: readonly OwnerSelectionCriterion[];
+  /** Null only when there is no runner-up to compare against. */
+  selectionBasis: OwnerSelectionBasis | null;
   candidates: PortfolioCandidateResult[];
 }
 

@@ -71,6 +71,12 @@
   --elevation-overlay: 0 20px 48px rgba(18, 37, 111, 0.18);
   --motion: 180ms;
 
+  /* --- glass (explanatory layers that sit over the decision, not beside it) - */
+  --glass-fill: rgba(255, 255, 255, 0.62);
+  --glass-tint: rgba(31, 54, 199, 0.05);
+  --glass-line: rgba(31, 54, 199, 0.16);
+  --glass-blur: saturate(160%) blur(14px);
+
   --font-ui: Inter, "Helvetica Neue", Arial, system-ui, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
@@ -696,6 +702,32 @@ p { margin: 0; }
 .brand-row .conflict { display: block; margin-top: 2px; color: var(--block-red); font-size: 11.5px; }
 .readiness-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .readiness-value small { display: block; color: var(--ink-muted); font-family: var(--font-ui); font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* Owner-selection rule — a glass layer explaining the recommendation above it. */
+.selection-rule {
+  margin-top: var(--s4); padding: var(--s4);
+  border: 1px solid var(--glass-line); border-radius: var(--radius-sm);
+  background: linear-gradient(var(--glass-tint), var(--glass-tint)), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+}
+.selection-rule h3 { margin-top: 2px; font-size: 15px; font-weight: 650; }
+.selection-rule-basis { margin-top: var(--s2); font-size: 13px; line-height: 1.5; }
+.selection-rule-basis strong { font-weight: 650; }
+
+.selection-rule-order {
+  display: grid; gap: 2px; margin: var(--s3) 0 0; padding-left: 20px;
+  color: var(--ink-muted); font-size: 12.5px;
+  /* Restated because the base reset clears list markers, and the order of these
+     criteria is the whole point of the block. */
+  list-style: decimal outside;
+}
+.selection-rule-order li.is-deciding { color: var(--ink); font-weight: 650; }
+.selection-rule-order li.is-deciding span { color: var(--brand-primary); font-weight: 600; }
+
+.selection-rule-note {
+  margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--glass-line);
+  color: var(--ink-muted); font-size: 12.5px; line-height: 1.55;
+}
 
 .control-group { display: grid; gap: var(--s2); }
 .control-group > legend { padding: 0; color: var(--ink-muted); font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
