@@ -1,1 +1,11 @@
 /.worktrees/
+
+# Agent + tooling scratch
+/.claude/
+
+# Generated artefacts. Regenerable, and large enough to bloat the diff.
+/output/
+/tmp/
+
+# Case-study source PDFs. Kept locally, never committed.
+*.pdf
