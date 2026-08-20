@@ -21,14 +21,17 @@ const HERO = "opp-extra-time-sweat-confidence";
 const claimBrands = ["rexona", "dove", "axe"];
 
 describe("parameter catalogue", () => {
-  it("specifies meaningfully more than it scores", () => {
+  it("reports the literal routing, advisory, diagnostic and specified-only breakdown", () => {
     const counts = countParameters();
 
     // The honest framing: a model advertising every parameter as live is not
     // more credible, it is unfalsifiable. The counts are read from the data so
     // the claim on screen cannot drift away from what is actually implemented.
-    expect(counts.scored).toBeGreaterThan(0);
-    expect(counts.scored).toBeLessThan(counts.specified);
+    expect(counts.weightedP3).toBe(18);
+    expect(counts.proofPenalties).toBe(2);
+    expect(counts.advisoryIndicators).toBe(2);
+    expect(counts.abDiagnostics).toBe(3);
+    expect(counts.routingInput + counts.computedIndicator + counts.specifiedOnly).toBe(counts.specified);
     expect(counts.grounded).toBeGreaterThan(0);
   });
 
@@ -44,9 +47,9 @@ describe("parameter catalogue", () => {
     }
   });
 
-  it("explains why each scored parameter earned its place", () => {
-    for (const parameter of MODEL_PARAMETERS.filter(({ scored }) => scored)) {
-      expect(parameter.earnsItsPlace, `${parameter.id} is scored without a reason`).toBeTruthy();
+  it("explains why each implemented parameter earned its place", () => {
+    for (const parameter of MODEL_PARAMETERS.filter(({ status }) => status !== "specified_only")) {
+      expect(parameter.earnsItsPlace, `${parameter.id} is implemented without a reason`).toBeTruthy();
     }
   });
 
@@ -110,7 +113,7 @@ describe("share of search", () => {
 
     expect(readiness).toEqual([
       "opp-extra-time-sweat-confidence:63",
-      "opp-festive-handwash-moment:81",
+      "opp-surf-first-monsoon:83",
       "opp-ingredient-misinformation:78",
       "opp-heatwave-qcommerce-spike:75",
       "opp-beauty-ownership-conflict:66",

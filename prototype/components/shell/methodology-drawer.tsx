@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 import { MODEL_STAGES, PRODUCTION_CONNECTIONS } from "@/lib/demo/model";
+import { AbTestDesignPanel } from "@/components/metrics/ab-test-design-panel";
 import {
   CITATIONS,
   PARAMETER_STAGES,
@@ -18,21 +19,41 @@ import {
  */
 export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
   const counts = countParameters();
 
   useEffect(() => {
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     closeRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
+      if (event.key === "Tab" && drawerRef.current) {
+        const focusable = [...drawerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        )];
+        const first = focusable[0];
+        const last = focusable.at(-1);
+        if (!first || !last) return;
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      previouslyFocused?.focus();
+    };
   }, [onClose]);
 
   return (
     <>
       <div className="drawer-scrim" onClick={onClose} aria-hidden="true" />
-      <aside className="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+      <aside className="drawer" ref={drawerRef} role="dialog" aria-modal="true" aria-labelledby="drawer-title">
         <div className="drawer-head">
           <h2 id="drawer-title">How BrandPulse works</h2>
           <button className="btn btn-quiet" onClick={onClose} ref={closeRef} type="button">
@@ -57,12 +78,22 @@ export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
             </div>
           ))}
 
-          <h3>The parameter space, and what we actually score</h3>
+          <h3>The parameter space, and what affects routing</h3>
           <p>
-            We specified <strong>{counts.specified}</strong> parameters across six stages and score{" "}
-            <strong>{counts.scored}</strong> of them today. The rest are designed and documented,
-            not live. A model that claimed all {counts.specified} were driving the number would be
-            harder to falsify, not more credible, so the two claims are kept apart.
+            The catalogue contains <strong>{counts.specified}</strong> parameters across six stages.
+            Their implementation status is literal rather than compressed into one “scored” count:
+          </p>
+          <ul>
+            <li><strong>{counts.weightedP3}</strong> weighted P3 components affect routing.</li>
+            <li><strong>{counts.proofPenalties}</strong> Proof penalties affect routing.</li>
+            <li><strong>{counts.advisoryIndicators}</strong> advisory indicators — Share of Search and Brand Memory Yield — are computed but cannot change routing.</li>
+            <li><strong>{counts.abDiagnostics}</strong> A/B diagnostics are computed test-design measures and cannot change routing.</li>
+            <li><strong>{counts.specifiedOnly}</strong> remaining catalogue entries are specified-only.</li>
+          </ul>
+          <p className="small muted">
+            One additional portfolio-conflict penalty is an explicit ownership routing input. In total,
+            {" "}<strong>{counts.routingInput}</strong> catalogue entries can affect a route and{" "}
+            <strong>{counts.computedIndicator}</strong> are computed without routing authority.
           </p>
           <p className="small muted">
             <span className="provenance-tag is-grounded">Grounded</span> rests on published
@@ -70,6 +101,8 @@ export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
             <span className="provenance-tag is-proposed">Ours</span> is our own design — defensible,
             but not borrowed authority. {counts.grounded} of {counts.specified} are grounded.
           </p>
+
+          <AbTestDesignPanel />
 
           {PARAMETER_STAGES.map((stage) => (
             <div className="drawer-stage" key={stage.id}>
@@ -79,7 +112,7 @@ export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
               <p className="small muted">Feeds {stage.feeds}.</p>
               <ul className="parameter-list">
                 {parametersForStage(stage.id).map((parameter) => (
-                  <li className={parameter.scored ? "is-scored" : undefined} key={parameter.id}>
+                  <li className={parameter.status !== "specified_only" ? "is-scored" : undefined} key={parameter.id}>
                     <span className="parameter-name">
                       {parameter.name}
                       <span
@@ -89,15 +122,17 @@ export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
                       >
                         {parameter.provenance === "grounded" ? "Grounded" : "Ours"}
                       </span>
-                      {parameter.scored ? (
-                        <span className="provenance-tag is-scored-tag">Scored</span>
-                      ) : (
-                        <span className="provenance-tag is-spec-tag">Specified</span>
-                      )}
+                      <span className={parameter.status === "specified_only" ? "provenance-tag is-spec-tag" : "provenance-tag is-scored-tag"}>
+                        {parameter.status === "routing_input"
+                          ? "Routing input"
+                          : parameter.status === "computed_indicator"
+                            ? "Computed · non-routing"
+                            : "Specified only"}
+                      </span>
                     </span>
                     <span className="parameter-question">{parameter.question}</span>
                     {parameter.earnsItsPlace ? (
-                      <span className="parameter-reason">Why it is scored: {parameter.earnsItsPlace}</span>
+                      <span className="parameter-reason">Why it is implemented: {parameter.earnsItsPlace}</span>
                     ) : null}
                   </li>
                 ))}

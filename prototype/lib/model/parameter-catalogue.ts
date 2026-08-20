@@ -14,6 +14,7 @@
  */
 
 export type ParameterProvenance = "grounded" | "proposed";
+export type ParameterStatus = "routing_input" | "computed_indicator" | "specified_only";
 
 export type ParameterStageId =
   | "sense"
@@ -40,9 +41,9 @@ export interface ModelParameter {
   provenance: ParameterProvenance;
   /** Present only for grounded parameters. Keys into CITATIONS. */
   citationId?: string;
-  /** True when this parameter is computed and shown today. */
-  scored: boolean;
-  /** For scored parameters, why it earned its place. */
+  /** Literal implementation status; never infer routing from a displayed number. */
+  status: ParameterStatus;
+  /** For implemented parameters, why it earned its place. */
   earnsItsPlace?: string;
 }
 
@@ -93,7 +94,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Persistence",
     question: "Has this outlived the event that started it?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Separates a moment from a spike, which is the first thing a router must do.",
   },
   {
@@ -102,7 +103,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Independent corroboration",
     question: "Do unrelated source families agree?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "One platform agreeing with itself is not evidence.",
   },
   {
@@ -111,7 +112,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Behavioural progression",
     question: "Has anyone moved from noticing to doing?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "This is the whole 'attention is not demand' claim, expressed as a number.",
   },
   {
@@ -120,7 +121,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Diffusion",
     question: "Has it spread beyond where it started?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Distinguishes reach from a recommendation loop.",
   },
   {
@@ -129,7 +130,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Commercial signal",
     question: "Is there any movement in baskets, not just in feeds?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "The only Proof input tied to money changing hands.",
   },
   {
@@ -138,7 +139,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Freshness quality",
     question: "How dated is the evidence we are reasoning over?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "A stale observation and a live one should not weigh the same.",
   },
   {
@@ -147,7 +148,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Source concentration penalty",
     question: "How much of this rests on one source?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Does the work of telling a fad from a trend; visible on the sensitivity control.",
   },
   {
@@ -156,7 +157,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Manipulation risk penalty",
     question: "Could this have been bought rather than observed?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Seeded attention is indistinguishable from organic attention without this.",
   },
   {
@@ -165,7 +166,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Confound residual",
     question: "What remains after subtracting seasonality, weather and scheduled events?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "signal-half-life",
@@ -173,7 +174,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Signal half-life",
     question: "How fast is this decaying, and what window does that imply?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
 
   /* --- Stage 2 · Define and position ------------------------------------ */
@@ -183,7 +184,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Brand meaning fit",
     question: "Does this sit inside what the brand already means?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "The largest weight in Permission, and the one that decides most owner questions.",
   },
   {
@@ -192,7 +193,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Audience overlap",
     question: "Are the people in this moment the people we serve?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "A relevant moment for the wrong audience is not an opportunity.",
   },
   {
@@ -202,7 +203,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Can we execute using assets uniquely attributed to us?",
     provenance: "grounded",
     citationId: "romaniuk-2018",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Assets do the attribution work; without them the spend can credit a competitor.",
   },
   {
@@ -211,7 +212,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Historical credibility",
     question: "Have we earned the right to say this before?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Past permission is the cheapest evidence of future permission.",
   },
   {
@@ -220,7 +221,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Portfolio distinctiveness",
     question: "Would this make us harder to tell apart from a sibling brand?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Turns a 400-brand portfolio from a list into a constraint.",
   },
   {
@@ -229,7 +230,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Cultural and claims safety",
     question: "Is there a way to say this that is safe and substantiated?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Cheaper to ask before spend than after a complaint.",
   },
   {
@@ -238,7 +239,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Portfolio conflict penalty",
     question: "Is a sibling brand already occupying this territory?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Decides ownership when raw brand fit would pick the wrong brand.",
   },
   {
@@ -248,7 +249,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Does this attach to a real buying occasion, or only to a cultural topic?",
     provenance: "grounded",
     citationId: "romaniuk-sharp-2022",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "cannibalisation-distance",
@@ -256,7 +257,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Portfolio cannibalisation distance",
     question: "How far is this positioning from each sibling brand's territory?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "claim-substantiation-depth",
@@ -264,7 +265,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Claim substantiation depth",
     question: "How many days would it take to prove the claim this implies?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "meaning-stability",
@@ -273,7 +274,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Is the signal's meaning drifting under us?",
     provenance: "grounded",
     citationId: "sharp-2010",
-    scored: false,
+    status: "specified_only",
   },
 
   /* --- Stage 3 · Build and test ----------------------------------------- */
@@ -283,7 +284,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Cell comparability",
     question: "Are the treatment and comparison cells actually alike?",
     provenance: "proposed",
-    scored: true,
+    status: "specified_only",
     earnsItsPlace: "A comparison between unlike cells cannot support the word incremental.",
   },
   {
@@ -293,7 +294,8 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "What is the smallest lift this test could actually detect?",
     provenance: "grounded",
     citationId: "binet-field-2013",
-    scored: false,
+    status: "computed_indicator",
+    earnsItsPlace: "Shows whether the planned exposure can resolve the minimum effect of interest.",
   },
   {
     id: "contamination-risk",
@@ -301,7 +303,8 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Contamination risk",
     question: "Do delivery radii and media overlap leak treatment into control?",
     provenance: "proposed",
-    scored: false,
+    status: "computed_indicator",
+    earnsItsPlace: "Flags media and delivery leakage before a comparison is described as causal.",
   },
   {
     id: "rights-runway",
@@ -309,7 +312,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Rights runway",
     question: "How many days until the earliest clearance in the pack expires?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "pre-registration-completeness",
@@ -317,7 +320,8 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Pre-registration completeness",
     question: "What proportion of the decision rules were locked before exposure?",
     provenance: "proposed",
-    scored: false,
+    status: "computed_indicator",
+    earnsItsPlace: "Makes missing locked fields visible without changing the route or P3 scores.",
   },
   {
     id: "creative-diversity",
@@ -325,17 +329,26 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Creative diversity index",
     question: "Are these genuinely different ideas or crops of one?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
 
   /* --- Stage 4 · Launch ------------------------------------------------- */
+  {
+    id: "product-claim-availability",
+    stage: "launch",
+    name: "Product claim availability",
+    question: "Is an already-substantiated claim available for this action?",
+    provenance: "proposed",
+    status: "routing_input",
+    earnsItsPlace: "A claim-bearing activation cannot outrun its substantiation.",
+  },
   {
     id: "inventory-service",
     stage: "launch",
     name: "Inventory and service level",
     question: "Can we serve the demand this would create?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "The heaviest weight in Preparedness, and the one that blocks most often.",
   },
   {
@@ -344,7 +357,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Channel coverage",
     question: "Can we reach these people where they actually buy?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "Reach without route-to-market is attention we cannot convert.",
   },
   {
@@ -353,8 +366,26 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Rights and legal clearance",
     question: "Is every asset cleared for this use, in this window?",
     provenance: "proposed",
-    scored: true,
+    status: "routing_input",
     earnsItsPlace: "The blocker that outranks every score, however high.",
+  },
+  {
+    id: "creator-agency-readiness",
+    stage: "launch",
+    name: "Creator and agency readiness",
+    question: "Can the prepared partner package execute inside the useful window?",
+    provenance: "proposed",
+    status: "routing_input",
+    earnsItsPlace: "A prepared action needs executable partners, not only an idea.",
+  },
+  {
+    id: "measurement-readiness",
+    stage: "launch",
+    name: "Measurement readiness",
+    question: "Can the selected action be observed against its declared decision rule?",
+    provenance: "proposed",
+    status: "routing_input",
+    earnsItsPlace: "The route must preserve a way to learn after activation.",
   },
   {
     id: "esov",
@@ -363,7 +394,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Is our share of voice above our share of market?",
     provenance: "grounded",
     citationId: "binet-field-2013",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "burn-rate",
@@ -371,7 +402,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Preparedness burn rate",
     question: "When does projected demand cross the service-level floor?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "crowding",
@@ -379,7 +410,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Crowding at launch",
     question: "How many competitors are already inside this moment?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "gate-latency",
@@ -387,7 +418,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Gate-decomposed latency",
     question: "Which gate is actually the bottleneck on time-to-decision?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
 
   /* --- Stage 5 · Grow and scale ----------------------------------------- */
@@ -398,7 +429,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Is our share of branded search rising or falling against the category?",
     provenance: "grounded",
     citationId: "binet-2020",
-    scored: true,
+    status: "computed_indicator",
     earnsItsPlace:
       "Free, published, weekly, and a leading rather than lagging measure — the only addition here that costs nothing to obtain.",
   },
@@ -408,7 +439,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Incrementality against a geographic counterfactual",
     question: "Did exposed cells beat matched unexposed cells?",
     provenance: "proposed",
-    scored: true,
+    status: "specified_only",
     earnsItsPlace: "The only design here that supports a causal reading, so it is the only one that earns the word.",
   },
   {
@@ -417,7 +448,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Backlash velocity",
     question: "How fast is negative sentiment changing, not how much there is?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "penetration-frequency",
@@ -426,7 +457,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Are we recruiting new category buyers or re-hitting existing ones?",
     provenance: "grounded",
     citationId: "sharp-2010",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "creative-wearout",
@@ -435,7 +466,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Is engagement decaying per additional exposure?",
     provenance: "grounded",
     citationId: "binet-field-2013",
-    scored: false,
+    status: "specified_only",
   },
 
   /* --- Stage 6 · Renovate or retire ------------------------------------- */
@@ -445,7 +476,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Brand memory yield",
     question: "How much of this decision could be answered from what we already know?",
     provenance: "proposed",
-    scored: true,
+    status: "computed_indicator",
     earnsItsPlace:
       "The only measure here that shows the system compounds with use rather than restarting each time.",
   },
@@ -456,7 +487,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Has a sustained gap opened between what people search and what they buy?",
     provenance: "grounded",
     citationId: "binet-2020",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "decision-reversal-rate",
@@ -464,7 +495,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Decision reversal rate",
     question: "How often does the checker overturn the model, and on which gate?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "calibration-error",
@@ -472,7 +503,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     name: "Calibration error",
     question: "Are Proof scores still predicting the outcomes we observe?",
     provenance: "proposed",
-    scored: false,
+    status: "specified_only",
   },
   {
     id: "asset-erosion",
@@ -481,7 +512,7 @@ export const MODEL_PARAMETERS: ModelParameter[] = [
     question: "Is correct brand attribution of our assets declining over time?",
     provenance: "grounded",
     citationId: "romaniuk-2018",
-    scored: false,
+    status: "specified_only",
   },
 ];
 
@@ -533,15 +564,39 @@ export function parametersForStage(stage: ParameterStageId): ModelParameter[] {
 
 export interface CatalogueCounts {
   specified: number;
-  scored: number;
+  routingInput: number;
+  computedIndicator: number;
+  specifiedOnly: number;
+  weightedP3: number;
+  proofPenalties: number;
+  advisoryIndicators: number;
+  abDiagnostics: number;
   grounded: number;
 }
+
+const WEIGHTED_P3_IDS = new Set([
+  "persistence", "independent-corroboration", "behavioural-progression", "diffusion",
+  "commercial-signal", "freshness-quality", "brand-meaning", "audience-overlap",
+  "distinctive-asset-fit", "historical-credibility", "portfolio-distinctiveness",
+  "cultural-claims-safety", "product-claim-availability", "inventory-service",
+  "channel-coverage", "creator-agency-readiness", "rights-legal-approval",
+  "measurement-readiness",
+]);
+const PROOF_PENALTY_IDS = new Set(["source-concentration", "manipulation-risk"]);
+const ADVISORY_INDICATOR_IDS = new Set(["share-of-search", "brand-memory-yield"]);
+const AB_DIAGNOSTIC_IDS = new Set(["mde-vs-exposure", "contamination-risk", "pre-registration-completeness"]);
 
 /** Counted from the data rather than asserted, so the claim cannot drift. */
 export function countParameters(): CatalogueCounts {
   return {
     specified: MODEL_PARAMETERS.length,
-    scored: MODEL_PARAMETERS.filter((parameter) => parameter.scored).length,
+    routingInput: MODEL_PARAMETERS.filter(({ status }) => status === "routing_input").length,
+    computedIndicator: MODEL_PARAMETERS.filter(({ status }) => status === "computed_indicator").length,
+    specifiedOnly: MODEL_PARAMETERS.filter(({ status }) => status === "specified_only").length,
+    weightedP3: MODEL_PARAMETERS.filter(({ id }) => WEIGHTED_P3_IDS.has(id)).length,
+    proofPenalties: MODEL_PARAMETERS.filter(({ id }) => PROOF_PENALTY_IDS.has(id)).length,
+    advisoryIndicators: MODEL_PARAMETERS.filter(({ id }) => ADVISORY_INDICATOR_IDS.has(id)).length,
+    abDiagnostics: MODEL_PARAMETERS.filter(({ id }) => AB_DIAGNOSTIC_IDS.has(id)).length,
     grounded: MODEL_PARAMETERS.filter((parameter) => parameter.provenance === "grounded").length,
   };
 }
