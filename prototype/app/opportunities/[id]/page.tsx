@@ -8,7 +8,7 @@ import { RouteBadge } from "@/components/gates/route-badge";
 import { ScoreBar } from "@/components/gates/score-bar";
 import { NextActionLink } from "@/components/shell/next-action-link";
 import { buildFallbackSynthesis } from "@/lib/agents/fallback";
-import { HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
+import { HERO_OPPORTUNITY_ID, isPlayableOpportunity } from "@/lib/demo/journey";
 import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
 import { createHeroPortfolioCandidates } from "@/lib/portfolio/hero-portfolio";
 import { getWeakestGate } from "@/lib/routing/select-route";
@@ -28,8 +28,8 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
         <section className="system-state" style={{ marginTop: "var(--s6)" }}>
           <h2>This bundled contract is unavailable</h2>
           <p>
-            Return to the Pulse Room and choose one of the three validated demo opportunities. No
-            network request is required.
+            Return to the Pulse Room and choose one of the validated demo opportunities. No network
+            request is required.
           </p>
           <Link className="btn btn-primary" href="/opportunities">
             Back to Pulse Room
@@ -125,12 +125,14 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
             </div>
           </section>
 
-          {isHero ? (
+          {isPlayableOpportunity(id) ? (
             <NextActionLink
-              detail="Rexona, Dove and Axe are scored against the same evidence."
+              detail={`${contract.brandAssessments
+                .map(({ brandId }) => brandId)
+                .join(", ")} are scored against the same evidence.`}
               href={`/resolver/${id}`}
               label="Decide which brand can responsibly own this"
-              cta="Open Portfolio Resolver"
+              cta="Open the ownership view"
             />
           ) : null}
 

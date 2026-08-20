@@ -66,6 +66,144 @@
         "evidenceIds": ["sig-noise-social", "sig-noise-commerce"]
       },
       "missingEvidence": ["Independent source-family corroboration", "Evidence of category behaviour"]
+    },
+    {
+      "opportunityId": "opp-festive-handwash-moment",
+      "summary": "A dated festive window is corroborated by search, news and prior-year commerce, and the operating record shows stock, rights and claim substantiation were all completed before the window opened. Nothing in this evidence is waiting on a decision that has not already been made.",
+      "themes": [
+        {
+          "label": "The window is dated, not inferred",
+          "evidenceIds": ["sig-festive-search", "sig-festive-news"]
+        },
+        {
+          "label": "It converted before, not just trended",
+          "evidenceIds": ["sig-festive-commerce"]
+        },
+        {
+          "label": "Readiness was earned in advance",
+          "evidenceIds": ["sig-festive-readiness"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Prior-year conversion in the same window may reflect the promotional calendar rather than the occasion, in which case the window is a discount effect wearing an occasion's clothes.",
+        "evidenceIds": ["sig-festive-commerce"]
+      },
+      "missingEvidence": ["Promotion-adjusted baseline for the same window", "Incrementality against unexposed cells"]
+    },
+    {
+      "opportunityId": "opp-ingredient-misinformation",
+      "summary": "An ingredient claim about the category is spreading across three independent source families, and the correcting facts are already substantiated and approved. The evidence describes a reputational exposure with a short window, not a demand opportunity.",
+      "themes": [
+        {
+          "label": "Spreading beyond one platform",
+          "evidenceIds": ["sig-misinfo-social", "sig-misinfo-news"]
+        },
+        {
+          "label": "People are actively checking",
+          "evidenceIds": ["sig-misinfo-search"]
+        },
+        {
+          "label": "The answer already exists",
+          "evidenceIds": ["sig-misinfo-substantiation"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Responding may raise the claim's reach further than ignoring it would, so speed of response and size of response are separate questions that this evidence cannot settle together.",
+        "evidenceIds": ["sig-misinfo-social", "sig-misinfo-search"]
+      },
+      "missingEvidence": ["Reach of the claim among category buyers specifically", "Response-versus-silence outcome from a comparable prior episode"]
+    },
+    {
+      "opportunityId": "opp-heatwave-qcommerce-spike",
+      "summary": "A dated heat-wave advisory, category search acceleration and rising q-commerce units agree that demand is real and time-bound. The operating record disagrees about where it can be served: national days-cover cannot support the demand a national campaign would create.",
+      "themes": [
+        {
+          "label": "Demand is real and dated",
+          "evidenceIds": ["sig-heat-weather", "sig-heat-search"]
+        },
+        {
+          "label": "It is already converting",
+          "evidenceIds": ["sig-heat-commerce"]
+        },
+        {
+          "label": "Supply is the binding constraint",
+          "evidenceIds": ["sig-heat-inventory"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Frozen dessert rises with temperature every year, so the spike may be ordinary seasonality that any campaign would have been credited with regardless.",
+        "evidenceIds": ["sig-heat-weather", "sig-heat-commerce"]
+      },
+      "missingEvidence": ["Same-week baseline from prior heat-waves", "Cell-level service level under a campaign load"]
+    },
+    {
+      "opportunityId": "opp-beauty-ownership-conflict",
+      "summary": "Monsoon skin-dullness interest is corroborated across search, news and consumer language, and the moment sits inside more than one brand's territory. The campaign record shows an overlapping campaign already in market, which makes ownership rather than evidence the open question.",
+      "themes": [
+        {
+          "label": "The moment is corroborated",
+          "evidenceIds": ["sig-glow-search", "sig-glow-news"]
+        },
+        {
+          "label": "A named routine gap",
+          "evidenceIds": ["sig-glow-consumer"]
+        },
+        {
+          "label": "The territory is already occupied",
+          "evidenceIds": ["sig-glow-portfolio"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Monsoon dullness language may describe a weather complaint rather than a purchase intent, in which case the moment is conversational and no brand needs to own it.",
+        "evidenceIds": ["sig-glow-search", "sig-glow-consumer"]
+      },
+      "missingEvidence": ["Purchase intent behind the dullness language", "Incremental effect of the overlapping campaign already running"]
+    },
+    {
+      "opportunityId": "opp-ph-cleanser-discourse",
+      "summary": "Cleanser pH scrutiny persists across three months and two independent source families, and consumer language describes ingredient checking before purchase. The public court record shows that comparative pH claims in this category have previously been restrained, so the constraint is substantiation rather than evidence.",
+      "themes": [
+        {
+          "label": "Persistent, not a spike",
+          "evidenceIds": ["sig-ph-search", "sig-ph-news"]
+        },
+        {
+          "label": "Scrutiny reaches the shelf",
+          "evidenceIds": ["sig-ph-consumer"]
+        },
+        {
+          "label": "Comparative claims carry documented exposure",
+          "evidenceIds": ["sig-ph-precedent"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Sustained pH interest may be informational curiosity driven by coverage rather than a change in what people buy, in which case entering the conversation carries the claims risk without the demand.",
+        "evidenceIds": ["sig-ph-search", "sig-ph-consumer"]
+      },
+      "missingEvidence": ["Purchase behaviour among people using pH language", "Approved substantiation for any comparative gentleness claim"]
+    },
+    {
+      "opportunityId": "opp-viral-laundry-hack",
+      "summary": "One hack format is spreading very fast, but category search is flat over the same seven days, basket attach has not moved, and most reach is attributable to a single platform surface. The evidence describes visibility rather than demand.",
+      "themes": [
+        {
+          "label": "High velocity, one surface",
+          "evidenceIds": ["sig-hack-social", "sig-hack-concentration"]
+        },
+        {
+          "label": "No corroborating search",
+          "evidenceIds": ["sig-hack-search"]
+        },
+        {
+          "label": "No basket movement",
+          "evidenceIds": ["sig-hack-commerce"]
+        }
+      ],
+      "counterHypothesis": {
+        "claim": "Recommendation-driven reach can precede category search by several days, so this may be an early real signal observed too soon rather than an empty one.",
+        "evidenceIds": ["sig-hack-social", "sig-hack-search"]
+      },
+      "missingEvidence": ["The same measures seven days later", "Reach outside the originating platform"]
     }
   ]
 }

@@ -3,23 +3,23 @@ import Link from "next/link";
 
 import { ScopeControl } from "@/components/portfolio/scope-control";
 import { SystemState } from "@/components/governance/system-state";
-import { HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
+import { PLAYABLE_OPPORTUNITY_IDS, isPlayableOpportunity } from "@/lib/demo/journey";
 import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
 
 export function generateStaticParams() {
-  return [{ id: HERO_OPPORTUNITY_ID }];
+  return PLAYABLE_OPPORTUNITY_IDS.map((id) => ({ id }));
 }
 
 export default async function ResolverPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const contract = findOpportunityContract(id);
 
-  if (!contract || id !== HERO_OPPORTUNITY_ID) {
+  if (!contract || !isPlayableOpportunity(id)) {
     return (
       <div className="shell-frame">
         <SystemState
-          title="Portfolio detail is unavailable"
-          detail="The full governed journey is intentionally bounded to the hero opportunity."
+          title="Ownership detail is not available for this signal"
+          detail="Two use cases carry the full set of scope and rights controls. The rest are readable as decisions but are not set up to be re-resolved."
         />
       </div>
     );

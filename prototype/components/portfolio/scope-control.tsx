@@ -9,23 +9,33 @@ import { ScoreBar } from "@/components/gates/score-bar";
 import { useGuide } from "@/components/guide/guide-provider";
 import { NextActionLink } from "@/components/shell/next-action-link";
 import type { AssetMode, JourneyState, OpportunityContract, PortfolioScope } from "@/lib/contracts";
-import { createHeroPortfolioCandidates } from "@/lib/portfolio/hero-portfolio";
+import { createPortfolioCandidates, getStoredSelection } from "@/lib/portfolio/hero-portfolio";
 import { resolvePortfolio } from "@/lib/portfolio/resolve-owner";
 import { LocalContractStore } from "@/lib/persistence/local-contract-store";
 import { LocalJourneyStore } from "@/lib/persistence/local-journey-store";
 
-const defaultJourney = (contract: OpportunityContract): JourneyState => ({
-  storageVersion: "1.0.0",
-  contractId: contract.contractId,
-  contractVersion: contract.version,
-  scope: "national",
-  assetMode: "unlicensed_match_footage",
-  selectedBrandId: "rexona",
-  sprint: null,
-  selectedVariantId: null,
-  decisions: [],
-  outcome: null,
-});
+/**
+ * Opens the resolver in the state the contract was scored at, so the route a
+ * viewer just read does not change the instant they arrive. Use cases start in
+ * different states on purpose: Rexona opens unresolved, the festive case opens
+ * already cleared.
+ */
+const defaultJourney = (contract: OpportunityContract): JourneyState => {
+  const { scope, assetMode } = getStoredSelection(contract.opportunity.id);
+
+  return {
+    storageVersion: "1.0.0",
+    contractId: contract.contractId,
+    contractVersion: contract.version,
+    scope,
+    assetMode,
+    selectedBrandId: contract.selectedBrandId ?? contract.brandAssessments[0].brandId,
+    sprint: null,
+    selectedVariantId: null,
+    decisions: [],
+    outcome: null,
+  };
+};
 
 export function ScopeControl({
   contract,
@@ -49,7 +59,7 @@ export function ScopeControl({
   const resolution = useMemo(
     () =>
       resolvePortfolio({
-        candidates: createHeroPortfolioCandidates(contract, journey.scope, journey.assetMode),
+        candidates: createPortfolioCandidates(contract, journey.scope, journey.assetMode),
         opportunity: contract.opportunity,
         scope: journey.scope,
         assetMode: journey.assetMode,
@@ -61,7 +71,7 @@ export function ScopeControl({
 
   function applySelection(scope: PortfolioScope, assetMode: AssetMode) {
     const nextResolution = resolvePortfolio({
-      candidates: createHeroPortfolioCandidates(contract, scope, assetMode),
+      candidates: createPortfolioCandidates(contract, scope, assetMode),
       opportunity: contract.opportunity,
       scope,
       assetMode,
@@ -177,9 +187,24 @@ export function ScopeControl({
           </div>
         </section>
 
-        {canContinue ? (
+        {selected.decision.route === "act_now" ? (
+          // Act means the window is too short to test and the preparation is
+          // already done. Offering an experiment step here would contradict the
+          // route the rules just returned.
+          <div className="next-action">
+            <div>
+              <strong>No experiment step — this one goes straight to a person</strong>
+              <span>
+                Act means stock, rights and claims were all cleared before the window opened, so
+                there is nothing left to test. A named human still has to approve it; the system
+                never publishes. The approval and outcome chain is walked in full on the Rexona
+                journey.
+              </span>
+            </div>
+          </div>
+        ) : canContinue ? (
           <NextActionLink
-            cta="Design the Causal Sprint"
+            cta="Design the bounded test"
             detail="Budget, metric, window and decision rules are fixed before exposure."
             href={`/sprint/${contract.opportunity.id}`}
             label="The bounded test is ready to pre-register"
@@ -191,7 +216,7 @@ export function ScopeControl({
               <span>A mandatory blocker outranks every score, however high.</span>
             </div>
             <span className="btn btn-secondary" aria-disabled="true">
-              Design the Causal Sprint
+              Design the bounded test
             </span>
           </div>
         )}

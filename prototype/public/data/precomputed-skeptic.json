@@ -55,6 +55,132 @@
           "evidenceIds": ["sig-noise-commerce"]
         }
       ]
+    },
+    {
+      "opportunityId": "opp-festive-handwash-moment",
+      "headline": "Prior-year conversion in this window may be the promotional calendar rather than the occasion.",
+      "challenges": [
+        {
+          "claim": "Festive windows are also discount windows, so last year's conversion cannot separate the occasion from the price that ran alongside it.",
+          "wouldChangeDecisionIf": "Prior-year conversion holds after adjusting for promotional depth.",
+          "evidenceIds": ["sig-festive-commerce"]
+        },
+        {
+          "claim": "Being ready is not the same as being needed; readiness records establish that the brand can act, not that acting will change anything.",
+          "wouldChangeDecisionIf": "Matched unexposed cells show lower offtake than exposed ones.",
+          "evidenceIds": ["sig-festive-readiness"]
+        },
+        {
+          "claim": "A search pattern that repeats every year is predictable rather than informative, so it may add no decision value over simply running the window as planned.",
+          "wouldChangeDecisionIf": "This year's search deviates measurably from the seasonal norm.",
+          "evidenceIds": ["sig-festive-search"]
+        }
+      ]
+    },
+    {
+      "opportunityId": "opp-ingredient-misinformation",
+      "headline": "Responding may hand the claim more reach than staying silent would.",
+      "challenges": [
+        {
+          "claim": "Amplification is a real cost: a brand response introduces the claim to people who had not encountered it, and the evidence measures spread without measuring who has actually seen it.",
+          "wouldChangeDecisionIf": "Reach is measured among category buyers rather than in the aggregate.",
+          "evidenceIds": ["sig-misinfo-social", "sig-misinfo-search"]
+        },
+        {
+          "claim": "Rising ingredient-safety search may reflect general curiosity rather than doubt about this category, so the exposure may be smaller than the volume suggests.",
+          "wouldChangeDecisionIf": "Search intent is separated into reassurance-seeking and avoidance-seeking.",
+          "evidenceIds": ["sig-misinfo-search"]
+        },
+        {
+          "claim": "Having approved substantiation makes a response possible but does not make it persuasive; a correction that reads as defensive can confirm the suspicion it answers.",
+          "wouldChangeDecisionIf": "A comparable prior episode shows response outperforming silence.",
+          "evidenceIds": ["sig-misinfo-substantiation"]
+        }
+      ]
+    },
+    {
+      "opportunityId": "opp-heatwave-qcommerce-spike",
+      "headline": "Frozen dessert rises with temperature every year, so this may be seasonality a campaign would take credit for.",
+      "challenges": [
+        {
+          "claim": "Weather and category sales move together by default, so neither record separates a campaign-addressable moment from the ordinary shape of summer.",
+          "wouldChangeDecisionIf": "The spike exceeds the same-week baseline from prior heat-waves.",
+          "evidenceIds": ["sig-heat-weather", "sig-heat-commerce"]
+        },
+        {
+          "claim": "Narrowing to well-stocked cells fixes the service risk but also selects the cells most likely to perform anyway, which will flatter the result.",
+          "wouldChangeDecisionIf": "Comparison cells are matched on days-cover as well as on baseline conversion.",
+          "evidenceIds": ["sig-heat-inventory"]
+        },
+        {
+          "claim": "Days-cover is measured before the campaign exists, so it describes current demand rather than the demand a campaign would create.",
+          "wouldChangeDecisionIf": "Service level is projected under campaign load rather than at rest.",
+          "evidenceIds": ["sig-heat-inventory"]
+        }
+      ]
+    },
+    {
+      "opportunityId": "opp-beauty-ownership-conflict",
+      "headline": "Monsoon dullness talk may be a weather complaint rather than a purchase intent.",
+      "challenges": [
+        {
+          "claim": "People describe dull skin in the monsoon every year without changing what they buy, so the language may be seasonal commentary that needs no brand response at all.",
+          "wouldChangeDecisionIf": "Purchase or basket behaviour moves alongside the dullness language.",
+          "evidenceIds": ["sig-glow-search", "sig-glow-consumer"]
+        },
+        {
+          "claim": "Resolving ownership assumes the moment is worth owning; if the effect is small, the portfolio has spent a decision on a question that did not matter.",
+          "wouldChangeDecisionIf": "The overlapping campaign already running shows a measurable incremental effect.",
+          "evidenceIds": ["sig-glow-portfolio"]
+        },
+        {
+          "claim": "The conflict penalty is a configured number, not an observation, so the margin between the top two candidates rests on an assumption rather than on evidence.",
+          "wouldChangeDecisionIf": "Observed cannibalisation between the two brands is measured instead of assumed.",
+          "evidenceIds": ["sig-glow-portfolio"]
+        }
+      ]
+    },
+    {
+      "opportunityId": "opp-ph-cleanser-discourse",
+      "headline": "Sustained pH interest may be reading rather than buying.",
+      "challenges": [
+        {
+          "claim": "Persistent search can reflect ongoing coverage and curiosity rather than a change in purchase criteria, in which case the claims risk is taken for no demand.",
+          "wouldChangeDecisionIf": "Purchase behaviour is observed among people using pH language.",
+          "evidenceIds": ["sig-ph-search", "sig-ph-consumer"]
+        },
+        {
+          "claim": "The cited litigation concerned a competitor's comparative advertising, so it establishes that this territory is contested rather than that any particular claim would fail.",
+          "wouldChangeDecisionIf": "Legal review assesses a specific proposed claim rather than the category in general.",
+          "evidenceIds": ["sig-ph-precedent"]
+        },
+        {
+          "claim": "Substantiating a claim takes long enough that the discourse may have moved on before the work completes, making this a durable trend that is nonetheless never actionable.",
+          "wouldChangeDecisionIf": "The same language persists through a second substantiation cycle.",
+          "evidenceIds": ["sig-ph-search"]
+        }
+      ]
+    },
+    {
+      "opportunityId": "opp-viral-laundry-hack",
+      "headline": "Recommendation reach can lead category search, so this may be a real signal caught too early.",
+      "challenges": [
+        {
+          "claim": "Flat search over seven days is consistent both with an empty signal and with a real one that has not yet surfaced, and this evidence cannot distinguish them.",
+          "wouldChangeDecisionIf": "The same measures are taken again seven days later.",
+          "evidenceIds": ["sig-hack-search", "sig-hack-social"]
+        },
+        {
+          "claim": "Basket attach is a blunt instrument for a hack that may use a product people already own, so absence of attach movement is weak evidence of absence of effect.",
+          "wouldChangeDecisionIf": "Usage frequency is measured rather than purchase.",
+          "evidenceIds": ["sig-hack-commerce"]
+        },
+        {
+          "claim": "The concentration figure is an attribution estimate, and attribution across platforms is unreliable enough that the penalty it drives may be overstated.",
+          "wouldChangeDecisionIf": "Reach is measured directly outside the originating platform.",
+          "evidenceIds": ["sig-hack-concentration"]
+        }
+      ]
     }
   ]
 }

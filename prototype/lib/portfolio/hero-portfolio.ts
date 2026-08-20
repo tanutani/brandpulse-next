@@ -52,5 +52,26 @@ export function createPortfolioCandidates(
   });
 }
 
+/**
+ * The scope and creative mode a contract was scored at.
+ *
+ * The resolver has to open on the same state the contract screen showed, or the
+ * route changes the moment a viewer arrives and it looks like the controls moved
+ * on their own. Different use cases start in different states: the Rexona
+ * journey opens unresolved, the festive case opens already cleared.
+ */
+export function getStoredSelection(opportunityId: string): {
+  scope: PortfolioScope;
+  assetMode: AssetMode;
+} {
+  const source = USE_CASE_SOURCES.find(
+    ({ opportunity }) => opportunity.id === opportunityId,
+  );
+  return {
+    scope: source?.storedScope ?? "national",
+    assetMode: source?.storedAssetMode ?? "unlicensed_match_footage",
+  };
+}
+
 /** @deprecated Kept as the previous name; use createPortfolioCandidates. */
 export const createHeroPortfolioCandidates = createPortfolioCandidates;

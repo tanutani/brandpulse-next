@@ -3,6 +3,26 @@ import { JOURNEY_STORAGE_KEY } from "@/lib/persistence/local-journey-store";
 
 export const HERO_OPPORTUNITY_ID = "opp-extra-time-sweat-confidence";
 
+/** The Act case, kept playable so a second journey ends somewhere different. */
+export const ACT_OPPORTUNITY_ID = "opp-festive-handwash-moment";
+
+/**
+ * Opportunities that can be walked past the contract screen.
+ *
+ * Deliberately not every use case. The resolver, sprint and review screens each
+ * need a scope story, an experiment design and an activation package, and a
+ * screen offering controls that lead nowhere is worse than one that says it is
+ * out of scope. The rest of the catalogue is readable but not playable.
+ */
+export const PLAYABLE_OPPORTUNITY_IDS: readonly string[] = [
+  HERO_OPPORTUNITY_ID,
+  ACT_OPPORTUNITY_ID,
+];
+
+export function isPlayableOpportunity(opportunityId: string): boolean {
+  return PLAYABLE_OPPORTUNITY_IDS.includes(opportunityId);
+}
+
 export const GUIDE_STORAGE_KEY = "brandpulse-next:guide:1.0.0";
 
 /**

@@ -1,3 +1,4 @@
+import type { DecisionBlocker } from "@/lib/contracts";
 import type { PreparednessFor, UseCaseSource } from "@/lib/fixtures/source/types";
 
 /**
@@ -17,16 +18,38 @@ import type { PreparednessFor, UseCaseSource } from "@/lib/fixtures/source/types
  * Act still routes to a human. The system never publishes.
  */
 
-const preClearedForFestive = (brandId: string): PreparednessFor => () => ({
-  productClaimAvailability: 90,
-  inventoryService: 88,
-  channelCoverage: 82,
-  creatorAgencyReadiness: 84,
-  rightsLegalApproval: 75,
-  measurementReadiness: 88,
-  evidenceIds: [`inv-${brandId}-national`, `brand-memory-${brandId}`],
-  blockers: [],
-});
+/**
+ * Act is conditional on the preparation staying true.
+ *
+ * Switching to unlicensed footage removes the clearance this route depends on
+ * and reinstates a mandatory rights blocker, which drops the decision from Act
+ * to Watch. That is the useful thing to be able to show: Act is not a property
+ * of the signal, it is a property of the work done before it arrived.
+ */
+const preClearedForFestive = (brandId: string): PreparednessFor => (scope, assetMode) => {
+  const unlicensed = assetMode === "unlicensed_match_footage";
+  const national = scope === "national";
+
+  return {
+    productClaimAvailability: 90,
+    // Festive stock was built to forecast nationally, so narrowing scope adds
+    // little here — unlike the heat-wave case, where scope is the whole story.
+    inventoryService: national ? 88 : 92,
+    channelCoverage: national ? 82 : 86,
+    creatorAgencyReadiness: 84,
+    rightsLegalApproval: unlicensed ? 15 : 75,
+    measurementReadiness: 88,
+    evidenceIds: [`inv-${brandId}-national`, `brand-memory-${brandId}`],
+    blockers: unlicensed ? [uncleatedFootageBlocker] : [],
+  };
+};
+
+const uncleatedFootageBlocker: DecisionBlocker = {
+  code: "RIGHTS_EVENT_FOOTAGE_UNAVAILABLE",
+  severity: "mandatory",
+  message: "Third-party event footage was never cleared for this festive package.",
+  remediation: "Stay with the pre-cleared creator-led cut that the window was prepared around.",
+};
 
 export const festiveHandwashMoment: UseCaseSource = {
   contractId: "contract-festive-handwash-moment",

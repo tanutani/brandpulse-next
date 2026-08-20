@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
 
+import brandMemory from "@/public/data/brand-memory.json";
+import { hasFallbackSynthesis } from "@/lib/agents/fallback";
+import { buildFallbackSkeptic } from "@/lib/agents/skeptic-fallback";
 import { loadFixtureBundle } from "@/lib/fixtures";
 import { USE_CASE_SOURCES } from "@/lib/fixtures/source";
 import { buildContract } from "@/lib/fixtures/build-contract";
@@ -85,6 +88,32 @@ describe("derived contracts", () => {
           ),
         );
       }
+    }
+  });
+
+  it("backs every candidate brand with a brand-memory entry", () => {
+    // Permission cites brand-memory-<id> as its evidence. Nothing imports that
+    // fixture at runtime, so without this check a candidate could cite a record
+    // that does not exist and no screen would ever notice.
+    const known = new Set(brandMemory.brands.map(({ id }) => id));
+
+    for (const source of USE_CASE_SOURCES) {
+      for (const brand of source.brands) {
+        expect(known, `${source.contractId} cites unknown brand ${brand.brandId}`).toContain(
+          brand.brandId,
+        );
+      }
+    }
+  });
+
+  it("has a fallback synthesis and counter-case for every opportunity", () => {
+    // Both agents fall back to these fixtures. A missing entry returns 503 rather
+    // than degrading quietly, which is the one failure mode the live AI work was
+    // built to avoid.
+    for (const contract of loadFixtureBundle().contracts) {
+      const id = contract.opportunity.id;
+      expect(hasFallbackSynthesis(id), `no synthesis fallback for ${id}`).toBe(true);
+      expect(buildFallbackSkeptic(id, "disabled"), `no skeptic fallback for ${id}`).not.toBeNull();
     }
   });
 
