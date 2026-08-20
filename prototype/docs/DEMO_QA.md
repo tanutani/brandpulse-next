@@ -1,8 +1,8 @@
 # BrandPulse NEXT Demo QA
 
-Date: 17 August 2026
+Date: 21 August 2026
 Mode: no API key configured; `DEMO_MODE=static`, `LIVE_AI_ENABLED=false`
-Scope: live AI product demo release candidate on `feat/live-ai-product-demo`
+Scope: competition release candidate on `feat/validation-and-plain-language`
 
 ## Automated gates
 
@@ -10,13 +10,13 @@ Scope: live AI product demo release candidate on `feat/live-ai-product-demo`
 |---|---|---|
 | ESLint | `npm.cmd run lint` | Pass — 0 errors, 0 warnings |
 | TypeScript | `npm.cmd run typecheck` | Pass |
-| Vitest | `npm.cmd run test` | Pass — 18 files, 87 tests |
-| Production build | `npm.cmd run build` | Pass — 11 routes; all judged routes prerendered, `/api/synthesize` dynamic |
-| Playwright | `npm.cmd run test:e2e` | Pass — 21 passed, 1 skipped in 26.2s |
+| Vitest | `npm.cmd run test` | Pass — 25 files, 137 tests |
+| Production build | `npm.cmd run build` | Pass — 19 prerendered pages across nine opportunities and both playable journeys |
+| Playwright | `npm.cmd run test:e2e` | Pass — 23 passed in 27.9s on an isolated static server |
 | `git diff --check` | — | Pass — no whitespace errors |
 
-The skipped Playwright test is `deployed-smoke.spec.ts`, which self-skips unless
-`PLAYWRIGHT_BASE_URL` is set.
+The browser gate builds and starts an isolated server on port 3107 so an existing local development
+server cannot mask the release candidate.
 
 ## Model boundary evidence
 
@@ -42,6 +42,16 @@ The skipped Playwright test is `deployed-smoke.spec.ts`, which self-skips unless
 
 ## Deterministic acceptance evidence
 
+- Nine authored sources produce nine derived contracts spanning Act now, Test, Incubate, Watch, and
+  Ignore. Surf is a growth activation; Lifebuoy misinformation is a defensive response.
+- Removing Surf creator rights deterministically downgrades Act now to Watch. Restoring rights,
+  passing policy, and maker-checker approval unlock a descriptive monitored result with no causal,
+  incrementality, treatment/control, or confidence-interval claim.
+- Journey storage v2 is contract-keyed; the legacy Rexona v1 record migrates automatically, and Surf
+  cannot overwrite Rexona progress.
+- Frozen desserts visibly disclose the post-demerger KWIL ecosystem context. The pH case separately
+  describes the 21 January 2021 appeal and 16 June 2022 interim stages without calling either a final
+  merits judgment.
 - Rexona outranks Dove and Axe on configured Permission; Dove's inclusion safety and Axe's portfolio
   conflict remain visible.
 - National plus unlicensed match footage produces Watch with `RIGHTS_MATCH_FOOTAGE_UNAVAILABLE` and
@@ -55,6 +65,8 @@ The skipped Playwright test is `deployed-smoke.spec.ts`, which self-skips unless
 - The result stays locked until a locked sprint and a current-version approval both exist.
 - The checked-in 1.2 percentage-point lift with 95% service level evaluates to Scale against the
   locked rules, and the ledger replays after refresh.
+- The Rexona A/B methodology panel calculates MDE, exposure sufficiency, contamination warnings,
+  and preregistration completeness without changing any P3 component or route.
 
 ## Signal replay
 
@@ -95,16 +107,16 @@ The skipped Playwright test is `deployed-smoke.spec.ts`, which self-skips unless
 ## Accessibility and responsiveness
 
 - Contrast measured for every token pair and recorded in `docs/VISUAL_SYSTEM.md`. `--signal-teal` is
-  3.92:1 and therefore restricted to borders, icons, and meters; text uses `--signal-teal-ink` at
-  6.47:1. All text pairs meet AA or better.
+  2.88:1 and therefore restricted to borders, motifs, and meters; text uses `--signal-teal-ink` at
+  6.77:1. All text pairs meet AA or better.
 - Colour is never the only signal: provenance, route, policy, and pulse states each carry an icon
   and a word.
-- Keyboard: the cover's primary action is reachable by Tab, shows a visible focus outline, and
-  activates with Enter. The guide does not trap focus.
+- Keyboard: the cover's primary action is reachable by Tab, shows a visible dual-ring focus outline,
+  and activates with Enter. The methodology dialog traps focus, closes with Escape, and restores it.
 - Reduced motion: the Decision Pulse renders static with transition duration under 50ms and loses no
   information.
-- Phone (390×844): no horizontal overflow on the cover, Pulse Room, opportunity, or resolver;
-  asserted in Playwright. Touch targets are at least 44px.
+- Phone (390×844): no horizontal overflow across cover, Pulse Room, both decision/ownership paths,
+  bounded test, or review; asserted in Playwright. Touch targets are at least 44px.
 - No browser console errors across the phone sweep.
 
 ## Known limitations
@@ -112,5 +124,6 @@ The skipped Playwright test is `deployed-smoke.spec.ts`, which self-skips unless
 - Live Gemini has not been exercised against the real provider from this machine; live behaviour is
   covered by provider mocks and a mocked-route Playwright test. A key holder should run one live
   call before relying on the live path in a presentation.
-- The deployed smoke test still needs a deployment of this branch to run.
-- Proxy-user comprehension sessions and presentation timing still require the registered team.
+- Production authentication and direct-link checks are recorded after deployment.
+- Five proxy-user comprehension sessions, final deck/QR verification, a human read of the pH line,
+  and the physical second-network check still require the registered team.

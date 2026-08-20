@@ -10,23 +10,30 @@ import { chromium } from "@playwright/test";
 const nextCli = "node_modules/next/dist/bin/next";
 const outDir = path.resolve(process.argv[2] ?? "docs/screenshots/current");
 const hero = "opp-extra-time-sweat-confidence";
+const surf = "opp-surf-first-monsoon";
 
 const DESKTOP = { width: 1440, height: 900 };
 const PHONE = { width: 390, height: 844 };
+const CAPTURE_PORT = "3108";
 
 /** Each entry drives the app to a screen, then captures a full-page image. */
 const SCREENS = [
   { name: "01-cover", path: "/" },
   { name: "02-pulse-room", path: "/opportunities" },
-  { name: "03-opportunity", path: `/opportunities/${hero}` },
-  { name: "04-resolver", path: `/resolver/${hero}`, drive: "resolver" },
-  { name: "05-sprint", path: `/sprint/${hero}`, drive: "sprint" },
-  { name: "06-review", path: `/review/${hero}`, drive: "review" },
+  { name: "03-rexona-decision", path: `/opportunities/${hero}` },
+  { name: "04-surf-decision", path: `/opportunities/${surf}` },
+  { name: "05-rexona-ownership", path: `/resolver/${hero}`, drive: "rexona-resolver" },
+  { name: "06-surf-ownership", path: `/resolver/${surf}`, drive: "surf-resolver" },
+  { name: "07-bounded-test", path: `/sprint/${hero}`, drive: "rexona-sprint" },
+  { name: "08-rexona-review", path: `/review/${hero}`, drive: "rexona-review" },
+  { name: "09-surf-review", path: `/review/${surf}`, drive: "surf-review" },
 ];
+
+const TEST_ENV = { ...process.env, DEMO_MODE: "static", LIVE_AI_ENABLED: "false", GEMINI_API_KEY: "" };
 
 function run(commandArgs) {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, commandArgs, { stdio: "inherit", env: process.env });
+    const child = spawn(process.execPath, commandArgs, { stdio: "inherit", env: TEST_ENV });
     child.once("error", reject);
     child.once("exit", (code) => resolve(code ?? 1));
   });
@@ -48,34 +55,43 @@ async function waitForServer(url) {
 
 /** Replays the deterministic journey so downstream screens have the state they gate on. */
 async function drive(page, base, stage) {
-  if (stage === "resolver" || stage === "sprint" || stage === "review") {
+  if (stage === "rexona-resolver" || stage === "rexona-sprint" || stage === "rexona-review") {
     await page.goto(`${base}/resolver/${hero}`);
     await page.getByRole("button", { name: "Four in-stock cities" }).click();
     await page.getByRole("button", { name: "Rights-safe creator" }).click();
   }
-  if (stage === "sprint" || stage === "review") {
+  if (stage === "rexona-sprint" || stage === "rexona-review") {
     await page.goto(`${base}/sprint/${hero}`);
     await page.getByRole("button", { name: "Lock sprint rules" }).click();
   }
-  if (stage === "review") {
+  if (stage === "rexona-review") {
     await page.goto(`${base}/review/${hero}`);
     await page.getByRole("button", { name: /Creator-led pressure moment/i }).click();
     await page.getByRole("button", { name: /Approve corrected variant/i }).click();
     await page.getByRole("button", { name: /Reveal synthetic result/i }).click();
+  }
+  if (stage === "surf-resolver" || stage === "surf-review") {
+    await page.goto(`${base}/resolver/${surf}`);
+  }
+  if (stage === "surf-review") {
+    await page.goto(`${base}/review/${surf}`);
+    await page.getByRole("button", { name: /Cleared creator muddy-play story/i }).click();
+    await page.getByRole("button", { name: /Approve corrected variant/i }).click();
+    await page.getByRole("button", { name: /Reveal monitored result/i }).click();
   }
 }
 
 const buildCode = await run([nextCli, "build"]);
 if (buildCode !== 0) process.exit(buildCode);
 
-const server = spawn(process.execPath, [nextCli, "start", "--hostname", "127.0.0.1"], {
+const server = spawn(process.execPath, [nextCli, "start", "--hostname", "127.0.0.1", "--port", CAPTURE_PORT], {
   stdio: ["ignore", "inherit", "inherit"],
-  env: { ...process.env, NEXT_TELEMETRY_DISABLED: "1" },
+  env: { ...TEST_ENV, NEXT_TELEMETRY_DISABLED: "1" },
 });
 
 let exitCode = 1;
 try {
-  const base = "http://127.0.0.1:3000";
+  const base = `http://127.0.0.1:${CAPTURE_PORT}`;
   await waitForServer(base);
   await mkdir(outDir, { recursive: true });
 
@@ -88,7 +104,8 @@ try {
       await page.evaluate(() => window.localStorage.clear());
       if (screen.drive) await drive(page, base, screen.drive);
       await page.goto(`${base}${screen.path}`);
-      await page.waitForLoadState("networkidle");
+      await page.waitForLoadState("domcontentloaded");
+      await page.waitForTimeout(250);
       const file = path.join(outDir, `${screen.name}-${label}.png`);
       await page.screenshot({ path: file, fullPage: true });
       console.log(`captured ${file}`);
@@ -100,7 +117,7 @@ try {
       await page.goto(`${base}/opportunities`);
       await page.getByRole("button", { name: "Start guide" }).click();
       await page.waitForSelector("[data-testid='guide-bubble']");
-      const file = path.join(outDir, "07-guided-sheet-phone.png");
+      const file = path.join(outDir, "10-guided-sheet-phone.png");
       await page.screenshot({ path: file });
       console.log(`captured ${file}`);
     }
