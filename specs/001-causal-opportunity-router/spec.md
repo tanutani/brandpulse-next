@@ -4,7 +4,7 @@
 
 **Created**: 2026-08-06
 
-**Status**: Ready for implementation
+**Status**: Implemented; release validation in progress
 
 **Input**: User description: "Create a governed signal-to-action product for HUL brand teams that combines fragmented consumer and market signals, distinguishes fads from durable trends, identifies the right portfolio brand and action, creates a causal test and approved activation brief, and keeps humans and brand/legal guardrails in control."
 
@@ -213,6 +213,29 @@ the system recommended, what humans changed, and whether the success threshold w
   browser storage.
 - **FR-036**: The product MUST present itself as an unofficial competition concept and MUST NOT
   imply HUL endorsement or deployment.
+- **FR-037**: The bundled catalogue MUST contain exactly nine opportunities, exercise all five
+  routes, and derive every displayed gate score and route from authored inputs.
+- **FR-038**: Every contract MUST carry an operational `actionMode` and an explicit
+  `portfolioContext`; brand names alone MUST NOT imply organizational ownership.
+- **FR-039**: The prepared Surf Excel first-monsoon scenario MUST route to Act Now as a growth
+  activation, downgrade to Watch when rights clearance is removed, and return to Act when restored.
+- **FR-040**: Growth activation and defensive response MUST be visibly distinct action modes even
+  when both use the Act Now route.
+- **FR-041**: The frozen-dessert scenario MUST be disclosed as a KWIL / wider portfolio ecosystem
+  scenario outside current HUL ownership and retain the four-city Test constraint.
+- **FR-042**: The cleanser-pH scenario MUST remain Incubate — blocked on claims and present the
+  21 January 2021 appeal and 16 June 2022 interim decision as separate non-final court stages.
+- **FR-043**: Test journeys MUST follow ownership → bounded test → activation review → causal
+  outcome; Act journeys MUST follow ownership → activation review → monitored outcome.
+- **FR-044**: A monitored Act outcome MUST be explicitly descriptive and MUST NOT contain or imply
+  treatment/control, incrementality, confidence intervals, or causal attribution.
+- **FR-045**: Browser journey persistence MUST use a v2 contract-keyed map and automatically migrate
+  the existing v1 Rexona record without allowing Surf to overwrite it.
+- **FR-046**: A/B design diagnostics MUST deterministically report MDE, exposure sufficiency,
+  contamination warnings, and preregistration completeness without affecting P3 or routing.
+- **FR-047**: The parameter catalogue MUST distinguish `routing_input`, `computed_indicator`, and
+  `specified_only`, including 18 weighted P3 components, two Proof penalties, two advisory
+  indicators, and three A/B diagnostics.
 
 ### Key Entities
 

@@ -274,6 +274,40 @@ quota-limited, and no model output can move a score, route, blocker, approval, o
 
 ---
 
+## Phase 13: Scenario alignment and route semantics (v1.2)
+
+- [X] T093 Replace festive Lifebuoy with the Surf Excel first-monsoon source, fallbacks, memory references, generated contract, playable ID, and regression tests
+- [X] T094 Add `actionMode` and `portfolioContext` to authored sources, derived contracts, Zod, and JSON Schema
+- [X] T095 Add the visible KWIL ecosystem disclosure and HUL 2025–26 annual-report citation while preserving four-city Test
+- [X] T096 Split pH legal evidence into the 21 January 2021 appeal and 16 June 2022 interim stages and retain Incubate — blocked on claims
+
+## Phase 14: Governed Surf ACT journey (v1.2)
+
+- [X] T097 Add `test` and `act` journey unions, route-specific workflow events, and monitored activation/outcome contracts
+- [X] T098 Key activation packages by opportunity ID and add blocked/corrected Surf variants
+- [X] T099 Add Surf maker-checker review, descriptive decision history, and `/review/[id]` generation for both playable decisions
+- [X] T100 Upgrade journey persistence to a contract-keyed v2 map with automatic v1 Rexona migration
+- [X] T101 Add Surf rights-downgrade, ACT state-machine, monitored-outcome, and independent-persistence tests
+
+## Phase 15: Diagnostics and HUL-adjacent interface (v1.2)
+
+- [X] T102 Add deterministic MDE, exposure, contamination, and preregistration diagnostics with boundary tests
+- [X] T103 Replace `scored` with `routing_input`, `computed_indicator`, and `specified_only` catalogue status and dynamic counts
+- [X] T104 Apply the exact HUL-adjacent tokens, CSS wave/dot motif, dual-journey landing, action labels, route filters, and plain decision-screen names
+- [X] T105 Add keyboard dialog trapping, focus restoration, reduced-motion handling, responsive layouts, and measured contrast documentation
+
+## Phase 16: Release evidence (v1.2)
+
+- [X] T106 Synchronize specification, data model, schema, quickstart, README, backup demo, and release documentation
+- [ ] T107 Conduct five human proxy-user sessions; at least four explain Rexona TEST, Surf growth ACT, and Lifebuoy defensive ACT
+- [ ] T108 Human-read the pH evidence line and verify final deck claims, citations, eligibility, timing, route labels, and QR destination
+- [X] T109 Capture final desktop and phone screenshots for landing, Pulse Room, both primary decisions and ownership states, bounded test, and both review outcomes
+- [X] T110 Run unit/integration, typecheck, lint, build, static/fallback E2E, Rexona E2E, Surf E2E, route/fixture drift, accessibility, and responsive gates
+- [ ] T111 Push the green continuation commits and deploy the identical SHA to Vercel production
+- [ ] T112 Verify the public alias without authentication in an incognito browser and on a second network
+
+---
+
 ## Format validation
 
 All executable tasks use the required checklist form: checkbox, sequential task ID, optional `[P]`

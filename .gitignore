@@ -9,3 +9,17 @@
 
 # Case-study source PDFs. Kept locally, never committed.
 *.pdf
+
+# Node / Next.js / test output
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+
+# Local runtime and deployment configuration
+.env
+.env.*
+!.env.example
+.vercel/

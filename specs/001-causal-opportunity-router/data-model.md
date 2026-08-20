@@ -20,8 +20,10 @@ OpportunityContractVersion * --- * BrandProfile (through BrandAssessment)
 BrandAssessment 1 --- 3 GateAssessment (Proof, Permission, Preparedness)
 OpportunityContractVersion 0 --- 1 CausalSprint
 CausalSprint 0 --- 1 ActivationPackage
+OpportunityContractVersion 0 --- 1 MonitoredActivationPlan
 OpportunityContractVersion 0 --- * HumanDecision
-CausalSprint 0 --- 1 Outcome
+CausalSprint 0 --- 1 CausalOutcome
+MonitoredActivationPlan 0 --- 1 MonitoredOutcome
 ```
 
 ## Core entities
@@ -121,6 +123,8 @@ CausalSprint 0 --- 1 Outcome
 | selectedBrandId | string or null | Human-confirmed owner |
 | brandAssessments | BrandAssessment[] | At least three in prototype |
 | recommendedRoute | enum | act_now, test, incubate, watch, ignore |
+| actionMode | enum | growth_activation, defensive_response, bounded_test, capability_build, monitor, no_action |
+| portfolioContext | enum | hul_current or kwil_ecosystem; prevents ownership inference from brand name |
 | routeReasonCodes | string[] | Deterministic explanation |
 | assumptions | Assumption[] | Label, value, source, owner |
 | causalSprintId | string or null | Present for Test |
@@ -156,18 +160,35 @@ CausalSprint 0 --- 1 Outcome
 | policyChecks | PolicyCheck[] | Rule, status, evidence, remediation |
 | status | enum | draft, changes_requested, approved, rejected |
 
+Activation packages are stored as a bundle keyed by opportunity ID. Rexona and Surf therefore use
+different claims, rights, disclosures, expiry dates, and blocked/corrected variants.
+
+### MonitoredActivationPlan
+
+| Field | Type | Notes |
+|---|---|---|
+| id | string | Stable activation-plan ID |
+| activationWindow | object | Fixed start and end |
+| selectedScope | enum | national or four_city |
+| channel | string | Selected activation channel(s) |
+| descriptiveSuccessMetric | string | Observation only; not an incrementality metric |
+| inventoryServiceGuardrail | number 0-1 | Prepared service floor |
+| backlashGuardrail | number 0-1 | Maximum negative-response rate |
+| stopRule | string | Human-readable pause condition |
+| approvalState | enum | pending, approved, changes_requested |
+
 ### HumanDecision
 
 | Field | Type | Notes |
 |---|---|---|
 | id | string | Append-only ID |
 | actor | object | Prototype role and display name; no auth claim |
-| decision | enum | approve_test, request_changes, watch, reject, override |
+| decision | enum | approve_test, approve_activation, request_changes, watch, reject, override |
 | rationale | string | Required |
 | decidedAt | datetime | UTC |
 | contractVersion | integer | Exact reviewed version |
 
-### Outcome
+### CausalOutcome
 
 | Field | Type | Notes |
 |---|---|---|
@@ -179,6 +200,30 @@ CausalSprint 0 --- 1 Outcome
 | decision | enum | scale, iterate, kill, inconclusive |
 | reasonCodes | string[] | Compared only with pre-registered rules |
 | synthetic | boolean | Always true in first-round demo |
+
+### MonitoredOutcome
+
+| Field | Type | Notes |
+|---|---|---|
+| id | string | Stable synthetic result ID |
+| activationPlanId | string | Parent monitored plan |
+| observedAt | datetime | Observation timestamp |
+| successMetric | string | Must match the plan's descriptive metric |
+| observedValue | number | Descriptive observed value |
+| inventoryService | number 0-1 | Guardrail observation |
+| backlashRate | number 0-1 | Guardrail observation |
+| decision | enum | continue, pause, complete |
+| observationBasis | literal | descriptive_no_control |
+| synthetic | true | Never represented as an HUL result |
+
+Monitored outcomes deliberately have no treatment rate, comparison rate, incremental effect, or
+confidence interval. This shape prevents causal language by construction.
+
+### Journey persistence v2
+
+The browser stores `{ storageVersion: "2.0.0", activeContractId, journeys }`, with `journeys` keyed
+by contract ID. Each record is a `test` or `act` discriminated union. Loading a valid v1 Rexona
+record migrates it once into the keyed map and removes the legacy key.
 
 ## Fixture contracts
 
@@ -206,6 +251,9 @@ CausalSprint 0 --- 1 Outcome
 8. Every identifier cited by a synthesis response must exist in the approved evidence set for that
    opportunity. An unknown identifier invalidates the whole response.
 9. Live and fallback synthesis satisfy one schema, so decisions are identical in either mode.
+10. `actionMode` explains operational intent but never writes or overrides the deterministic route.
+11. A KWIL ecosystem contract is visibly disclosed and is never described as current HUL ownership.
+12. An Act outcome is descriptive; only a locked Test route may produce causal evaluation fields.
 
 ## Live signal room and synthesis (additive, v1.1)
 

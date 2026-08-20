@@ -28,18 +28,18 @@ whose evidence*, and the interface encodes that answer in colour, badge, and pos
 Prototype tokens. These are competition design choices, **not** claimed official HUL brand standards.
 
 ```css
---brand-primary: #1f36c7;   /* structure, primary action, active state */
---brand-deep:    #12256f;   /* headings on light, deep surfaces */
+--brand-primary: #1746c9;   /* structure, primary action, active state */
+--brand-deep:    #0b2463;   /* headings on light, deep surfaces */
 --brand-soft:    #eaf0ff;   /* selected and information fills */
---signal-teal:   #008f95;   /* public observation */
+--signal-teal:   #00a6c8;   /* cyan observation accent; non-text use */
 --portfolio-violet: #6656c9;/* model inference */
---decision-yellow: #f4c64d; /* route / decision */
+--decision-yellow: #f6c453; /* route / decision */
 --block-red:     #c83e4d;   /* blocker */
 
---canvas:        #f5f7fb;
+--canvas:        #f4f7fc;
 --surface:       #ffffff;
 --surface-muted: #eef2f7;
---ink:           #14213a;
+--ink:           #10213d;
 --ink-muted:     #61708a;
 --line:          #dbe3ef;
 ```
@@ -48,19 +48,20 @@ Prototype tokens. These are competition design choices, **not** claimed official
 
 | Pair | Ratio | Verdict |
 |---|---|---|
-| `--brand-primary` on `--surface` | 8.71:1 | AAA |
-| white on `--brand-primary` | 8.71:1 | AAA |
-| `--brand-deep` on `--surface` | 13.8:1 | AAA |
-| `--brand-primary` on `--brand-soft` | 7.63:1 | AAA |
-| `--ink` on `--canvas` | 15.0:1 | AAA |
-| `--ink-muted` on `--canvas` | 4.67:1 | AA |
-| `--portfolio-violet` on `--surface` | 5.61:1 | AA |
+| `--brand-primary` on `--surface` | 7.62:1 | AAA |
+| white on `--brand-primary` | 7.62:1 | AAA |
+| `--brand-deep` on `--surface` | 14.52:1 | AAA |
+| `--brand-primary` on `--brand-soft` | 6.68:1 | AA |
+| `--ink` on `--canvas` | 14.96:1 | AAA |
+| `--ink-muted` on `--canvas` | 4.66:1 | AA |
+| `--portfolio-violet` on `--surface` | 5.62:1 | AA |
 | `--block-red` on `--surface` | 4.94:1 | AA |
-| `--ink` on `--decision-yellow` | 9.96:1 | AAA |
-| `--signal-teal` on `--surface` | 3.92:1 | **AA large / non-text only** |
+| `--ink` on `--decision-yellow` | 9.90:1 | AAA |
+| `--signal-teal` on `--surface` | 2.88:1 | **Non-text accent only** |
+| `--signal-teal-ink` on `--surface` | 6.77:1 | AA |
 
-`--signal-teal` fails AA for small text, so text uses the derived `--signal-teal-ink` (#00696e,
-6.47:1). Teal itself is reserved for borders, icons, meters, and large bold labels. The same applies
+`--signal-teal` fails AA for text, so text uses `--signal-teal-ink` (#00647a, 6.77:1).
+Cyan itself is reserved for borders, motifs, meters, and non-text state accents. The same applies
 to `--decision-yellow`, which never carries white text; it pairs with `--ink` or
 `--decision-ink` (#7a5a00).
 
@@ -112,7 +113,9 @@ inside bounded panels or opens in a drawer.
 │  [Open live decision room]          │ Four cities + creator   │  │
 │  [How BrandPulse works]             │        ↓ Test           │  │
 │                                     │ +1.2pp · Scale          │  │
-│  data + unofficial-concept note     └─────────────────────────┘  │
+│                                     ├── Surf ACT preview ─────┤  │
+│  data + unofficial-concept note     │ Prepared → approval     │  │
+│                                     └─────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -138,7 +141,7 @@ inside bounded panels or opens in a drawer.
 
 One continuous rail across the guided journey:
 
-`Signal → Evidence → Route → Blocked action → Safe test → Learning`
+`Signal → Evidence → Route → Blocked action → Approval → Learning`
 
 - Six stations on a single track, each owning one accent: teal, blue, amber, red, violet, deep blue.
 - Completed stations fill and show a check; the current station shows a ring; upcoming stay hollow.
@@ -171,6 +174,11 @@ Distinct treatments, deliberately not one white card repeated:
 Default, hover, focus-visible, pressed, selected, loading, disabled, blocked, complete, and
 degraded/fallback are each specified. Transitions run 140–220ms on colour, opacity, and transform.
 Layout height is not animated.
+
+The focus indicator combines warm yellow with a deep-blue outer ring so it stays visible on both
+light and deep-blue surfaces. The methodology dialog traps Tab/Shift+Tab, closes on Escape, and
+returns focus to the invoking control. `prefers-reduced-motion: reduce` collapses all transitions and
+animations to 0.01ms without removing state information.
 
 ## 8. Critique applied
 

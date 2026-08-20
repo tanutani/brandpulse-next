@@ -35,7 +35,7 @@ recheck availability on build day. Never expose the key in a `NEXT_PUBLIC_` vari
 ## 3. Build order
 
 1. Copy the JSON Schema into TypeScript/Zod contracts.
-2. Add two opportunity fixtures and three candidate-brand profiles for each.
+2. Add the nine opportunity fixtures and at least three candidate-brand profiles for each.
 3. Write pure functions for P3 components, blockers, weakest-link readiness, and route selection.
 4. Write route-boundary tests before UI work.
 5. Implement the XState workflow and forbidden-transition tests.
@@ -60,6 +60,19 @@ incremental result.
 A viral one-creator spike has weak persistence and no behavioral progression, or a good opportunity
 contains a prohibited claim/expired rights window. The product displays counter-evidence and blocks
 Act Now. This path is essential proof that the system is not an agreeable content generator.
+
+### Prepared ACT: Surf Excel first monsoon
+
+Open the national, rights-safe Surf state at Act Now. Remove creator rights and confirm Watch;
+restore the prepared package and confirm Act Now. Continue directly from Ownership view to
+Activation Review, pass policy checks, record maker-checker approval, and reveal a synthetic
+monitored result that explicitly says it is descriptive and makes no causal claim.
+
+### Portfolio and claims disclosures
+
+The frozen-dessert Test stays limited to four cities and is labelled as a KWIL / wider portfolio
+ecosystem case outside current HUL ownership. The pH case stays Incubate — blocked on claims and
+links the 2021 appeal and 2022 interim court stages separately.
 
 ## 5. Definition of demo-ready
 

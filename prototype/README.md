@@ -34,19 +34,36 @@ Open the decision room, or use **Start guide** in the top bar for the anchored w
 2. **Run AI analysis.** Gemini groups the approved evidence and argues the strongest case against it.
 3. **Open Rexona**, inspect the evidence chain, and use *Ask why?* to separate rule output from
    model inference.
-4. **Portfolio Resolver**: switch from national to four in-stock cities and from match footage to
+4. **Ownership view**: switch from national to four in-stock cities and from match footage to
    rights-safe creator content. The route recalculates from Watch to Test.
-5. **Causal Sprint**: lock the ₹5,00,000 experiment before any result exists.
+5. **Bounded test**: lock the ₹5,00,000 experiment before any result exists.
 6. **Activation Review**: `RIGHTS-001` blocks the unsafe variant; select the corrected variant and
    record maker-checker approval.
-7. **Reveal the synthetic result** and inspect the persisted Learning Ledger.
+7. **Reveal the synthetic result** and inspect the persisted decision history.
 
 The **Decision Pulse** rail tracks this journey from Signal to Learning on every screen.
 **Present** gives a clean screenshot composition without needing browser fullscreen permission.
 
-Browser decisions are stored in versioned `localStorage`. **Reset** removes only the three
-BrandPulse keys — `brandpulse-next:contracts:1.0.0`, `brandpulse-next:journey:1.0.0`, and
-`brandpulse-next:guide:1.0.0` — and leaves unrelated storage untouched.
+Browser decisions are stored in a v2 map keyed by contract ID, so Rexona and Surf progress remain
+independent. **Reset** removes only the active BrandPulse keys plus the one-time v1 migration key and
+leaves unrelated storage untouched.
+
+## 90-second Surf ACT contrast
+
+Open `/opportunities/opp-surf-first-monsoon`. The prepared national state is **Act now — growth
+activation** because weather, search, social and synthetic commerce agree, while inventory, creator
+rights and an existing claim were prepared in advance. Remove rights in the ownership view to see a
+deterministic downgrade to Watch; restore the cleared package, review the blocked and corrected
+variants, record maker-checker approval, and reveal a descriptive monitored result. The result has no
+treatment/control, incrementality estimate, confidence interval, or causal claim.
+
+The separate Lifebuoy misinformation case is **Act now — defensive response**: factual correction,
+not a product campaign. The frozen-dessert case is visibly marked as a **KWIL / wider portfolio
+ecosystem scenario outside current HUL ownership**, citing the 1 December 2025 demerger effective date.
+
+The methodology drawer includes deterministic Rexona A/B design diagnostics. Minimum detectable
+effect, exposure sufficiency, contamination flags, and preregistration completeness are visible but
+cannot change P3 scores, routing, or the interactive bounded test.
 
 ## Environment variables
 
@@ -124,7 +141,8 @@ npm.cmd run test:e2e
 and release-smoke suites, then shuts down. Install Chromium once with
 `npx.cmd playwright install chromium`.
 
-Visual QA captures all six screens at desktop and phone width:
+Visual QA captures the landing page, Pulse Room, both primary decisions and ownership states, the
+bounded test, and both review outcomes at desktop and phone width:
 
 ```powershell
 node scripts/capture-screens.mjs docs/screenshots/after

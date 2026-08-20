@@ -271,3 +271,17 @@ No constitution violations. `@google/genai` is the single added runtime dependen
 server-only; the client bundle contains no provider key, SDK, or provider endpoint. Deferred items
 include authentication, multi-user collaboration, production connectors, long-term database storage,
 automated media buying, live publishing, and model fine-tuning.
+
+## Continuation architecture (v1.2)
+
+- Keep exactly nine input-authored contracts and derive scores/routes through the existing P3
+  scorers. Add `actionMode` and `portfolioContext` as explanatory metadata only.
+- Replace the positive Lifebuoy ACT fixture with the prepared Surf Excel first-monsoon case; retain
+  Lifebuoy for defensive ingredient misinformation.
+- Split journeys into `test` and `act` discriminated unions. TEST retains the Rexona bounded test and
+  causal result. ACT uses a monitored activation plan and a descriptive outcome with no causal fields.
+- Store v2 journeys in a contract-keyed browser map and migrate the v1 Rexona record once.
+- Key activation packages by opportunity ID and generate review pages for both playable decisions.
+- Compute A/B design diagnostics in pure TypeScript and mark them non-routing in both code and UI.
+- Use exact HUL-adjacent tokens and plain decision-screen labels while retaining Opportunity Contract,
+  Portfolio Resolver, Causal Sprint, and Learning Ledger as methodology terms.
