@@ -3,23 +3,23 @@ import Link from "next/link";
 
 import { ReviewWorkspace } from "@/components/governance/review-workspace";
 import { SystemState } from "@/components/governance/system-state";
-import { HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
+import { PLAYABLE_OPPORTUNITY_IDS } from "@/lib/demo/journey";
 import { findOpportunityContract } from "@/lib/fixtures";
 
 export function generateStaticParams() {
-  return [{ id: HERO_OPPORTUNITY_ID }];
+  return PLAYABLE_OPPORTUNITY_IDS.map((id) => ({ id }));
 }
 
 export default async function ReviewPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const contract = findOpportunityContract(id);
 
-  if (!contract || id !== HERO_OPPORTUNITY_ID) {
+  if (!contract || !PLAYABLE_OPPORTUNITY_IDS.includes(id)) {
     return (
       <div className="shell-frame">
         <SystemState
           title="Review unavailable"
-          detail="The governed activation package exists only for the hero journey."
+          detail="A governed activation package exists only for the two playable decisions."
         />
       </div>
     );
@@ -27,8 +27,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="shell-frame">
-      <Link className="back-link" href={`/sprint/${id}`}>
-        <ArrowLeft aria-hidden="true" size={15} /> Causal Sprint
+      <Link className="back-link" href={contract.recommendedRoute === "act_now" ? `/resolver/${id}` : `/sprint/${id}`}>
+        <ArrowLeft aria-hidden="true" size={15} /> {contract.recommendedRoute === "act_now" ? "Ownership view" : "Bounded test"}
       </Link>
       <ReviewWorkspace contract={contract} />
     </div>

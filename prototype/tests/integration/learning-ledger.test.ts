@@ -21,9 +21,9 @@ describe("ledger refresh", () => {
       synthetic: true, decision: "scale", reasonCodes: ["PRIMARY_METRIC_ABOVE_LOCKED_SCALE_THRESHOLD"],
     };
     const state = {
-      storageVersion: "1.0.0", contractId: "contract-extra-time-sweat-confidence", contractVersion: 3,
+      storageVersion: "2.0.0", kind: "test", contractId: "contract-extra-time-sweat-confidence", contractVersion: 3,
       scope: "four_city", assetMode: "rights_safe_creator", selectedBrandId: "rexona",
-      sprint: null, selectedVariantId: "variant-creator-rights-safe", decisions: [], outcome,
+      sprint: null, activationPlan: null, selectedVariantId: "variant-creator-rights-safe", decisions: [], outcome,
     } satisfies JourneyState;
     const storage = new MemoryStorage();
     new LocalJourneyStore(storage).save(state);

@@ -19,7 +19,7 @@ export default async function SprintPage({ params }: { params: Promise<{ id: str
       <div className="shell-frame">
         <SystemState
           title="Sprint unavailable"
-          detail="Only the hero Test route has a pre-registered Causal Sprint in this bounded prototype."
+          detail="Only the Rexona Test route has a pre-registered bounded test in this prototype."
         />
       </div>
     );
@@ -28,7 +28,7 @@ export default async function SprintPage({ params }: { params: Promise<{ id: str
   return (
     <div className="shell-frame">
       <Link className="back-link" href={`/resolver/${id}`}>
-        <ArrowLeft aria-hidden="true" size={15} /> Portfolio Resolver
+        <ArrowLeft aria-hidden="true" size={15} /> Ownership view
       </Link>
       <SprintStudio contract={contract} />
     </div>

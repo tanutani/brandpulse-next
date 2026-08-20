@@ -18,6 +18,16 @@ describe("opportunity workflow", () => {
     expect(actor.getSnapshot().value).toBe("learned");
     expect(actor.getSnapshot().status).toBe("done");
   });
+  it("completes the approval-first ACT path without an experiment", () => {
+    const actor = createActor(opportunityMachine).start();
+    for (const type of [
+      "START", "EVIDENCE_ASSEMBLED", "CHALLENGE_COMPLETED", "SCORING_COMPLETED",
+      "ACT_ROUTE_CONFIRMED", "ACTIVATION_REVIEWED", "READINESS_CHECKED", "ACT_MAKER_APPROVED",
+      "OUTCOME_REQUESTED", "LEARNING_RECORDED",
+    ] as WorkflowEventType[]) actor.send(event(type));
+    expect(actor.getSnapshot().value).toBe("learned");
+    expect(actor.getSnapshot().status).toBe("done");
+  });
   it("ignores forbidden scoring and premature approval events", () => {
     const actor = createActor(opportunityMachine).start();
     actor.send(event("SCORING_COMPLETED"));

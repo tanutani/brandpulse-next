@@ -9,6 +9,7 @@ import { ScoreBar } from "@/components/gates/score-bar";
 import { useGuide } from "@/components/guide/guide-provider";
 import { NextActionLink } from "@/components/shell/next-action-link";
 import type { AssetMode, JourneyState, OpportunityContract, PortfolioScope } from "@/lib/contracts";
+import { createSurfMonitoredPlan } from "@/lib/activation/monitored-plan";
 import { createPortfolioCandidates, getStoredSelection } from "@/lib/portfolio/hero-portfolio";
 import { resolvePortfolio } from "@/lib/portfolio/resolve-owner";
 import { LocalContractStore } from "@/lib/persistence/local-contract-store";
@@ -17,24 +18,38 @@ import { LocalJourneyStore } from "@/lib/persistence/local-journey-store";
 /**
  * Opens the resolver in the state the contract was scored at, so the route a
  * viewer just read does not change the instant they arrive. Use cases start in
- * different states on purpose: Rexona opens unresolved, the festive case opens
+ * different states on purpose: Rexona opens unresolved, the Surf case opens
  * already cleared.
  */
 const defaultJourney = (contract: OpportunityContract): JourneyState => {
   const { scope, assetMode } = getStoredSelection(contract.opportunity.id);
 
-  return {
-    storageVersion: "1.0.0",
+  const common = {
+    storageVersion: "2.0.0" as const,
     contractId: contract.contractId,
     contractVersion: contract.version,
     scope,
     assetMode,
     selectedBrandId: contract.selectedBrandId ?? contract.brandAssessments[0].brandId,
-    sprint: null,
     selectedVariantId: null,
     decisions: [],
-    outcome: null,
   };
+
+  return contract.actionMode === "growth_activation"
+    ? {
+        ...common,
+        kind: "act",
+        sprint: null,
+        activationPlan: createSurfMonitoredPlan(scope),
+        outcome: null,
+      }
+    : {
+        ...common,
+        kind: "test",
+        sprint: null,
+        activationPlan: null,
+        outcome: null,
+      };
 };
 
 export function ScopeControl({
@@ -49,12 +64,14 @@ export function ScopeControl({
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const stored = new LocalJourneyStore(window.localStorage).load();
+    const store = new LocalJourneyStore(window.localStorage);
+    const stored = store.load(contract.contractId);
     queueMicrotask(() => {
       if (stored?.contractId === contract.contractId) setJourney(stored);
+      else store.save(defaultJourney(contract));
       setReady(true);
     });
-  }, [contract.contractId]);
+  }, [contract]);
 
   const resolution = useMemo(
     () =>
@@ -112,7 +129,7 @@ export function ScopeControl({
       ],
     };
     contractStore.appendContractVersion(nextContract);
-    const nextJourney = {
+    const common = {
       ...journey,
       contractVersion: nextVersion,
       scope,
@@ -123,6 +140,9 @@ export function ScopeControl({
       decisions: [],
       outcome: null,
     };
+    const nextJourney: JourneyState = journey.kind === "act"
+      ? { ...common, kind: "act", activationPlan: createSurfMonitoredPlan(scope) }
+      : { ...common, kind: "test", activationPlan: null };
     new LocalJourneyStore(window.localStorage).save(nextJourney);
     setJourney(nextJourney);
 
@@ -141,10 +161,10 @@ export function ScopeControl({
         <section className="decision-surface">
           <div className="decision-surface-head">
             <div>
-              <p>Portfolio Resolver · contract v{journey.contractVersion}</p>
+              <p>Ownership view · contract v{journey.contractVersion}</p>
               <h2>Who can responsibly own this?</h2>
             </div>
-            <RouteBadge route={selected.decision.route} />
+            <RouteBadge route={selected.decision.route} actionMode={contract.actionMode} />
           </div>
           <div className="decision-surface-body">
             <div className="brand-rank">
@@ -188,20 +208,12 @@ export function ScopeControl({
         </section>
 
         {selected.decision.route === "act_now" ? (
-          // Act means the window is too short to test and the preparation is
-          // already done. Offering an experiment step here would contradict the
-          // route the rules just returned.
-          <div className="next-action">
-            <div>
-              <strong>No experiment step — this one goes straight to a person</strong>
-              <span>
-                Act means stock, rights and claims were all cleared before the window opened, so
-                there is nothing left to test. A named human still has to approve it; the system
-                never publishes. The approval and outcome chain is walked in full on the Rexona
-                journey.
-              </span>
-            </div>
-          </div>
+          <NextActionLink
+            cta="Review the activation"
+            detail="Policy checks and a named maker-checker approval remain mandatory before simulation."
+            href={`/review/${contract.opportunity.id}`}
+            label="Prepared activation — straight to human review"
+          />
         ) : canContinue ? (
           <NextActionLink
             cta="Design the bounded test"
@@ -262,7 +274,7 @@ export function ScopeControl({
                 onClick={() => applySelection(journey.scope, "unlicensed_match_footage")}
                 type="button"
               >
-                Match footage
+                {journey.kind === "act" ? "Remove rights clearance" : "Match footage"}
               </button>
               <button
                 aria-pressed={journey.assetMode === "rights_safe_creator"}
@@ -270,7 +282,7 @@ export function ScopeControl({
                 onClick={() => applySelection(journey.scope, "rights_safe_creator")}
                 type="button"
               >
-                Rights-safe creator
+                {journey.kind === "act" ? "Restore prepared package" : "Rights-safe creator"}
               </button>
             </div>
           </fieldset>
@@ -289,8 +301,8 @@ export function ScopeControl({
               <div className="ready-alert">
                 <Check aria-hidden="true" size={18} />
                 <div>
-                  <strong>Bounded test ready</strong>
-                  <p>Four-city stock, creator rights and measurement checks all pass.</p>
+                  <strong>{journey.kind === "act" ? "Prepared activation ready" : "Bounded test ready"}</strong>
+                  <p>{journey.kind === "act" ? "Inventory, claim support and creator rights all pass." : "Four-city stock, creator rights and measurement checks all pass."}</p>
                 </div>
               </div>
             )}

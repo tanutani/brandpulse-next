@@ -9,13 +9,67 @@ import type { LearningLedgerEntry } from "@/lib/contracts";
 export function LearningLedger({ entry }: { entry: LearningLedgerEntry }) {
   useGuide();
 
+  if (entry.kind === "act") {
+    return (
+      <section className="surface surface-pad" aria-labelledby="ledger-title" data-guide-anchor="ledger">
+        <div className="section-head">
+          <div>
+            <p className="section-kicker">Decision history · contract v{entry.contractVersion}</p>
+            <h2 id="ledger-title" style={{ fontSize: 18 }}>
+              Approval and descriptive observation stay attached to the decision
+            </h2>
+          </div>
+          <ProvenanceBadge type="synthetic_internal" />
+        </div>
+
+        <ol className="ledger-timeline">
+          <li className="ledger-event">
+            <span className="ledger-marker"><History aria-hidden="true" size={14} /></span>
+            <div>
+              <span>Decision record</span>
+              <strong>Surf Excel selected · growth activation</strong>
+              <small>Prepared inventory, claim support and creator rights retained.</small>
+            </div>
+          </li>
+          <li className="ledger-event">
+            <span className="ledger-marker"><FlaskConical aria-hidden="true" size={14} /></span>
+            <div>
+              <span>Monitored activation plan</span>
+              <strong>{entry.activationPlan.selectedScope.replaceAll("_", " ")} · {entry.activationPlan.channel.replaceAll("_", " ")}</strong>
+              <small>{entry.activationPlan.stopRule}</small>
+            </div>
+          </li>
+          <li className="ledger-event">
+            <span className="ledger-marker"><CheckCircle2 aria-hidden="true" size={14} /></span>
+            <div>
+              <span>Maker-checker</span>
+              <strong>{entry.approval.actor} approved current v{entry.approval.contractVersion}</strong>
+              <small>{entry.approval.rationale}</small>
+            </div>
+          </li>
+          <li className="ledger-event is-result">
+            <span className="ledger-marker"><Scale aria-hidden="true" size={14} /></span>
+            <div>
+              <span>Synthetic monitored outcome</span>
+              <strong>{(entry.outcome.observedValue * 100).toFixed(1)}% observed · {entry.outcome.decision.toUpperCase()}</strong>
+              <small>
+                Descriptive only — no treatment/control, incrementality estimate, confidence interval or causal claim.
+                Service {(entry.outcome.inventoryService * 100).toFixed(0)}%; backlash {(entry.outcome.backlashRate * 100).toFixed(1)}%.
+              </small>
+            </div>
+          </li>
+        </ol>
+      </section>
+    );
+  }
+
   return (
     <section className="surface surface-pad" aria-labelledby="ledger-title" data-guide-anchor="ledger">
       <div className="section-head">
         <div>
-          <p className="section-kicker">Learning Ledger · contract v{entry.contractVersion}</p>
+          <p className="section-kicker">Decision history · contract v{entry.contractVersion}</p>
           <h2 id="ledger-title" style={{ fontSize: 18 }}>
-            The decision remembers what humans and the test taught it
+            The decision remembers what humans and the bounded test taught it
           </h2>
         </div>
         <ProvenanceBadge type="synthetic_internal" />
@@ -27,7 +81,7 @@ export function LearningLedger({ entry }: { entry: LearningLedgerEntry }) {
             <History aria-hidden="true" size={14} />
           </span>
           <div>
-            <span>Opportunity Contract</span>
+            <span>Decision record</span>
             <strong>Rexona selected · weakest-link Test route</strong>
             <small>Evidence, counter-evidence, assumptions and version retained.</small>
           </div>

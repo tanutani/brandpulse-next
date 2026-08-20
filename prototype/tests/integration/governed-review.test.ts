@@ -24,9 +24,9 @@ describe("governed review persistence", () => {
     const store = new LocalJourneyStore(storage);
     const sprint = lockSprint(createHeroSprint(contract), "2026-08-15T12:10:00.000Z");
     const initial: JourneyState = {
-      storageVersion: "1.0.0", contractId: contract.contractId, contractVersion: 3,
+      storageVersion: "2.0.0", kind: "test", contractId: contract.contractId, contractVersion: 3,
       scope: "four_city", assetMode: "rights_safe_creator", selectedBrandId: "rexona",
-      sprint, selectedVariantId: null, decisions: [], outcome: null,
+      sprint, activationPlan: null, selectedVariantId: null, decisions: [], outcome: null,
     };
     store.save(initial);
     const checks = evaluateActivationVariant(activationPackageFixture.variants[1], "2026-08-15T12:20:00.000Z");

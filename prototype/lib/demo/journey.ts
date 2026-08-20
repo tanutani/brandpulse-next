@@ -1,10 +1,10 @@
 import { CONTRACT_STORAGE_KEY } from "@/lib/persistence/local-contract-store";
-import { JOURNEY_STORAGE_KEY } from "@/lib/persistence/local-journey-store";
+import { JOURNEY_STORAGE_KEY, LEGACY_JOURNEY_STORAGE_KEY } from "@/lib/persistence/local-journey-store";
 
 export const HERO_OPPORTUNITY_ID = "opp-extra-time-sweat-confidence";
 
 /** The Act case, kept playable so a second journey ends somewhere different. */
-export const ACT_OPPORTUNITY_ID = "opp-festive-handwash-moment";
+export const ACT_OPPORTUNITY_ID = "opp-surf-first-monsoon";
 
 /**
  * Opportunities that can be walked past the contract screen.
@@ -32,6 +32,7 @@ export const GUIDE_STORAGE_KEY = "brandpulse-next:guide:1.0.0";
 export const BRANDPULSE_STORAGE_KEYS = [
   CONTRACT_STORAGE_KEY,
   JOURNEY_STORAGE_KEY,
+  LEGACY_JOURNEY_STORAGE_KEY,
   GUIDE_STORAGE_KEY,
 ] as const;
 
@@ -63,7 +64,7 @@ export const PULSE_STATIONS: PulseStation[] = [
   { id: "evidence", label: "Evidence", accent: "var(--brand-primary)" },
   { id: "route", label: "Route", accent: "var(--decision-yellow)" },
   { id: "blocked", label: "Blocked action", accent: "var(--block-red)" },
-  { id: "test", label: "Safe test", accent: "var(--portfolio-violet)" },
+  { id: "test", label: "Approval", accent: "var(--portfolio-violet)" },
   { id: "learning", label: "Learning", accent: "var(--brand-deep)" },
 ];
 
@@ -164,21 +165,21 @@ export const GUIDE_STEPS: GuideStep[] = [
     message:
       "National stock cannot serve the demand this would create. Narrow the scope to the four cities that can.",
     href: `/resolver/${HERO_OPPORTUNITY_ID}`,
-    screen: "Portfolio Resolver",
+    screen: "Ownership view",
   },
   {
     id: "asset-creator",
     message:
       "Match footage has no usage rights. Switch to rights-safe creator content and watch Preparedness recalculate.",
     href: `/resolver/${HERO_OPPORTUNITY_ID}`,
-    screen: "Portfolio Resolver",
+    screen: "Ownership view",
   },
   {
     id: "lock-sprint",
     message:
       "Fix the budget, metric, window and decision rules before any result exists. Lock the ₹5,00,000 experiment.",
     href: `/sprint/${HERO_OPPORTUNITY_ID}`,
-    screen: "Causal Sprint",
+    screen: "Bounded test",
   },
   {
     id: "rights-check",
@@ -210,9 +211,9 @@ export const GUIDE_STEPS: GuideStep[] = [
   {
     id: "ledger",
     message:
-      "The Learning Ledger keeps the whole chain — evidence, the human change, the approval and the outcome.",
+      "Decision history keeps the whole chain — evidence, the human change, the approval and the outcome.",
     href: `/review/${HERO_OPPORTUNITY_ID}`,
-    screen: "Learning Ledger",
+    screen: "Decision history",
     acknowledge: "Finish",
   },
 ];

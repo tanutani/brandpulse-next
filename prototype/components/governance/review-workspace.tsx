@@ -2,16 +2,16 @@
 
 import { Check, Eye, LockKeyhole, ShieldAlert } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { activationPackageFixture } from "@/lib/activation/draft-package";
+import { getActivationPackage } from "@/lib/activation/draft-package";
 import { LearningLedger } from "@/components/governance/learning-ledger";
 import { useGuide } from "@/components/guide/guide-provider";
 import type { JourneyState, OpportunityContract } from "@/lib/contracts";
 import { evaluateOutcome } from "@/lib/experiment/evaluate-outcome";
-import { heroSyntheticOutcome } from "@/lib/fixtures/synthetic-result";
+import { heroSyntheticOutcome, surfMonitoredOutcome } from "@/lib/fixtures/synthetic-result";
 import { approveCurrentVersion, hasCurrentVersionApproval } from "@/lib/governance/approve-contract";
-import { buildLedgerEntry } from "@/lib/learning/build-ledger-entry";
+import { buildLedgerEntry, buildMonitoredLedgerEntry } from "@/lib/learning/build-ledger-entry";
 import { LocalContractStore } from "@/lib/persistence/local-contract-store";
 import { LocalJourneyStore } from "@/lib/persistence/local-journey-store";
 import { evaluateActivationVariant, policyChecksPass } from "@/lib/policies/evaluate-package";
@@ -24,21 +24,23 @@ export function ReviewWorkspace({ contract }: { contract: OpportunityContract })
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const stored = new LocalJourneyStore(window.localStorage).load();
+    const stored = new LocalJourneyStore(window.localStorage).load(contract.contractId);
     queueMicrotask(() => {
       setJourney(stored);
       setReady(true);
     });
-  }, []);
+  }, [contract.contractId]);
 
-  const selectedId = journey?.selectedVariantId ?? activationPackageFixture.variants[0].id;
+  const activationPackage = getActivationPackage(contract.opportunity.id)!;
+  const selectedId = journey?.selectedVariantId ?? activationPackage.variants[0].id;
   const selected =
-    activationPackageFixture.variants.find(({ id }) => id === selectedId) ??
-    activationPackageFixture.variants[0];
-  const checks = useMemo(() => evaluateActivationVariant(selected, evaluatedAt), [selected]);
-  const approved = journey ? hasCurrentVersionApproval(journey.decisions, journey.contractVersion) : false;
+    activationPackage.variants.find(({ id }) => id === selectedId) ??
+    activationPackage.variants[0];
+  const checks = evaluateActivationVariant(selected, evaluatedAt);
+  const approvalType = journey?.kind === "act" ? "approve_activation" : "approve_test";
+  const approved = journey ? hasCurrentVersionApproval(journey.decisions, journey.contractVersion, approvalType) : false;
   const currentApproval = journey?.decisions.findLast(
-    (decision) => decision.decision === "approve_test" && decision.contractVersion === journey.contractVersion,
+    (decision) => decision.decision === approvalType && decision.contractVersion === journey.contractVersion,
   );
   const passing = policyChecksPass(checks);
 
@@ -54,7 +56,7 @@ export function ReviewWorkspace({ contract }: { contract: OpportunityContract })
     setJourney(next);
 
     if (policyChecksPass(evaluateActivationVariant(
-      activationPackageFixture.variants.find((variant) => variant.id === id) ?? selected,
+      activationPackage.variants.find((variant) => variant.id === id) ?? selected,
       evaluatedAt,
     ))) {
       guide.completeAction("variant-corrected");
@@ -72,11 +74,18 @@ export function ReviewWorkspace({ contract }: { contract: OpportunityContract })
       currentContractVersion: journey.contractVersion,
       checks,
       decidedAt: "2026-08-15T12:25:00.000Z",
+      decision: approvalType,
     });
     const decisions = hasCurrentVersionApproval(journey.decisions, journey.contractVersion)
       ? journey.decisions
       : [...journey.decisions, approval];
-    const next = { ...journey, decisions };
+    const next: JourneyState = journey.kind === "act"
+      ? {
+          ...journey,
+          decisions,
+          activationPlan: { ...journey.activationPlan, approvalState: "approved" },
+        }
+      : { ...journey, decisions };
     new LocalJourneyStore(window.localStorage).save(next);
     new LocalContractStore(window.localStorage).appendDecision(approval);
     setJourney(next);
@@ -84,31 +93,33 @@ export function ReviewWorkspace({ contract }: { contract: OpportunityContract })
   }
 
   function revealResult() {
-    if (!journey?.sprint || !approved) return;
-    const outcome = evaluateOutcome(journey.sprint, heroSyntheticOutcome);
-    const next = { ...journey, outcome };
+    if (!journey || !approved) return;
+    const next: JourneyState = journey.kind === "act"
+      ? { ...journey, outcome: surfMonitoredOutcome }
+      : journey.sprint
+        ? { ...journey, outcome: evaluateOutcome(journey.sprint, heroSyntheticOutcome) }
+        : journey;
     new LocalJourneyStore(window.localStorage).save(next);
     setJourney(next);
     guide.completeAction("reveal-result");
   }
 
-  if (ready && !journey?.sprint?.lockedAt) {
+  if (ready && (!journey || (journey.kind === "test" && !journey.sprint?.lockedAt))) {
     return (
       <section className="system-state">
-        <h2>Lock the Causal Sprint first</h2>
+        <h2>Lock the bounded test first</h2>
         <p>
           Activation review cannot start until the metric, window, cells and decision thresholds are
           immutable.
         </p>
         <Link className="btn btn-primary" href={`/sprint/${contract.opportunity.id}`}>
-          Return to Causal Sprint
+          Return to bounded test
         </Link>
       </section>
     );
   }
 
-  const ledger =
-    journey?.sprint && journey.outcome && currentApproval
+  const ledger = journey?.kind === "test" && journey.sprint && journey.outcome && currentApproval
       ? buildLedgerEntry({
           contract,
           scope: journey.scope,
@@ -118,7 +129,16 @@ export function ReviewWorkspace({ contract }: { contract: OpportunityContract })
           outcome: journey.outcome,
           recordedAt: "2026-08-22T18:30:00.000Z",
         })
-      : null;
+      : journey?.kind === "act" && journey.outcome && currentApproval
+        ? buildMonitoredLedgerEntry({
+            contract,
+            activationPlan: journey.activationPlan,
+            policyChecks: checks,
+            approval: currentApproval,
+            outcome: journey.outcome,
+            recordedAt: "2026-08-17T18:30:00.000Z",
+          })
+        : null;
 
   return (
     <div className="journey-grid">
@@ -132,7 +152,7 @@ export function ReviewWorkspace({ contract }: { contract: OpportunityContract })
           </div>
           <div className="decision-surface-body">
             <div className="variant-tabs" role="group" aria-label="Activation variants">
-              {activationPackageFixture.variants.map((variant) => {
+              {activationPackage.variants.map((variant) => {
                 const variantPasses = policyChecksPass(evaluateActivationVariant(variant, evaluatedAt));
                 return (
                   <button
@@ -196,7 +216,7 @@ export function ReviewWorkspace({ contract }: { contract: OpportunityContract })
               type="button"
             >
               <Eye aria-hidden="true" size={15} />{" "}
-              {journey?.outcome ? "Result revealed" : "Reveal synthetic result"}
+              {journey?.outcome ? "Result revealed" : journey?.kind === "act" ? "Reveal monitored result" : "Reveal synthetic result"}
             </button>
           </div>
 

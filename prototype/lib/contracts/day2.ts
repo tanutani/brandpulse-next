@@ -155,6 +155,7 @@ export interface ApprovalRequest {
   currentContractVersion: number;
   checks: PolicyCheck[];
   decidedAt: string;
+  decision?: "approve_test" | "approve_activation";
 }
 
 export const SyntheticOutcomeSchema = z.object({
@@ -179,7 +180,42 @@ export const OutcomeEvaluationSchema = SyntheticOutcomeSchema.extend({
 
 export type OutcomeEvaluation = z.infer<typeof OutcomeEvaluationSchema>;
 
-export interface LearningLedgerEntry {
+export const MonitoredActivationPlanSchema = z.object({
+  schemaVersion: z.literal("1.0.0"),
+  id: z.string().min(1),
+  activationWindow: z.object({
+    start: z.iso.datetime({ offset: true }),
+    end: z.iso.datetime({ offset: true }),
+  }).strict(),
+  selectedScope: z.enum(PORTFOLIO_SCOPES),
+  channel: z.string().min(1),
+  descriptiveSuccessMetric: z.string().min(1),
+  inventoryServiceGuardrail: z.number().min(0).max(1),
+  backlashGuardrail: z.number().min(0).max(1),
+  stopRule: z.string().min(1),
+  approvalState: z.enum(["pending", "approved", "changes_requested"]),
+}).strict();
+
+export type MonitoredActivationPlan = z.infer<typeof MonitoredActivationPlanSchema>;
+
+export const MonitoredOutcomeSchema = z.object({
+  id: z.string().min(1),
+  activationPlanId: z.string().min(1),
+  observedAt: z.iso.datetime({ offset: true }),
+  successMetric: z.string().min(1),
+  observedValue: z.number(),
+  inventoryService: z.number().min(0).max(1),
+  backlashRate: z.number().min(0).max(1),
+  decision: z.enum(["continue", "pause", "complete"]),
+  reasonCodes: z.array(z.string()),
+  observationBasis: z.literal("descriptive_no_control"),
+  synthetic: z.literal(true),
+}).strict();
+
+export type MonitoredOutcome = z.infer<typeof MonitoredOutcomeSchema>;
+
+export interface CausalLearningLedgerEntry {
+  kind: "test";
   schemaVersion: "1.0.0";
   contractId: string;
   contractVersion: number;
@@ -193,25 +229,58 @@ export interface LearningLedgerEntry {
   recordedAt: string;
 }
 
-export const JourneyStateSchema = z.object({
-  storageVersion: z.literal("1.0.0"),
+export interface MonitoredLearningLedgerEntry {
+  kind: "act";
+  schemaVersion: "1.0.0";
+  contractId: string;
+  contractVersion: number;
+  hypothesis: string;
+  selectedBrandId: string;
+  activationPlan: MonitoredActivationPlan;
+  policyChecks: PolicyCheck[];
+  approval: HumanDecision;
+  outcome: MonitoredOutcome;
+  recordedAt: string;
+}
+
+export type LearningLedgerEntry = CausalLearningLedgerEntry | MonitoredLearningLedgerEntry;
+
+const JourneyCommonSchema = z.object({
+  storageVersion: z.literal("2.0.0"),
   contractId: z.string(),
   contractVersion: z.number().int().min(1),
   scope: z.enum(PORTFOLIO_SCOPES),
   assetMode: z.enum(ASSET_MODES),
   selectedBrandId: z.string(),
-  sprint: SprintRegistrationSchema.nullable(),
   selectedVariantId: z.string().nullable(),
   decisions: z.array(z.object({
     id: z.string(),
     actor: z.string(),
-    decision: z.enum(["approve_test", "request_changes", "watch", "reject", "override"]),
+    decision: z.enum(["approve_test", "approve_activation", "request_changes", "watch", "reject", "override"]),
     rationale: z.string().min(1),
     decidedAt: z.iso.datetime({ offset: true }),
     contractVersion: z.number().int().min(1),
   }).strict()),
+}).strict();
+
+export const TestJourneyStateSchema = JourneyCommonSchema.extend({
+  kind: z.literal("test"),
+  sprint: SprintRegistrationSchema.nullable(),
+  activationPlan: z.null(),
   outcome: OutcomeEvaluationSchema.nullable(),
 }).strict();
+
+export const ActJourneyStateSchema = JourneyCommonSchema.extend({
+  kind: z.literal("act"),
+  sprint: z.null(),
+  activationPlan: MonitoredActivationPlanSchema,
+  outcome: MonitoredOutcomeSchema.nullable(),
+}).strict();
+
+export const JourneyStateSchema = z.discriminatedUnion("kind", [
+  TestJourneyStateSchema,
+  ActJourneyStateSchema,
+]);
 
 export type JourneyState = z.infer<typeof JourneyStateSchema>;
 
@@ -222,5 +291,14 @@ export interface LedgerAssemblyInputs {
   policyChecks: PolicyCheck[];
   approval: HumanDecision;
   outcome: OutcomeEvaluation;
+  recordedAt: string;
+}
+
+export interface MonitoredLedgerAssemblyInputs {
+  contract: OpportunityContract;
+  activationPlan: MonitoredActivationPlan;
+  policyChecks: PolicyCheck[];
+  approval: HumanDecision;
+  outcome: MonitoredOutcome;
   recordedAt: string;
 }

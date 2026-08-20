@@ -1,9 +1,12 @@
 {
-  "fixtureVersion": "1.0.0",
+  "fixtureVersion": "2.0.0",
   "generatedAt": "2026-08-15T12:20:00.000Z",
   "disclosure": "Illustrative activation copy and rights states created for this competition demo; not approved HUL creative.",
-  "sprintId": "sprint-extra-time-four-city",
-  "variants": [
+  "packages": [
+    {
+      "opportunityId": "opp-extra-time-sweat-confidence",
+      "planId": "sprint-extra-time-four-city",
+      "variants": [
     {
       "id": "variant-match-footage-blocked",
       "label": "Match-reaction cut",
@@ -39,6 +42,50 @@
       "disclosure": "Synthetic availability · Competition demo",
       "inclusionSafe": true,
       "rightsExpiresAt": "2026-08-18T18:30:00.000Z"
+    }
+      ]
+    },
+    {
+      "opportunityId": "opp-surf-first-monsoon",
+      "planId": "activation-surf-first-monsoon",
+      "variants": [
+        {
+          "id": "variant-surf-muddy-play-blocked",
+          "label": "Uncleared muddy-play montage",
+          "channel": "paid_social",
+          "copy": "First rain. Biggest stains. Every stain disappears with Surf Excel.",
+          "usesMatchFootage": true,
+          "rightsStatus": "unavailable",
+          "claim": "guaranteed removal of all stains",
+          "disclosure": "",
+          "inclusionSafe": true,
+          "rightsExpiresAt": null
+        },
+        {
+          "id": "variant-surf-muddy-play-cleared",
+          "label": "Cleared creator muddy-play story",
+          "channel": "paid_social",
+          "copy": "Let the first rain make memories. We will take care of the muddy clothes.",
+          "usesMatchFootage": false,
+          "rightsStatus": "cleared_for_demo",
+          "claim": "stain removal when substantiated",
+          "disclosure": "#ad · Original creator content · Synthetic demo creative",
+          "inclusionSafe": true,
+          "rightsExpiresAt": "2026-08-17T18:30:00.000Z"
+        },
+        {
+          "id": "variant-surf-commerce-cleared",
+          "label": "Prepared-inventory commerce card",
+          "channel": "q_commerce",
+          "copy": "First-rain stains? Surf Excel is ready in selected in-stock demo cells.",
+          "usesMatchFootage": false,
+          "rightsStatus": "cleared_for_demo",
+          "claim": "availability in selected in-stock demo cells",
+          "disclosure": "Synthetic availability · Competition demo",
+          "inclusionSafe": true,
+          "rightsExpiresAt": "2026-08-17T18:30:00.000Z"
+        }
+      ]
     }
   ]
 }

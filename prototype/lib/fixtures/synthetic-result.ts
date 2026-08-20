@@ -1,5 +1,5 @@
 import fixture from "@/public/data/synthetic-results.json";
-import { SyntheticOutcomeSchema } from "@/lib/contracts";
+import { MonitoredOutcomeSchema, SyntheticOutcomeSchema } from "@/lib/contracts";
 
 export const heroSyntheticOutcome = SyntheticOutcomeSchema.parse({
   id: fixture.results[0].id,
@@ -11,5 +11,22 @@ export const heroSyntheticOutcome = SyntheticOutcomeSchema.parse({
   incrementalEffect: fixture.results[0].incrementalEffect,
   confidenceInterval: fixture.results[0].confidenceInterval,
   serviceLevelGuardrail: fixture.results[0].serviceLevelGuardrail,
+  synthetic: true,
+});
+
+const surf = fixture.results.find((result) => result.kind === "act");
+if (!surf || !("activationPlanId" in surf)) throw new Error("SURF_MONITORED_OUTCOME_MISSING");
+
+export const surfMonitoredOutcome = MonitoredOutcomeSchema.parse({
+  id: surf.id,
+  activationPlanId: surf.activationPlanId,
+  observedAt: surf.observedAt,
+  successMetric: surf.successMetric,
+  observedValue: surf.observedValue,
+  inventoryService: surf.inventoryService,
+  backlashRate: surf.backlashRate,
+  decision: surf.decision,
+  reasonCodes: surf.reasonCodes,
+  observationBasis: surf.observationBasis,
   synthetic: true,
 });

@@ -49,9 +49,10 @@ describe("Reset Demo storage boundary", () => {
     });
   });
 
-  it("owns exactly the three versioned keys the product writes", () => {
+  it("owns the active keys plus the one-time journey migration key", () => {
     expect([...BRANDPULSE_STORAGE_KEYS]).toEqual([
       "brandpulse-next:contracts:1.0.0",
+      "brandpulse-next:journey:2.0.0",
       "brandpulse-next:journey:1.0.0",
       "brandpulse-next:guide:1.0.0",
     ]);

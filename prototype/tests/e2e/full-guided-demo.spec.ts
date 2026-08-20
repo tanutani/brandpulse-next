@@ -7,7 +7,7 @@ async function runJourney(page: Page) {
   await page.goto(`/resolver/${hero}`);
   await page.getByRole("button", { name: "Four in-stock cities" }).click();
   await page.getByRole("button", { name: "Rights-safe creator" }).click();
-  await page.getByRole("link", { name: /Design the Causal Sprint/i }).click();
+  await page.getByRole("link", { name: /Design the bounded test/i }).click();
   await page.getByRole("button", { name: /Lock sprint rules/i }).click();
   await page.getByRole("link", { name: /Review activation package/i }).click();
   await page.getByRole("button", { name: /Creator-led pressure moment/i }).click();
@@ -26,8 +26,8 @@ test("cover leads to the Pulse Room and a persisted Learning Ledger without a ke
   await expect(page.getByText(/Not an official HUL product/i).first()).toBeVisible();
 
   // The cover is short: the primary action needs no scrolling.
-  await expect(page.getByRole("link", { name: /Open live decision room/i })).toBeInViewport();
-  await page.getByRole("link", { name: /Open live decision room/i }).click();
+  await expect(page.getByRole("link", { name: /Start Rexona guided demo/i })).toBeInViewport();
+  await page.getByRole("link", { name: /Start Rexona guided demo/i }).click();
 
   await expect(page.getByRole("heading", { name: "Pulse Room" })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Decision journey" })).toBeVisible();
@@ -100,7 +100,7 @@ test("mocked live Gemini mode is labelled as live", async ({ page }) => {
 
   // The deterministic route is unchanged by a live model answer.
   await page.getByRole("link", { name: /Extra-time sweat confidence/i }).click();
-  await expect(page.getByText("Readiness = min(68, 86, 76) = 68", { exact: true })).toBeVisible();
+  await expect(page.getByText("Readiness = min(68, 91, 63) = 63", { exact: true })).toBeVisible();
 });
 
 test("a failing synthesis endpoint never blocks the journey", async ({ page }) => {
@@ -122,7 +122,7 @@ test("national match footage stays blocked and four cities plus creator content 
   await page.getByRole("button", { name: "Four in-stock cities" }).click();
   await page.getByRole("button", { name: "Rights-safe creator" }).click();
   await expect(page.getByText("Bounded test ready")).toBeVisible();
-  await expect(page.getByRole("link", { name: /Design the Causal Sprint/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Design the bounded test/i })).toBeVisible();
 });
 
 test("RIGHTS-001 cannot be bypassed and results stay locked", async ({ page }) => {
@@ -145,5 +145,29 @@ test("RIGHTS-001 cannot be bypassed and results stay locked", async ({ page }) =
 
 test("the review screen refuses to start before the sprint is locked", async ({ page }) => {
   await page.goto(`/review/${hero}`);
-  await expect(page.getByRole("heading", { name: "Lock the Causal Sprint first" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Lock the bounded test first" })).toBeVisible();
+});
+
+test("Surf ACT requires restored rights, policy checks and human approval", async ({ page }) => {
+  const surf = "opp-surf-first-monsoon";
+  await page.goto(`/resolver/${surf}`);
+  await expect(page.getByText(/Act now — growth activation/i)).toBeVisible();
+
+  await page.getByRole("button", { name: "Remove rights clearance" }).click();
+  await expect(page.getByText(/Watch — gather evidence/i)).toBeVisible();
+  await expect(page.getByText("RIGHTS_CREATOR_PACKAGE_UNAVAILABLE", { exact: true })).toBeVisible();
+
+  await page.getByRole("button", { name: "Restore prepared package" }).click();
+  await page.getByRole("link", { name: /Review the activation/i }).click();
+  await expect(page.getByRole("button", { name: /Approve corrected variant/i })).toBeDisabled();
+
+  await page.getByRole("button", { name: /Cleared creator muddy-play story/i }).click();
+  await page.getByRole("button", { name: /Approve corrected variant/i }).click();
+  await page.getByRole("button", { name: /Reveal monitored result/i }).click();
+  await expect(page.getByText(/Descriptive only — no treatment\/control/i)).toBeVisible();
+
+  await page.reload();
+  await expect(page.getByText(/Descriptive only — no treatment\/control/i)).toBeVisible();
+  await page.goto(`/resolver/${hero}`);
+  await expect(page.getByText("Action constrained")).toBeVisible();
 });

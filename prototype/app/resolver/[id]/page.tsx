@@ -28,7 +28,7 @@ export default async function ResolverPage({ params }: { params: Promise<{ id: s
   return (
     <div className="shell-frame">
       <Link className="back-link" href={`/opportunities/${id}`}>
-        <ArrowLeft aria-hidden="true" size={15} /> Opportunity Contract
+        <ArrowLeft aria-hidden="true" size={15} /> Decision record
       </Link>
       <ScopeControl contract={contract} evaluatedAt={loadFixtureBundle().generatedAt} />
     </div>
