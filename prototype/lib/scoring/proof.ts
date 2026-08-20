@@ -26,6 +26,22 @@ export function calculateBaseProof(inputs: ProofInputs): number {
   );
 }
 
+/**
+ * True when a stored gate carries the real six weighted components rather than a
+ * single collapsed placeholder.
+ *
+ * Most checked-in assessments store one component whose value simply repeats the
+ * score. Those cannot be re-scored, because the six inputs behind them were never
+ * recorded. Callers that want to recompute must check this first: reading a named
+ * component off a collapsed set yields undefined, and undefined arithmetic
+ * silently clamps to zero rather than throwing.
+ */
+export function hasFullProofComponents(components: ComponentScore[]): boolean {
+  if (components.length !== COMPONENTS.length) return false;
+  const names = new Set(components.map(({ name }) => name));
+  return COMPONENTS.every((name) => names.has(name));
+}
+
 export function calculateProof(inputs: ProofInputs): ProofAssessment {
   const evidenceIds = [...new Set(inputs.evidence.map(({ id }) => id))].sort();
   const components: ComponentScore[] = COMPONENTS.map((name) => ({

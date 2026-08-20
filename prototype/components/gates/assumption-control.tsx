@@ -8,7 +8,7 @@ import { ScoreBar } from "@/components/gates/score-bar";
 import type { OpportunityContract, ProofInputs } from "@/lib/contracts";
 import { LocalContractStore } from "@/lib/persistence/local-contract-store";
 import { selectRoute } from "@/lib/routing/select-route";
-import { calculateProof } from "@/lib/scoring/proof";
+import { calculateProof, hasFullProofComponents } from "@/lib/scoring/proof";
 
 export function AssumptionControl({
   contract,
@@ -23,6 +23,13 @@ export function AssumptionControl({
   const [sourceConcentration, setSourceConcentration] = useState(0);
   const [storageReady, setStorageReady] = useState(false);
   const [persistenceAvailable, setPersistenceAvailable] = useState(true);
+
+  /**
+   * Re-scoring needs the six proof inputs. A collapsed assessment stores only its
+   * own total, so there is nothing to vary and the panel is hidden rather than
+   * shown computing on absent values.
+   */
+  const canRecompute = hasFullProofComponents(assessment.proof.components);
 
   const componentValues = useMemo(
     () => Object.fromEntries(assessment.proof.components.map(({ name, value }) => [name, value])),
@@ -78,7 +85,7 @@ export function AssumptionControl({
   }, [contract.contractId]);
 
   useEffect(() => {
-    if (!storageReady) return;
+    if (!storageReady || !canRecompute) return;
 
     try {
       const store = new LocalContractStore(window.localStorage);
@@ -122,7 +129,9 @@ export function AssumptionControl({
     } catch {
       // The deterministic route remains usable even when browser storage is unavailable.
     }
-  }, [assessment.brandId, contract, decision.readiness, decision.reasonCodes, decision.route, proof, sourceConcentration, storageReady]);
+  }, [assessment.brandId, canRecompute, contract, decision.readiness, decision.reasonCodes, decision.route, proof, sourceConcentration, storageReady]);
+
+  if (!canRecompute) return null;
 
   return (
     <details className="detail-disclosure">
