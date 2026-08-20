@@ -88,6 +88,36 @@ describe("derived contracts", () => {
     }
   });
 
+  it("exercises every route the router can return", () => {
+    // Before the catalogue was extended, only test, incubate and ignore appeared,
+    // so act_now and watch were reachable in code and never demonstrated.
+    const routes = new Set(
+      loadFixtureBundle().contracts.map((contract) => contract.recommendedRoute),
+    );
+
+    expect([...routes].sort()).toEqual(["act_now", "ignore", "incubate", "test", "watch"]);
+  });
+
+  it("lets the portfolio conflict penalty decide the owner, not raw brand fit", () => {
+    // Pond's scores higher than Lakmé on every raw permission component and still
+    // loses, because it is already running an overlapping campaign.
+    const contract = loadFixtureBundle().contracts.find(
+      ({ opportunity }) => opportunity.id === "opp-beauty-ownership-conflict",
+    )!;
+    const lakme = contract.brandAssessments.find(({ brandId }) => brandId === "lakme")!;
+    const ponds = contract.brandAssessments.find(({ brandId }) => brandId === "ponds")!;
+
+    const rawTotal = (assessment: typeof lakme) =>
+      assessment.permission.components.reduce(
+        (sum, component) => sum + component.value * component.weight,
+        0,
+      );
+
+    expect(rawTotal(ponds)).toBeGreaterThan(rawTotal(lakme));
+    expect(ponds.permission.score).toBeLessThan(lakme.permission.score);
+    expect(contract.selectedBrandId).toBe("lakme");
+  });
+
   it("reports route reason codes the router actually emits", () => {
     // The hand-authored fixture carried invented codes such as
     // REXONA_PERMISSION_STRONGEST that no branch of selectRoute can produce, and

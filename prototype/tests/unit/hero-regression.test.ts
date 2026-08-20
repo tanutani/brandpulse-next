@@ -17,20 +17,32 @@ import { hasFullProofComponents } from "@/lib/scoring/proof";
 const HERO = "opp-extra-time-sweat-confidence";
 const evaluatedAt = loadFixtureBundle().generatedAt;
 
+/** The catalogue this file was written to protect, before it was extended. */
+const ORIGINAL_IDS = [
+  HERO,
+  "opp-scalp-skinification",
+  "opp-single-creator-cooling-challenge",
+];
+
 describe("hero journey (locked before the contract-source refactor)", () => {
-  it("keeps every stored gate score across every contract and brand", () => {
-    const snapshot = loadFixtureBundle().contracts.flatMap((contract) =>
-      contract.brandAssessments.map((assessment) =>
-        [
-          contract.opportunity.id,
-          assessment.brandId,
-          assessment.proof.score,
-          assessment.permission.score,
-          assessment.preparedness.score,
-          assessment.readiness,
-        ].join(":"),
-      ),
-    );
+  it("keeps every stored gate score across the original contracts", () => {
+    // Scoped to the three use cases that existed before the catalogue grew. This
+    // guards the journeys already captured in screenshots and rehearsal; adding a
+    // new case must not require editing it.
+    const snapshot = loadFixtureBundle()
+      .contracts.filter(({ opportunity }) => ORIGINAL_IDS.includes(opportunity.id))
+      .flatMap((contract) =>
+        contract.brandAssessments.map((assessment) =>
+          [
+            contract.opportunity.id,
+            assessment.brandId,
+            assessment.proof.score,
+            assessment.permission.score,
+            assessment.preparedness.score,
+            assessment.readiness,
+          ].join(":"),
+        ),
+      );
 
     // Permission and Preparedness for the hero moved deliberately when contracts
     // started deriving from the same brand inputs the resolver uses. Before the
@@ -54,10 +66,10 @@ describe("hero journey (locked before the contract-source refactor)", () => {
     ]);
   });
 
-  it("keeps the recommended route of each contract", () => {
-    const routes = loadFixtureBundle().contracts.map(
-      (contract) => `${contract.opportunity.id}:${contract.recommendedRoute}`,
-    );
+  it("keeps the recommended route of each original contract", () => {
+    const routes = loadFixtureBundle()
+      .contracts.filter(({ opportunity }) => ORIGINAL_IDS.includes(opportunity.id))
+      .map((contract) => `${contract.opportunity.id}:${contract.recommendedRoute}`);
 
     // The hero now opens on Watch, which is what national scope plus unlicensed
     // match footage actually earns and what the landing page already claimed.

@@ -35,8 +35,10 @@ export default function PulseRoomPage() {
         <div>
           <h1>Pulse Room</h1>
           <p>
-            Signal arrives, evidence is grouped and challenged, then one decision moves forward. The
-            Rexona window is the live journey; the other two show what the router rejects and defers.
+            Signal arrives, evidence is grouped and challenged, then one decision moves forward.
+            Nine signals, five different answers — act, test, incubate, watch, ignore. The Rexona
+            window is the guided journey; the rest show the answers the same rules return when the
+            evidence, the brand fit or the supply chain will not support acting.
           </p>
         </div>
       </header>
