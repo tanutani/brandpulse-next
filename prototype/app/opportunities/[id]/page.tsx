@@ -8,6 +8,9 @@ import { RouteBadge } from "@/components/gates/route-badge";
 import { ScoreBar } from "@/components/gates/score-bar";
 import { NextActionLink } from "@/components/shell/next-action-link";
 import { buildFallbackSynthesis } from "@/lib/agents/fallback";
+import brandMemory from "@/public/data/brand-memory.json";
+import { MemoryYieldPanel } from "@/components/metrics/memory-yield-panel";
+import { ShareOfSearchPanel } from "@/components/metrics/share-of-search-panel";
 import { HERO_OPPORTUNITY_ID, isPlayableOpportunity } from "@/lib/demo/journey";
 import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
 import { createHeroPortfolioCandidates } from "@/lib/portfolio/hero-portfolio";
@@ -56,6 +59,10 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
           remediation: blocker.remediation,
         }))
     : [];
+
+  // Brand memory is a global configuration, so every brand it covers counts as
+  // a brand whose claims the organisation already knows.
+  const knownClaimBrandIds = brandMemory.brands.map(({ id }) => id);
 
   const support = contract.opportunity.evidence.filter(({ stance }) => stance !== "contradict");
   const against = contract.opportunity.evidence.filter(({ stance }) => stance === "contradict");
@@ -139,6 +146,10 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
           {isHero ? (
             <AssumptionControl contract={contract} evaluatedAt={loadFixtureBundle().generatedAt} />
           ) : null}
+
+          <MemoryYieldPanel contract={contract} knownClaimBrandIds={knownClaimBrandIds} />
+
+          {isHero ? <ShareOfSearchPanel category="deodorants" /> : null}
         </div>
 
         <div className="stack">

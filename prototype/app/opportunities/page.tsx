@@ -29,6 +29,10 @@ export default function PulseRoomPage() {
     };
   });
 
+  // Counted rather than written down, so the heading cannot drift out of step
+  // with the catalogue the way the previous "three signals" copy did.
+  const routeCount = new Set(opportunities.map(({ route }) => route)).size;
+
   return (
     <div className="shell-frame">
       <header className="page-head">
@@ -36,9 +40,9 @@ export default function PulseRoomPage() {
           <h1>Pulse Room</h1>
           <p>
             Signal arrives, evidence is grouped and challenged, then one decision moves forward.
-            Nine signals, five different answers — act, test, incubate, watch, ignore. The Rexona
-            window is the guided journey; the rest show the answers the same rules return when the
-            evidence, the brand fit or the supply chain will not support acting.
+            The same rules return act, test, incubate, watch or ignore. The Rexona window is the
+            guided journey; the rest show what those rules answer when the evidence, the brand fit
+            or the supply chain will not support acting.
           </p>
         </div>
       </header>
@@ -62,7 +66,9 @@ export default function PulseRoomPage() {
             <div className="section-head">
               <div>
                 <p className="section-kicker">Open decisions</p>
-                <h2 id="open-decisions-title">Three signals, three different answers</h2>
+                <h2 id="open-decisions-title">
+                  {opportunities.length} signals, {routeCount} different answers
+                </h2>
               </div>
             </div>
             <OpportunityList opportunities={opportunities} />

@@ -766,6 +766,74 @@ p { margin: 0; }
   color: var(--ink-muted); font-size: 12.5px; line-height: 1.55;
 }
 
+/* =============================================================================
+   Validation model — parameter catalogue and the two scored indicators
+   ========================================================================== */
+
+.provenance-tag {
+  display: inline-block; margin-left: 6px; padding: 1px 6px;
+  border-radius: var(--radius-pill); font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle;
+}
+.provenance-tag.is-grounded { background: var(--state-public-evidence-fill); color: var(--state-public-evidence); }
+.provenance-tag.is-proposed { background: var(--state-model-inference-fill); color: var(--state-model-inference); }
+.provenance-tag.is-scored-tag { background: var(--state-success-fill); color: var(--state-success); }
+.provenance-tag.is-spec-tag { background: var(--surface-muted); color: var(--ink-muted); }
+
+.parameter-list { display: grid; gap: var(--s2); margin: var(--s3) 0 0; padding: 0; list-style: none; }
+.parameter-list > li {
+  padding: var(--s2) var(--s3); border-left: 2px solid var(--line);
+  background: var(--surface-muted); border-radius: var(--radius-sm);
+}
+/* A scored parameter is the exception, so it carries the accent. */
+.parameter-list > li.is-scored { border-left-color: var(--state-success); background: var(--surface); }
+.parameter-name { display: block; font-size: 13px; font-weight: 650; }
+.parameter-question { display: block; margin-top: 2px; color: var(--ink-muted); font-size: 12px; }
+.parameter-reason { display: block; margin-top: 4px; color: var(--ink-muted); font-size: 11.5px; font-style: italic; }
+
+.citation-apa { font-size: 12px; line-height: 1.5; text-indent: -18px; padding-left: 18px; }
+
+/* Share of search */
+.sos-list { display: grid; gap: var(--s2); margin: var(--s4) 0 0; padding: 0; list-style: none; }
+.sos-row { display: grid; grid-template-columns: 128px minmax(0, 1fr) 92px; gap: var(--s3); align-items: center; }
+.sos-brand { font-size: 13px; font-weight: 600; }
+.sos-bar { height: 8px; border-radius: var(--radius-pill); background: var(--surface-muted); overflow: hidden; }
+.sos-bar > span { display: block; height: 100%; border-radius: var(--radius-pill); background: var(--ink-muted); }
+.sos-row.is-rising .sos-bar > span { background: var(--state-success); }
+.sos-row.is-falling .sos-bar > span { background: var(--block-red); }
+.sos-value { text-align: right; font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.sos-value small {
+  display: flex; align-items: center; justify-content: flex-end; gap: 2px; margin-top: 1px;
+  color: var(--ink-muted); font-family: var(--font-ui); font-size: 10.5px; font-weight: 650;
+}
+.sos-row.is-rising .sos-value small { color: var(--state-success); }
+.sos-row.is-falling .sos-value small { color: var(--block-red); }
+
+/* Brand memory yield */
+.memory-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); margin: var(--s4) 0; }
+.memory-figure {
+  padding: var(--s3); border: 1px solid var(--glass-line); border-radius: var(--radius-sm);
+  background: linear-gradient(var(--glass-tint), var(--glass-tint)), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+}
+.memory-figure.is-muted { border-color: var(--line); background: var(--surface-muted); }
+.memory-figure strong { display: block; font-family: var(--font-mono); font-size: 22px; font-variant-numeric: tabular-nums; }
+.memory-figure.is-muted strong { color: var(--ink-muted); }
+.memory-figure span { display: block; margin-top: 2px; color: var(--ink-muted); font-size: 11.5px; }
+
+.memory-question-list { display: grid; gap: var(--s2); margin: var(--s4) 0 0; padding: 0; list-style: none; }
+.memory-question-list > li {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: var(--s2); align-items: start;
+  padding: var(--s2) var(--s3); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); background: var(--surface);
+}
+.memory-question-list > li.is-open { background: var(--surface-muted); }
+.memory-mark { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: var(--radius-pill); }
+.memory-question-list > li.is-answered .memory-mark { background: var(--state-success-fill); color: var(--state-success); }
+.memory-question-list > li.is-open .memory-mark { background: var(--surface); color: var(--ink-muted); }
+.memory-question-list strong { display: block; font-size: 12.5px; font-weight: 650; }
+.memory-detail { display: block; margin-top: 2px; color: var(--ink-muted); font-size: 11.5px; }
+
 .control-group { display: grid; gap: var(--s2); }
 .control-group > legend { padding: 0; color: var(--ink-muted); font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 fieldset { margin: 0; padding: 0; border: 0; }

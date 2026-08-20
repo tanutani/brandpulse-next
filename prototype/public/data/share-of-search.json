@@ -1,0 +1,72 @@
+{
+  "fixtureVersion": "share-of-search-1.0.0",
+  "generatedAt": "2026-08-15T08:30:00.000Z",
+  "disclosure": "Google Trends style weekly interest indices for a demonstration category. Index values are invented for this prototype and are labelled synthetic; the method and its published basis are real.",
+  "method": {
+    "citationId": "binet-2020",
+    "leadTimeMonths": [6, 12],
+    "flatBandPp": 0.5,
+    "note": "Share of organic branded search tracks market share and tends to lead it. The lead time is a property of the published research across categories, not a forecast about any brand shown here."
+  },
+  "series": [
+    {
+      "category": "deodorants",
+      "geography": "India",
+      "evidenceType": "synthetic_internal",
+      "synthetic": true,
+      "displayLabel": "Synthetic HUL-like Data",
+      "sourceUrl": "https://trends.google.com/trends/explore?date=today%203-m&geo=IN&q=deodorant",
+      "capturedAt": "2026-08-15T08:00:00.000Z",
+      "brands": [
+        {
+          "brandId": "rexona",
+          "points": [
+            { "weekStarting": "2026-06-01", "index": 38 },
+            { "weekStarting": "2026-06-08", "index": 39 },
+            { "weekStarting": "2026-06-15", "index": 37 },
+            { "weekStarting": "2026-06-22", "index": 40 },
+            { "weekStarting": "2026-06-29", "index": 41 },
+            { "weekStarting": "2026-07-06", "index": 43 },
+            { "weekStarting": "2026-07-13", "index": 42 },
+            { "weekStarting": "2026-07-20", "index": 45 },
+            { "weekStarting": "2026-07-27", "index": 46 },
+            { "weekStarting": "2026-08-03", "index": 47 },
+            { "weekStarting": "2026-08-10", "index": 49 }
+          ]
+        },
+        {
+          "brandId": "axe",
+          "points": [
+            { "weekStarting": "2026-06-01", "index": 31 },
+            { "weekStarting": "2026-06-08", "index": 30 },
+            { "weekStarting": "2026-06-15", "index": 32 },
+            { "weekStarting": "2026-06-22", "index": 30 },
+            { "weekStarting": "2026-06-29", "index": 29 },
+            { "weekStarting": "2026-07-06", "index": 29 },
+            { "weekStarting": "2026-07-13", "index": 28 },
+            { "weekStarting": "2026-07-20", "index": 28 },
+            { "weekStarting": "2026-07-27", "index": 27 },
+            { "weekStarting": "2026-08-03", "index": 26 },
+            { "weekStarting": "2026-08-10", "index": 26 }
+          ]
+        },
+        {
+          "brandId": "other-category",
+          "points": [
+            { "weekStarting": "2026-06-01", "index": 31 },
+            { "weekStarting": "2026-06-08", "index": 31 },
+            { "weekStarting": "2026-06-15", "index": 31 },
+            { "weekStarting": "2026-06-22", "index": 30 },
+            { "weekStarting": "2026-06-29", "index": 30 },
+            { "weekStarting": "2026-07-06", "index": 28 },
+            { "weekStarting": "2026-07-13", "index": 30 },
+            { "weekStarting": "2026-07-20", "index": 27 },
+            { "weekStarting": "2026-07-27", "index": 27 },
+            { "weekStarting": "2026-08-03", "index": 27 },
+            { "weekStarting": "2026-08-10", "index": 25 }
+          ]
+        }
+      ]
+    }
+  ]
+}
