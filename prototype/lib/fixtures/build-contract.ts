@@ -89,6 +89,8 @@ export function buildContract(source: UseCaseSource): OpportunityContract {
     selectedBrandId: source.selectedBrandId,
     brandAssessments: assessed.map(({ assessment }) => assessment),
     recommendedRoute: selected.decision.route,
+    actionMode: source.actionMode,
+    portfolioContext: source.portfolioContext,
     routeReasonCodes: selected.decision.reasonCodes,
     assumptions: source.assumptions,
     causalSprint: source.causalSprint ?? null,

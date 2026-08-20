@@ -57,23 +57,23 @@
       ]
     },
     {
-      "opportunityId": "opp-festive-handwash-moment",
-      "headline": "Prior-year conversion in this window may be the promotional calendar rather than the occasion.",
+      "opportunityId": "opp-surf-first-monsoon",
+      "headline": "The weather can explain the demand movement without the activation explaining any of it.",
       "challenges": [
         {
-          "claim": "Festive windows are also discount windows, so last year's conversion cannot separate the occasion from the price that ran alongside it.",
-          "wouldChangeDecisionIf": "Prior-year conversion holds after adjusting for promotional depth.",
-          "evidenceIds": ["sig-festive-commerce"]
+          "claim": "First rain, muddy play and laundry demand share a calendar, so their co-movement does not establish that the proposed activation adds value.",
+          "wouldChangeDecisionIf": "The monitored response exceeds the recent rain-adjusted baseline.",
+          "evidenceIds": ["sig-monsoon-weather", "sig-monsoon-commerce"]
         },
         {
           "claim": "Being ready is not the same as being needed; readiness records establish that the brand can act, not that acting will change anything.",
-          "wouldChangeDecisionIf": "Matched unexposed cells show lower offtake than exposed ones.",
-          "evidenceIds": ["sig-festive-readiness"]
+          "wouldChangeDecisionIf": "The descriptive success metric moves without breaching service or backlash guardrails.",
+          "evidenceIds": ["sig-monsoon-rights"]
         },
         {
-          "claim": "A search pattern that repeats every year is predictable rather than informative, so it may add no decision value over simply running the window as planned.",
-          "wouldChangeDecisionIf": "This year's search deviates measurably from the seasonal norm.",
-          "evidenceIds": ["sig-festive-search"]
+          "claim": "Muddy-play storytelling may fit Surf Excel but still feel opportunistic if the first-monsoon conversation is already saturated.",
+          "wouldChangeDecisionIf": "The monitored backlash rate remains below the pre-declared stop rule.",
+          "evidenceIds": ["sig-monsoon-social", "sig-monsoon-search"]
         }
       ]
     },
@@ -152,7 +152,7 @@
         {
           "claim": "The cited litigation concerned a competitor's comparative advertising, so it establishes that this territory is contested rather than that any particular claim would fail.",
           "wouldChangeDecisionIf": "Legal review assesses a specific proposed claim rather than the category in general.",
-          "evidenceIds": ["sig-ph-precedent"]
+          "evidenceIds": ["sig-ph-appeal-2021", "sig-ph-interim-2022"]
         },
         {
           "claim": "Substantiating a claim takes long enough that the discourse may have moved on before the work completes, making this a durable trend that is nonetheless never actionable.",

@@ -31,6 +31,8 @@ const fixedPreparedness =
 export const scalpSkinification: UseCaseSource = {
   contractId: "contract-scalp-skinification",
   version: 1,
+  actionMode: "monitor",
+  portfolioContext: "hul_current",
   evaluatedAt: "2026-08-15T08:30:00.000Z",
   storedScope: "national",
   storedAssetMode: "rights_safe_creator",

@@ -32,6 +32,8 @@ const byScope =
 export const heatwaveQcommerce: UseCaseSource = {
   contractId: "contract-heatwave-qcommerce-spike",
   version: 1,
+  actionMode: "bounded_test",
+  portfolioContext: "kwil_ecosystem",
   evaluatedAt: "2026-08-15T08:30:00.000Z",
   storedScope: "four_city",
   storedAssetMode: "rights_safe_creator",
@@ -209,6 +211,17 @@ export const heatwaveQcommerce: UseCaseSource = {
   ],
 
   assumptions: [
+    {
+      label: "Portfolio context",
+      value:
+        "KWIL / wider portfolio ecosystem scenario outside current HUL ownership after the ice-cream business demerger became effective on 1 December 2025",
+      evidenceType: "business_assumption",
+    },
+    {
+      label: "Demerger source",
+      value: "HUL Integrated Annual Report 2025-26 — https://www.hul.co.in/files/annual-report-2025-26.pdf",
+      evidenceType: "business_assumption",
+    },
     {
       label: "Stored scope",
       value: "four_city — the cells whose days-cover can serve the created demand",

@@ -34,6 +34,8 @@ const claimConstrained =
 export const phCleanserDiscourse: UseCaseSource = {
   contractId: "contract-ph-cleanser-discourse",
   version: 1,
+  actionMode: "capability_build",
+  portfolioContext: "hul_current",
   evaluatedAt: "2026-08-15T08:30:00.000Z",
   storedScope: "national",
   storedAssetMode: "rights_safe_creator",
@@ -69,14 +71,24 @@ export const phCleanserDiscourse: UseCaseSource = {
         capturedAt: "2026-08-15T08:08:00.000Z",
       },
       {
-        id: "sig-ph-precedent",
+        id: "sig-ph-appeal-2021",
         stance: "contradict",
         claim:
-          "Public court record: in Hindustan Unilever Ltd & Anr v. USV Private Limited (Bombay High Court, 21 January 2021), comparative pH advertising naming Dove, Lux and Pears was the subject of injunction proceedings, and the advertising was later restrained as disparaging. Comparative pH claims in this category carry documented litigation exposure.",
+          "The Bombay High Court appeal order dated 21 January 2021 permitted parts of the comparison to continue, subject to restrictions. It was an interlocutory order, not a final merits judgment.",
         evidenceType: "public",
         freshness: "aging",
         sourceUrl: "https://indiankanoon.org/doc/183690875/",
         capturedAt: "2026-08-15T08:12:00.000Z",
+      },
+      {
+        id: "sig-ph-interim-2022",
+        stance: "contradict",
+        claim:
+          "The Bombay High Court interim decision dated 16 June 2022 restrained the impugned comparative campaign pending the suit. It did not finally decide the suit on its merits.",
+        evidenceType: "public",
+        freshness: "aging",
+        sourceUrl: "https://indiankanoon.org/doc/102784225/",
+        capturedAt: "2026-08-15T08:13:00.000Z",
       },
       {
         id: "sig-ph-consumer",
@@ -196,6 +208,11 @@ export const phCleanserDiscourse: UseCaseSource = {
     {
       label: "Litigation precedent is cited from the public record, not from HUL counsel",
       value: true,
+      evidenceType: "business_assumption",
+    },
+    {
+      label: "Claims capability instruction",
+      value: "Incubate — blocked on claims; build substantiation and legal-review capability before activation",
       evidenceType: "business_assumption",
     },
     {

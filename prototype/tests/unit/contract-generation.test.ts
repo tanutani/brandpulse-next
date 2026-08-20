@@ -127,6 +127,38 @@ describe("derived contracts", () => {
     expect([...routes].sort()).toEqual(["act_now", "ignore", "incubate", "test", "watch"]);
   });
 
+  it("keeps exactly nine opportunities and assigns operational action semantics", () => {
+    const contracts = loadFixtureBundle().contracts;
+    expect(contracts).toHaveLength(9);
+    expect(contracts.find(({ opportunity }) => opportunity.id === "opp-surf-first-monsoon")).toMatchObject({
+      selectedBrandId: "surf-excel",
+      recommendedRoute: "act_now",
+      actionMode: "growth_activation",
+      portfolioContext: "hul_current",
+    });
+    expect(contracts.find(({ opportunity }) => opportunity.id === "opp-ingredient-misinformation")).toMatchObject({
+      selectedBrandId: "lifebuoy",
+      recommendedRoute: "act_now",
+      actionMode: "defensive_response",
+    });
+    expect(contracts.find(({ opportunity }) => opportunity.id === "opp-heatwave-qcommerce-spike")).toMatchObject({
+      recommendedRoute: "test",
+      portfolioContext: "kwil_ecosystem",
+    });
+    expect(contracts.find(({ opportunity }) => opportunity.id === "opp-ph-cleanser-discourse")).toMatchObject({
+      recommendedRoute: "incubate",
+      actionMode: "capability_build",
+    });
+  });
+
+  it("downgrades Surf from Act to Watch when creator rights are removed", () => {
+    const source = USE_CASE_SOURCES.find(({ opportunity }) => opportunity.id === "opp-surf-first-monsoon")!;
+    const changed = buildContract({ ...source, storedAssetMode: "unlicensed_match_footage" });
+    expect(changed.recommendedRoute).toBe("watch");
+    expect(changed.routeReasonCodes).toContain("RIGHTS_CREATOR_PACKAGE_UNAVAILABLE");
+    expect(buildContract(source).recommendedRoute).toBe("act_now");
+  });
+
   it("lets the portfolio conflict penalty decide the owner, not raw brand fit", () => {
     // Pond's scores higher than Lakmé on every raw permission component and still
     // loses, because it is already running an overlapping campaign.

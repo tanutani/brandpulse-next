@@ -31,6 +31,8 @@ const respondReady = (brandId: string): PreparednessFor => () => ({
 export const ingredientMisinformation: UseCaseSource = {
   contractId: "contract-ingredient-misinformation",
   version: 1,
+  actionMode: "defensive_response",
+  portfolioContext: "hul_current",
   evaluatedAt: "2026-08-15T08:30:00.000Z",
   storedScope: "national",
   storedAssetMode: "rights_safe_creator",

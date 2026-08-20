@@ -1,6 +1,6 @@
 import { beautyOwnershipConflict } from "@/lib/fixtures/source/beauty-ownership-conflict";
 import { coolingChallenge } from "@/lib/fixtures/source/cooling-challenge";
-import { festiveHandwashMoment } from "@/lib/fixtures/source/festive-handwash-moment";
+import { surfMonsoonMoment } from "@/lib/fixtures/source/surf-monsoon-moment";
 import { heatwaveQcommerce } from "@/lib/fixtures/source/heatwave-qcommerce";
 import { heroExtraTime } from "@/lib/fixtures/source/hero-extra-time";
 import { ingredientMisinformation } from "@/lib/fixtures/source/ingredient-misinformation";
@@ -18,7 +18,7 @@ import type { UseCaseSource } from "@/lib/fixtures/source/types";
  */
 export const USE_CASE_SOURCES: UseCaseSource[] = [
   heroExtraTime,
-  festiveHandwashMoment,
+  surfMonsoonMoment,
   ingredientMisinformation,
   heatwaveQcommerce,
   beautyOwnershipConflict,

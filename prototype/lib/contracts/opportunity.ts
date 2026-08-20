@@ -2,9 +2,22 @@ import { z } from "zod";
 
 import { EVIDENCE_TYPES, FRESHNESS_STATES, ROUTES } from "./enums";
 
+export const ACTION_MODES = [
+  "growth_activation",
+  "defensive_response",
+  "bounded_test",
+  "capability_build",
+  "monitor",
+  "no_action",
+] as const;
+
+export const PORTFOLIO_CONTEXTS = ["hul_current", "kwil_ecosystem"] as const;
+
 export const EvidenceTypeSchema = z.enum(EVIDENCE_TYPES);
 export const FreshnessSchema = z.enum(FRESHNESS_STATES);
 export const RouteSchema = z.enum(ROUTES);
+export const ActionModeSchema = z.enum(ACTION_MODES);
+export const PortfolioContextSchema = z.enum(PORTFOLIO_CONTEXTS);
 
 export const ComponentScoreSchema = z
   .object({
@@ -89,7 +102,7 @@ export const HumanDecisionSchema = z
   .object({
     id: z.string(),
     actor: z.string(),
-    decision: z.enum(["approve_test", "request_changes", "watch", "reject", "override"]),
+    decision: z.enum(["approve_test", "approve_activation", "request_changes", "watch", "reject", "override"]),
     rationale: z.string().min(1),
     decidedAt: z.iso.datetime({ offset: true }),
     contractVersion: z.number().int().min(1),
@@ -114,6 +127,8 @@ export const OpportunityContractSchema = z
     selectedBrandId: z.string().nullable().optional(),
     brandAssessments: z.array(BrandAssessmentSchema).min(3),
     recommendedRoute: RouteSchema,
+    actionMode: ActionModeSchema,
+    portfolioContext: PortfolioContextSchema,
     routeReasonCodes: z.array(z.string()).min(1),
     assumptions: z.array(AssumptionSchema),
     causalSprint: CausalSprintSchema.nullable().optional(),
@@ -131,3 +146,5 @@ export type BrandAssessment = z.infer<typeof BrandAssessmentSchema>;
 export type CausalSprint = z.infer<typeof CausalSprintSchema>;
 export type HumanDecision = z.infer<typeof HumanDecisionSchema>;
 export type OpportunityContract = z.infer<typeof OpportunityContractSchema>;
+export type ActionMode = z.infer<typeof ActionModeSchema>;
+export type PortfolioContext = z.infer<typeof PortfolioContextSchema>;

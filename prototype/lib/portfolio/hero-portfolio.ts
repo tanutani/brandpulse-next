@@ -58,7 +58,7 @@ export function createPortfolioCandidates(
  * The resolver has to open on the same state the contract screen showed, or the
  * route changes the moment a viewer arrives and it looks like the controls moved
  * on their own. Different use cases start in different states: the Rexona
- * journey opens unresolved, the festive case opens already cleared.
+ * journey opens unresolved, the Surf case opens already cleared.
  */
 export function getStoredSelection(opportunityId: string): {
   scope: PortfolioScope;

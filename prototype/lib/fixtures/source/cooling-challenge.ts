@@ -30,6 +30,8 @@ const nationalPreparedness =
 export const coolingChallenge: UseCaseSource = {
   contractId: "contract-single-creator-cooling-challenge",
   version: 1,
+  actionMode: "no_action",
+  portfolioContext: "hul_current",
   evaluatedAt: "2026-08-15T08:30:00.000Z",
   storedScope: "national",
   storedAssetMode: "rights_safe_creator",

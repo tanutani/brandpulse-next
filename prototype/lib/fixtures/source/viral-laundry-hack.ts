@@ -28,6 +28,8 @@ const readyEverywhere = (evidenceId: string): PreparednessFor => () => ({
 export const viralLaundryHack: UseCaseSource = {
   contractId: "contract-viral-laundry-hack",
   version: 1,
+  actionMode: "monitor",
+  portfolioContext: "hul_current",
   evaluatedAt: "2026-08-15T08:30:00.000Z",
   storedScope: "national",
   storedAssetMode: "rights_safe_creator",

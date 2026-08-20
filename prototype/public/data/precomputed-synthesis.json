@@ -68,27 +68,27 @@
       "missingEvidence": ["Independent source-family corroboration", "Evidence of category behaviour"]
     },
     {
-      "opportunityId": "opp-festive-handwash-moment",
-      "summary": "A dated festive window is corroborated by search, news and prior-year commerce, and the operating record shows stock, rights and claim substantiation were all completed before the window opened. Nothing in this evidence is waiting on a decision that has not already been made.",
+      "opportunityId": "opp-surf-first-monsoon",
+      "summary": "The first-monsoon window is corroborated by weather, search, social and invented aggregate commerce evidence. Prepared inventory, cleared creator rights and existing stain-removal claim support make this a growth activation ready for human approval.",
       "themes": [
         {
-          "label": "The window is dated, not inferred",
-          "evidenceIds": ["sig-festive-search", "sig-festive-news"]
+          "label": "The weather window is dated",
+          "evidenceIds": ["sig-monsoon-weather", "sig-monsoon-search"]
         },
         {
-          "label": "It converted before, not just trended",
-          "evidenceIds": ["sig-festive-commerce"]
+          "label": "Attention progresses toward purchase",
+          "evidenceIds": ["sig-monsoon-social", "sig-monsoon-commerce"]
         },
         {
           "label": "Readiness was earned in advance",
-          "evidenceIds": ["sig-festive-readiness"]
+          "evidenceIds": ["sig-monsoon-rights"]
         }
       ],
       "counterHypothesis": {
-        "claim": "Prior-year conversion in the same window may reflect the promotional calendar rather than the occasion, in which case the window is a discount effect wearing an occasion's clothes.",
-        "evidenceIds": ["sig-festive-commerce"]
+        "claim": "Rain and stain-removal search can rise together without the activation changing demand; preparedness establishes permission to act, not incremental impact.",
+        "evidenceIds": ["sig-monsoon-weather", "sig-monsoon-commerce"]
       },
-      "missingEvidence": ["Promotion-adjusted baseline for the same window", "Incrementality against unexposed cells"]
+      "missingEvidence": ["Post-activation descriptive response against the recent baseline", "Backlash and service guardrail observations"]
     },
     {
       "opportunityId": "opp-ingredient-misinformation",
@@ -161,7 +161,7 @@
     },
     {
       "opportunityId": "opp-ph-cleanser-discourse",
-      "summary": "Cleanser pH scrutiny persists across three months and two independent source families, and consumer language describes ingredient checking before purchase. The public court record shows that comparative pH claims in this category have previously been restrained, so the constraint is substantiation rather than evidence.",
+      "summary": "Cleanser pH scrutiny persists across three months and two independent source families. A 21 January 2021 appeal order permitted parts of the comparison with restrictions; a 16 June 2022 interim decision later restrained the impugned campaign pending the suit. Neither is presented as a final merits judgment, so the action is claims capability-building.",
       "themes": [
         {
           "label": "Persistent, not a spike",
@@ -173,7 +173,7 @@
         },
         {
           "label": "Comparative claims carry documented exposure",
-          "evidenceIds": ["sig-ph-precedent"]
+          "evidenceIds": ["sig-ph-appeal-2021", "sig-ph-interim-2022"]
         }
       ],
       "counterHypothesis": {

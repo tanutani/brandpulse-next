@@ -1,5 +1,6 @@
 import type {
   Assumption,
+  ActionMode,
   AssetMode,
   CausalSprint,
   DecisionBlocker,
@@ -7,6 +8,7 @@ import type {
   Opportunity,
   PermissionInputs,
   PortfolioScope,
+  PortfolioContext,
   PreparednessInputs,
   ProofInputs,
 } from "@/lib/contracts";
@@ -66,6 +68,8 @@ export type BrandSourceTriple = [BrandSource, BrandSource, BrandSource, ...Brand
 export interface UseCaseSource {
   contractId: string;
   version: number;
+  actionMode: ActionMode;
+  portfolioContext: PortfolioContext;
   /** Evidence is authored literally here, including sourceUrl and capturedAt. */
   opportunity: Opportunity;
   /**

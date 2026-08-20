@@ -730,6 +730,8 @@
         }
       ],
       "recommendedRoute": "watch",
+      "actionMode": "bounded_test",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "REMEDIABLE_BLOCKER_REQUIRES_REMEDIATION",
         "RIGHTS_MATCH_FOOTAGE_UNAVAILABLE"
@@ -792,133 +794,148 @@
     },
     {
       "schemaVersion": "1.0.0",
-      "contractId": "contract-festive-handwash-moment",
+      "contractId": "contract-surf-first-monsoon",
       "version": 1,
       "opportunity": {
-        "id": "opp-festive-handwash-moment",
-        "title": "Festive gathering hygiene moment",
-        "hypothesis": "A dated festive gathering window creates a shared-food hygiene occasion the brand is already cleared to serve.",
+        "id": "opp-surf-first-monsoon",
+        "title": "First-monsoon muddy-play moment",
+        "hypothesis": "The first widespread monsoon rain creates a short muddy-play and stain-removal occasion that Surf Excel is already prepared to serve.",
         "signalClass": "live_moment",
-        "usefulUntil": "2026-08-17T15:30:00.000Z",
+        "usefulUntil": "2026-08-17T18:30:00.000Z",
         "evidence": [
           {
-            "id": "sig-festive-search",
+            "id": "sig-monsoon-weather",
             "stance": "support",
-            "claim": "A dated public search snapshot shows the festive hygiene query pattern repeating on schedule.",
+            "claim": "A dated IMD weather snapshot shows the first widespread monsoon rain across target markets.",
             "evidenceType": "public",
             "freshness": "live",
-            "sourceUrl": "https://trends.google.com/trends/explore?date=now%207-d&geo=IN&q=handwash",
+            "sourceUrl": "https://mausam.imd.gov.in/",
             "capturedAt": "2026-08-15T08:00:00.000Z"
           },
           {
-            "id": "sig-festive-news",
+            "id": "sig-monsoon-search",
             "stance": "support",
-            "claim": "A dated public news-index snapshot confirms the gathering window and its dates.",
+            "claim": "A dated public search snapshot shows muddy-clothes and stain-removal queries rising with the rain.",
             "evidenceType": "public",
             "freshness": "live",
-            "sourceUrl": "https://api.gdeltproject.org/api/v2/doc/doc?query=festival%20gathering%20india&mode=artlist&format=html",
-            "capturedAt": "2026-08-15T08:05:00.000Z"
+            "sourceUrl": "https://trends.google.com/trends/explore?date=now%207-d&geo=IN&q=mud%20stain%20removal",
+            "capturedAt": "2026-08-15T08:04:00.000Z"
           },
           {
-            "id": "sig-festive-commerce",
+            "id": "sig-monsoon-social",
             "stance": "support",
-            "claim": "Invented aggregate commerce records show the same window converting in prior years, not just attracting attention.",
+            "claim": "A dated public social-video search shows muddy outdoor play diffusing beyond one creator.",
+            "evidenceType": "public",
+            "freshness": "live",
+            "sourceUrl": "https://www.youtube.com/results?search_query=first+monsoon+muddy+play+india",
+            "capturedAt": "2026-08-15T08:08:00.000Z"
+          },
+          {
+            "id": "sig-monsoon-commerce",
+            "stance": "support",
+            "claim": "Invented aggregate commerce records show stain-removal searches progressing to laundry purchases.",
             "evidenceType": "synthetic_internal",
             "freshness": "live",
             "sourceUrl": null,
-            "capturedAt": "2026-08-15T08:09:00.000Z",
+            "capturedAt": "2026-08-15T08:12:00.000Z",
             "synthetic": true
           },
           {
-            "id": "sig-festive-readiness",
+            "id": "sig-monsoon-rights",
             "stance": "support",
-            "claim": "Invented aggregate operating records show stock built to forecast and creative rights cleared before the window opened.",
+            "claim": "Invented aggregate operating records show prepared inventory, cleared creator rights, and an existing substantiated stain-removal claim.",
             "evidenceType": "synthetic_internal",
             "freshness": "live",
             "sourceUrl": null,
-            "capturedAt": "2026-08-15T08:13:00.000Z",
+            "capturedAt": "2026-08-15T08:16:00.000Z",
             "synthetic": true
           }
         ]
       },
-      "selectedBrandId": "lifebuoy",
+      "selectedBrandId": "surf-excel",
       "brandAssessments": [
         {
-          "brandId": "lifebuoy",
+          "brandId": "surf-excel",
           "proof": {
             "gate": "proof",
-            "score": 81,
+            "score": 83,
             "components": [
               {
                 "name": "persistence",
                 "value": 82,
                 "weight": 0.2,
                 "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
                 ]
               },
               {
                 "name": "independentCorroboration",
-                "value": 84,
+                "value": 88,
                 "weight": 0.2,
                 "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
                 ]
               },
               {
                 "name": "behavioralProgression",
-                "value": 80,
+                "value": 82,
                 "weight": 0.2,
                 "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
                 ]
               },
               {
                 "name": "diffusion",
-                "value": 78,
+                "value": 80,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
                 ]
               },
               {
                 "name": "commercialSignal",
-                "value": 78,
+                "value": 80,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
                 ]
               },
               {
                 "name": "freshnessQuality",
-                "value": 90,
+                "value": 92,
                 "weight": 0.1,
                 "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
                 ]
               }
             ],
             "blockers": [],
             "rulesetVersion": "p3-1.0.0",
-            "baseScore": 82,
+            "baseScore": 84,
             "penalties": [
               {
                 "code": "SOURCE_CONCENTRATION",
@@ -936,201 +953,213 @@
           },
           "permission": {
             "gate": "permission",
-            "score": 88,
+            "score": 92,
             "components": [
               {
                 "name": "brandMeaning",
-                "value": 94,
+                "value": 96,
                 "weight": 0.25,
                 "evidenceIds": [
-                  "brand-memory-lifebuoy"
+                  "brand-memory-surf-excel"
                 ]
               },
               {
                 "name": "audienceOverlap",
-                "value": 90,
+                "value": 92,
                 "weight": 0.2,
                 "evidenceIds": [
-                  "brand-memory-lifebuoy"
+                  "brand-memory-surf-excel"
                 ]
               },
               {
                 "name": "distinctiveAssetFit",
+                "value": 94,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "brand-memory-surf-excel"
+                ]
+              },
+              {
+                "name": "historicalCredibility",
+                "value": 94,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "brand-memory-surf-excel"
+                ]
+              },
+              {
+                "name": "portfolioDistinctiveness",
+                "value": 88,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "brand-memory-surf-excel"
+                ]
+              },
+              {
+                "name": "culturalClaimsSafety",
+                "value": 82,
+                "weight": 0.1,
+                "evidenceIds": [
+                  "brand-memory-surf-excel"
+                ]
+              }
+            ],
+            "blockers": [],
+            "rulesetVersion": "p3-1.0.0"
+          },
+          "preparedness": {
+            "gate": "preparedness",
+            "score": 85,
+            "components": [
+              {
+                "name": "productClaimAvailability",
+                "value": 88,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "inv-surf-excel-national",
+                  "brand-memory-surf-excel",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "inventoryService",
+                "value": 87,
+                "weight": 0.25,
+                "evidenceIds": [
+                  "inv-surf-excel-national",
+                  "brand-memory-surf-excel",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "channelCoverage",
+                "value": 82,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "inv-surf-excel-national",
+                  "brand-memory-surf-excel",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "creatorAgencyReadiness",
                 "value": 86,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "brand-memory-lifebuoy"
+                  "inv-surf-excel-national",
+                  "brand-memory-surf-excel",
+                  "sig-monsoon-rights"
                 ]
               },
               {
-                "name": "historicalCredibility",
+                "name": "rightsLegalApproval",
+                "value": 82,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "inv-surf-excel-national",
+                  "brand-memory-surf-excel",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "measurementReadiness",
+                "value": 84,
+                "weight": 0.1,
+                "evidenceIds": [
+                  "inv-surf-excel-national",
+                  "brand-memory-surf-excel",
+                  "sig-monsoon-rights"
+                ]
+              }
+            ],
+            "blockers": [],
+            "rulesetVersion": "p3-1.0.0"
+          },
+          "readiness": 83,
+          "portfolioConflicts": []
+        },
+        {
+          "brandId": "rin",
+          "proof": {
+            "gate": "proof",
+            "score": 83,
+            "components": [
+              {
+                "name": "persistence",
+                "value": 82,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "independentCorroboration",
+                "value": 88,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "behavioralProgression",
+                "value": 82,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "diffusion",
+                "value": 80,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "commercialSignal",
+                "value": 80,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "freshnessQuality",
                 "value": 92,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "brand-memory-lifebuoy"
-                ]
-              },
-              {
-                "name": "portfolioDistinctiveness",
-                "value": 82,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "brand-memory-lifebuoy"
-                ]
-              },
-              {
-                "name": "culturalClaimsSafety",
-                "value": 75,
                 "weight": 0.1,
                 "evidenceIds": [
-                  "brand-memory-lifebuoy"
-                ]
-              }
-            ],
-            "blockers": [],
-            "rulesetVersion": "p3-1.0.0"
-          },
-          "preparedness": {
-            "gate": "preparedness",
-            "score": 85,
-            "components": [
-              {
-                "name": "productClaimAvailability",
-                "value": 90,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "inv-lifebuoy-national",
-                  "brand-memory-lifebuoy"
-                ]
-              },
-              {
-                "name": "inventoryService",
-                "value": 88,
-                "weight": 0.25,
-                "evidenceIds": [
-                  "inv-lifebuoy-national",
-                  "brand-memory-lifebuoy"
-                ]
-              },
-              {
-                "name": "channelCoverage",
-                "value": 82,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "inv-lifebuoy-national",
-                  "brand-memory-lifebuoy"
-                ]
-              },
-              {
-                "name": "creatorAgencyReadiness",
-                "value": 84,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "inv-lifebuoy-national",
-                  "brand-memory-lifebuoy"
-                ]
-              },
-              {
-                "name": "rightsLegalApproval",
-                "value": 75,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "inv-lifebuoy-national",
-                  "brand-memory-lifebuoy"
-                ]
-              },
-              {
-                "name": "measurementReadiness",
-                "value": 88,
-                "weight": 0.1,
-                "evidenceIds": [
-                  "inv-lifebuoy-national",
-                  "brand-memory-lifebuoy"
-                ]
-              }
-            ],
-            "blockers": [],
-            "rulesetVersion": "p3-1.0.0"
-          },
-          "readiness": 81,
-          "portfolioConflicts": []
-        },
-        {
-          "brandId": "lux",
-          "proof": {
-            "gate": "proof",
-            "score": 81,
-            "components": [
-              {
-                "name": "persistence",
-                "value": 82,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "independentCorroboration",
-                "value": 84,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "behavioralProgression",
-                "value": 80,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "diffusion",
-                "value": 78,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "commercialSignal",
-                "value": 78,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "freshnessQuality",
-                "value": 90,
-                "weight": 0.1,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
                 ]
               }
             ],
             "blockers": [],
             "rulesetVersion": "p3-1.0.0",
-            "baseScore": 82,
+            "baseScore": 84,
             "penalties": [
               {
                 "code": "SOURCE_CONCENTRATION",
@@ -1148,250 +1177,262 @@
           },
           "permission": {
             "gate": "permission",
-            "score": 79,
+            "score": 76,
             "components": [
               {
                 "name": "brandMeaning",
-                "value": 82,
+                "value": 78,
                 "weight": 0.25,
                 "evidenceIds": [
-                  "brand-memory-lux"
+                  "brand-memory-rin"
                 ]
               },
               {
                 "name": "audienceOverlap",
-                "value": 80,
+                "value": 82,
                 "weight": 0.2,
                 "evidenceIds": [
-                  "brand-memory-lux"
+                  "brand-memory-rin"
                 ]
               },
               {
                 "name": "distinctiveAssetFit",
-                "value": 78,
+                "value": 70,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "brand-memory-lux"
+                  "brand-memory-rin"
                 ]
               },
               {
                 "name": "historicalCredibility",
-                "value": 80,
+                "value": 76,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "brand-memory-lux"
+                  "brand-memory-rin"
                 ]
               },
               {
                 "name": "portfolioDistinctiveness",
-                "value": 74,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "brand-memory-lux"
-                ]
-              },
-              {
-                "name": "culturalClaimsSafety",
-                "value": 77,
-                "weight": 0.1,
-                "evidenceIds": [
-                  "brand-memory-lux"
-                ]
-              }
-            ],
-            "blockers": [],
-            "rulesetVersion": "p3-1.0.0"
-          },
-          "preparedness": {
-            "gate": "preparedness",
-            "score": 85,
-            "components": [
-              {
-                "name": "productClaimAvailability",
-                "value": 90,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "inv-lux-national",
-                  "brand-memory-lux"
-                ]
-              },
-              {
-                "name": "inventoryService",
-                "value": 88,
-                "weight": 0.25,
-                "evidenceIds": [
-                  "inv-lux-national",
-                  "brand-memory-lux"
-                ]
-              },
-              {
-                "name": "channelCoverage",
-                "value": 82,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "inv-lux-national",
-                  "brand-memory-lux"
-                ]
-              },
-              {
-                "name": "creatorAgencyReadiness",
-                "value": 84,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "inv-lux-national",
-                  "brand-memory-lux"
-                ]
-              },
-              {
-                "name": "rightsLegalApproval",
-                "value": 75,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "inv-lux-national",
-                  "brand-memory-lux"
-                ]
-              },
-              {
-                "name": "measurementReadiness",
-                "value": 88,
-                "weight": 0.1,
-                "evidenceIds": [
-                  "inv-lux-national",
-                  "brand-memory-lux"
-                ]
-              }
-            ],
-            "blockers": [],
-            "rulesetVersion": "p3-1.0.0"
-          },
-          "readiness": 79,
-          "portfolioConflicts": []
-        },
-        {
-          "brandId": "pears",
-          "proof": {
-            "gate": "proof",
-            "score": 81,
-            "components": [
-              {
-                "name": "persistence",
-                "value": 82,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "independentCorroboration",
-                "value": 84,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "behavioralProgression",
-                "value": 80,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "diffusion",
-                "value": 78,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "commercialSignal",
-                "value": 78,
-                "weight": 0.15,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              },
-              {
-                "name": "freshnessQuality",
-                "value": 90,
-                "weight": 0.1,
-                "evidenceIds": [
-                  "sig-festive-commerce",
-                  "sig-festive-news",
-                  "sig-festive-readiness",
-                  "sig-festive-search"
-                ]
-              }
-            ],
-            "blockers": [],
-            "rulesetVersion": "p3-1.0.0",
-            "baseScore": 82,
-            "penalties": [
-              {
-                "code": "SOURCE_CONCENTRATION",
-                "normalizedRisk": 4,
-                "cap": 20,
-                "points": 0.8
-              },
-              {
-                "code": "MANIPULATION_RISK",
-                "normalizedRisk": 0,
-                "cap": 25,
-                "points": 0
-              }
-            ]
-          },
-          "permission": {
-            "gate": "permission",
-            "score": 74,
-            "components": [
-              {
-                "name": "brandMeaning",
-                "value": 76,
-                "weight": 0.25,
-                "evidenceIds": [
-                  "brand-memory-pears"
-                ]
-              },
-              {
-                "name": "audienceOverlap",
-                "value": 74,
-                "weight": 0.2,
-                "evidenceIds": [
-                  "brand-memory-pears"
-                ]
-              },
-              {
-                "name": "distinctiveAssetFit",
                 "value": 72,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "brand-memory-pears"
+                  "brand-memory-rin"
+                ]
+              },
+              {
+                "name": "culturalClaimsSafety",
+                "value": 78,
+                "weight": 0.1,
+                "evidenceIds": [
+                  "brand-memory-rin"
+                ]
+              }
+            ],
+            "blockers": [],
+            "rulesetVersion": "p3-1.0.0"
+          },
+          "preparedness": {
+            "gate": "preparedness",
+            "score": 85,
+            "components": [
+              {
+                "name": "productClaimAvailability",
+                "value": 88,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "inv-rin-national",
+                  "brand-memory-rin",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "inventoryService",
+                "value": 87,
+                "weight": 0.25,
+                "evidenceIds": [
+                  "inv-rin-national",
+                  "brand-memory-rin",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "channelCoverage",
+                "value": 82,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "inv-rin-national",
+                  "brand-memory-rin",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "creatorAgencyReadiness",
+                "value": 86,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "inv-rin-national",
+                  "brand-memory-rin",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "rightsLegalApproval",
+                "value": 82,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "inv-rin-national",
+                  "brand-memory-rin",
+                  "sig-monsoon-rights"
+                ]
+              },
+              {
+                "name": "measurementReadiness",
+                "value": 84,
+                "weight": 0.1,
+                "evidenceIds": [
+                  "inv-rin-national",
+                  "brand-memory-rin",
+                  "sig-monsoon-rights"
+                ]
+              }
+            ],
+            "blockers": [],
+            "rulesetVersion": "p3-1.0.0"
+          },
+          "readiness": 76,
+          "portfolioConflicts": []
+        },
+        {
+          "brandId": "comfort",
+          "proof": {
+            "gate": "proof",
+            "score": 83,
+            "components": [
+              {
+                "name": "persistence",
+                "value": 82,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "independentCorroboration",
+                "value": 88,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "behavioralProgression",
+                "value": 82,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "diffusion",
+                "value": 80,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "commercialSignal",
+                "value": 80,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              },
+              {
+                "name": "freshnessQuality",
+                "value": 92,
+                "weight": 0.1,
+                "evidenceIds": [
+                  "sig-monsoon-commerce",
+                  "sig-monsoon-rights",
+                  "sig-monsoon-search",
+                  "sig-monsoon-social",
+                  "sig-monsoon-weather"
+                ]
+              }
+            ],
+            "blockers": [],
+            "rulesetVersion": "p3-1.0.0",
+            "baseScore": 84,
+            "penalties": [
+              {
+                "code": "SOURCE_CONCENTRATION",
+                "normalizedRisk": 4,
+                "cap": 20,
+                "points": 0.8
+              },
+              {
+                "code": "MANIPULATION_RISK",
+                "normalizedRisk": 0,
+                "cap": 25,
+                "points": 0
+              }
+            ]
+          },
+          "permission": {
+            "gate": "permission",
+            "score": 68,
+            "components": [
+              {
+                "name": "brandMeaning",
+                "value": 62,
+                "weight": 0.25,
+                "evidenceIds": [
+                  "brand-memory-comfort"
+                ]
+              },
+              {
+                "name": "audienceOverlap",
+                "value": 74,
+                "weight": 0.2,
+                "evidenceIds": [
+                  "brand-memory-comfort"
+                ]
+              },
+              {
+                "name": "distinctiveAssetFit",
+                "value": 64,
+                "weight": 0.15,
+                "evidenceIds": [
+                  "brand-memory-comfort"
                 ]
               },
               {
                 "name": "historicalCredibility",
-                "value": 76,
+                "value": 66,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "brand-memory-pears"
+                  "brand-memory-comfort"
                 ]
               },
               {
@@ -1399,15 +1440,15 @@
                 "value": 70,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "brand-memory-pears"
+                  "brand-memory-comfort"
                 ]
               },
               {
                 "name": "culturalClaimsSafety",
-                "value": 75,
+                "value": 80,
                 "weight": 0.1,
                 "evidenceIds": [
-                  "brand-memory-pears"
+                  "brand-memory-comfort"
                 ]
               }
             ],
@@ -1420,20 +1461,22 @@
             "components": [
               {
                 "name": "productClaimAvailability",
-                "value": 90,
+                "value": 88,
                 "weight": 0.2,
                 "evidenceIds": [
-                  "inv-pears-national",
-                  "brand-memory-pears"
+                  "inv-comfort-national",
+                  "brand-memory-comfort",
+                  "sig-monsoon-rights"
                 ]
               },
               {
                 "name": "inventoryService",
-                "value": 88,
+                "value": 87,
                 "weight": 0.25,
                 "evidenceIds": [
-                  "inv-pears-national",
-                  "brand-memory-pears"
+                  "inv-comfort-national",
+                  "brand-memory-comfort",
+                  "sig-monsoon-rights"
                 ]
               },
               {
@@ -1441,46 +1484,52 @@
                 "value": 82,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "inv-pears-national",
-                  "brand-memory-pears"
+                  "inv-comfort-national",
+                  "brand-memory-comfort",
+                  "sig-monsoon-rights"
                 ]
               },
               {
                 "name": "creatorAgencyReadiness",
-                "value": 84,
+                "value": 86,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "inv-pears-national",
-                  "brand-memory-pears"
+                  "inv-comfort-national",
+                  "brand-memory-comfort",
+                  "sig-monsoon-rights"
                 ]
               },
               {
                 "name": "rightsLegalApproval",
-                "value": 75,
+                "value": 82,
                 "weight": 0.15,
                 "evidenceIds": [
-                  "inv-pears-national",
-                  "brand-memory-pears"
+                  "inv-comfort-national",
+                  "brand-memory-comfort",
+                  "sig-monsoon-rights"
                 ]
               },
               {
                 "name": "measurementReadiness",
-                "value": 88,
+                "value": 84,
                 "weight": 0.1,
                 "evidenceIds": [
-                  "inv-pears-national",
-                  "brand-memory-pears"
+                  "inv-comfort-national",
+                  "brand-memory-comfort",
+                  "sig-monsoon-rights"
                 ]
               }
             ],
             "blockers": [],
             "rulesetVersion": "p3-1.0.0"
           },
-          "readiness": 74,
+          "readiness": 68,
           "portfolioConflicts": []
         }
       ],
       "recommendedRoute": "act_now",
+      "actionMode": "growth_activation",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "ACT_NOW_THRESHOLDS_MET",
         "LIVE_WINDOW_WITHIN_72_HOURS"
@@ -1488,12 +1537,12 @@
       "assumptions": [
         {
           "label": "Why this one can Act",
-          "value": "Stock, rights and claim substantiation were all completed before the window opened",
+          "value": "Inventory, creator rights and stain-removal claim support were completed before the weather window opened",
           "evidenceType": "business_assumption"
         },
         {
-          "label": "Act still requires human approval",
-          "value": "Nothing is published by the system under any route",
+          "label": "Activation boundary",
+          "value": "A human maker-checker decision is required; the system never publishes",
           "evidenceType": "business_assumption"
         },
         {
@@ -2178,6 +2227,8 @@
         }
       ],
       "recommendedRoute": "act_now",
+      "actionMode": "defensive_response",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "ACT_NOW_THRESHOLDS_MET",
         "LIVE_WINDOW_WITHIN_72_HOURS"
@@ -2930,10 +2981,22 @@
         }
       ],
       "recommendedRoute": "test",
+      "actionMode": "bounded_test",
+      "portfolioContext": "kwil_ecosystem",
       "routeReasonCodes": [
         "TEST_THRESHOLDS_MET"
       ],
       "assumptions": [
+        {
+          "label": "Portfolio context",
+          "value": "KWIL / wider portfolio ecosystem scenario outside current HUL ownership after the ice-cream business demerger became effective on 1 December 2025",
+          "evidenceType": "business_assumption"
+        },
+        {
+          "label": "Demerger source",
+          "value": "HUL Integrated Annual Report 2025-26 — https://www.hul.co.in/files/annual-report-2025-26.pdf",
+          "evidenceType": "business_assumption"
+        },
         {
           "label": "Stored scope",
           "value": "four_city — the cells whose days-cover can serve the created demand",
@@ -3631,6 +3694,8 @@
         }
       ],
       "recommendedRoute": "test",
+      "actionMode": "bounded_test",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "TEST_THRESHOLDS_MET"
       ],
@@ -3685,13 +3750,22 @@
             "capturedAt": "2026-08-15T08:08:00.000Z"
           },
           {
-            "id": "sig-ph-precedent",
+            "id": "sig-ph-appeal-2021",
             "stance": "contradict",
-            "claim": "Public court record: in Hindustan Unilever Ltd & Anr v. USV Private Limited (Bombay High Court, 21 January 2021), comparative pH advertising naming Dove, Lux and Pears was the subject of injunction proceedings, and the advertising was later restrained as disparaging. Comparative pH claims in this category carry documented litigation exposure.",
+            "claim": "The Bombay High Court appeal order dated 21 January 2021 permitted parts of the comparison to continue, subject to restrictions. It was an interlocutory order, not a final merits judgment.",
             "evidenceType": "public",
             "freshness": "aging",
             "sourceUrl": "https://indiankanoon.org/doc/183690875/",
             "capturedAt": "2026-08-15T08:12:00.000Z"
+          },
+          {
+            "id": "sig-ph-interim-2022",
+            "stance": "contradict",
+            "claim": "The Bombay High Court interim decision dated 16 June 2022 restrained the impugned comparative campaign pending the suit. It did not finally decide the suit on its merits.",
+            "evidenceType": "public",
+            "freshness": "aging",
+            "sourceUrl": "https://indiankanoon.org/doc/102784225/",
+            "capturedAt": "2026-08-15T08:13:00.000Z"
           },
           {
             "id": "sig-ph-consumer",
@@ -3718,9 +3792,10 @@
                 "value": 86,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3729,9 +3804,10 @@
                 "value": 84,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3740,9 +3816,10 @@
                 "value": 72,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3751,9 +3828,10 @@
                 "value": 78,
                 "weight": 0.15,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3762,9 +3840,10 @@
                 "value": 62,
                 "weight": 0.15,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3773,9 +3852,10 @@
                 "value": 80,
                 "weight": 0.1,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               }
@@ -3926,9 +4006,10 @@
                 "value": 86,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3937,9 +4018,10 @@
                 "value": 84,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3948,9 +4030,10 @@
                 "value": 72,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3959,9 +4042,10 @@
                 "value": 78,
                 "weight": 0.15,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3970,9 +4054,10 @@
                 "value": 62,
                 "weight": 0.15,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -3981,9 +4066,10 @@
                 "value": 80,
                 "weight": 0.1,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               }
@@ -4134,9 +4220,10 @@
                 "value": 86,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -4145,9 +4232,10 @@
                 "value": 84,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -4156,9 +4244,10 @@
                 "value": 72,
                 "weight": 0.2,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -4167,9 +4256,10 @@
                 "value": 78,
                 "weight": 0.15,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -4178,9 +4268,10 @@
                 "value": 62,
                 "weight": 0.15,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               },
@@ -4189,9 +4280,10 @@
                 "value": 80,
                 "weight": 0.1,
                 "evidenceIds": [
+                  "sig-ph-appeal-2021",
                   "sig-ph-consumer",
+                  "sig-ph-interim-2022",
                   "sig-ph-news",
-                  "sig-ph-precedent",
                   "sig-ph-search"
                 ]
               }
@@ -4333,6 +4425,8 @@
         }
       ],
       "recommendedRoute": "incubate",
+      "actionMode": "capability_build",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "DURABLE_TREND_NEEDS_CAPABILITY"
       ],
@@ -4345,6 +4439,11 @@
         {
           "label": "Litigation precedent is cited from the public record, not from HUL counsel",
           "value": true,
+          "evidenceType": "business_assumption"
+        },
+        {
+          "label": "Claims capability instruction",
+          "value": "Incubate — blocked on claims; build substantiation and legal-review capability before activation",
           "evidenceType": "business_assumption"
         },
         {
@@ -5008,6 +5107,8 @@
         }
       ],
       "recommendedRoute": "watch",
+      "actionMode": "monitor",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "REMEDIABLE_BLOCKER_REQUIRES_REMEDIATION",
         "SCALP_CLAIM_NOT_SUBSTANTIATED"
@@ -5701,6 +5802,8 @@
         }
       ],
       "recommendedRoute": "watch",
+      "actionMode": "monitor",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "PROOF_NEEDS_MORE_EVIDENCE",
         "PERMISSION_NEEDS_REVIEW"
@@ -6380,6 +6483,8 @@
         }
       ],
       "recommendedRoute": "ignore",
+      "actionMode": "no_action",
+      "portfolioContext": "hul_current",
       "routeReasonCodes": [
         "PROOF_BELOW_IGNORE_THRESHOLD"
       ],

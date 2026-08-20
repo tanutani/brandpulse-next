@@ -38,6 +38,8 @@ export const minimalOpportunityContract = OpportunityContractSchema.parse({
     portfolioConflicts: [],
   })),
   recommendedRoute: "watch",
+  actionMode: "monitor",
+  portfolioContext: "hul_current",
   routeReasonCodes: ["INSUFFICIENT_EVIDENCE"],
   assumptions: [
     {

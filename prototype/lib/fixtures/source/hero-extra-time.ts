@@ -63,6 +63,8 @@ const preparednessFor =
 export const heroExtraTime: UseCaseSource = {
   contractId: "contract-extra-time-sweat-confidence",
   version: 1,
+  actionMode: "bounded_test",
+  portfolioContext: "hul_current",
   evaluatedAt: "2026-08-15T08:30:00.000Z",
   storedScope: "national",
   storedAssetMode: "unlicensed_match_footage",
