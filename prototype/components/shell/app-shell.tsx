@@ -21,10 +21,10 @@ const EMPTY_PROGRESS: JourneyProgress = {
 };
 
 const WORKSPACE_LABELS: Array<[RegExp, string]> = [
-  [/^\/opportunities\/.+/, "Opportunity Contract"],
+  [/^\/opportunities\/.+/, "Decision record"],
   [/^\/opportunities$/, "Pulse Room"],
-  [/^\/resolver\//, "Portfolio Resolver"],
-  [/^\/sprint\//, "Causal Sprint"],
+  [/^\/resolver\//, "Ownership view"],
+  [/^\/sprint\//, "Bounded test"],
   [/^\/review\//, "Activation Review"],
 ];
 

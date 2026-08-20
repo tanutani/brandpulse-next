@@ -57,7 +57,7 @@ test("keyboard users can reach the primary action and see focus", async ({ page 
   await page.keyboard.press("Tab");
 
   // Walk the tab order until the primary call to action takes focus.
-  const target = page.getByRole("link", { name: /Open live decision room/i });
+  const target = page.getByRole("link", { name: /Start Rexona guided demo/i });
   for (let step = 0; step < 20 && !(await target.evaluate((node) => node === document.activeElement)); step += 1) {
     await page.keyboard.press("Tab");
   }

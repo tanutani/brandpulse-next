@@ -2,10 +2,11 @@
 
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 import { RouteBadge } from "@/components/gates/route-badge";
 import { useGuide } from "@/components/guide/guide-provider";
-import type { Route } from "@/lib/contracts";
+import type { ActionMode, Route } from "@/lib/contracts";
 
 export interface OpportunitySummary {
   id: string;
@@ -14,28 +15,39 @@ export interface OpportunitySummary {
   evidenceCount: number;
   weakestGate: string;
   route: Route;
-  primary: boolean;
+  actionMode: ActionMode;
+  primary: "guided" | "act" | null;
 }
 
 export function OpportunityList({ opportunities }: { opportunities: OpportunitySummary[] }) {
   const guide = useGuide();
+  const [filter, setFilter] = useState<Route | "all">("all");
+  const visible = filter === "all" ? opportunities : opportunities.filter(({ route }) => route === filter);
 
   return (
-    <div className="opportunity-list">
-      {opportunities.map((opportunity) => (
+    <>
+      <div className="route-filters" role="group" aria-label="Filter opportunities by route">
+        {(["all", "act_now", "test", "incubate", "watch", "ignore"] as const).map((route) => (
+          <button aria-pressed={filter === route} key={route} onClick={() => setFilter(route)} type="button">
+            {route === "all" ? "All" : route.replaceAll("_", " ")}
+          </button>
+        ))}
+      </div>
+      <div className="opportunity-list" aria-live="polite">
+      {visible.map((opportunity) => (
         <Link
           className={`opportunity-row${opportunity.primary ? " is-primary" : ""}`}
-          data-guide-anchor={opportunity.primary ? "open-hero" : undefined}
+          data-guide-anchor={opportunity.primary === "guided" ? "open-hero" : undefined}
           href={`/opportunities/${opportunity.id}`}
           key={opportunity.id}
           onClick={() => {
-            if (opportunity.primary) guide.completeAction("open-hero");
+            if (opportunity.primary === "guided") guide.completeAction("open-hero");
           }}
         >
           <span>
             {opportunity.primary ? (
               <span className="primary-tag">
-                <Star aria-hidden="true" size={11} /> Primary journey
+                <Star aria-hidden="true" size={11} /> {opportunity.primary === "guided" ? "Guided journey" : "ACT decision"}
               </span>
             ) : null}
             <strong>{opportunity.title}</strong>
@@ -46,13 +58,14 @@ export function OpportunityList({ opportunities }: { opportunities: OpportunityS
             </span>
           </span>
           <span style={{ display: "grid", gap: 6, justifyItems: "end" }}>
-            <RouteBadge route={opportunity.route} />
+            <RouteBadge route={opportunity.route} actionMode={opportunity.actionMode} />
             <span className="muted small" style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
               Open <ArrowRight aria-hidden="true" size={13} />
             </span>
           </span>
         </Link>
       ))}
-    </div>
+      </div>
+    </>
   );
 }

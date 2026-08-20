@@ -48,6 +48,8 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
     contract.brandAssessments[0];
   const weakest = getWeakestGate(assessment.proof, assessment.permission, assessment.preparedness);
   const isHero = id === HERO_OPPORTUNITY_ID;
+  const isKwil = contract.portfolioContext === "kwil_ecosystem";
+  const isPhClaimsCase = id === "opp-ph-cleanser-discourse";
 
   // The blockers that apply at national scope with match footage, for "Ask why?".
   const nationalBlockers = isHero
@@ -79,15 +81,37 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
             <div className="decision-surface-head">
               <div>
                 <p>
-                  Opportunity Contract · v{contract.version} ·{" "}
+                  Decision record · v{contract.version} ·{" "}
                   {contract.opportunity.signalClass.replaceAll("_", " ")}
                 </p>
                 <h2>{contract.opportunity.title}</h2>
               </div>
-              <RouteBadge route={contract.recommendedRoute} />
+              <RouteBadge route={contract.recommendedRoute} actionMode={contract.actionMode} />
             </div>
             <div className="decision-surface-body">
               <p className="hypothesis-line">{contract.opportunity.hypothesis}</p>
+
+              {isKwil ? (
+                <div className="context-disclosure" role="note">
+                  <strong>KWIL / wider portfolio ecosystem scenario — outside current HUL ownership</strong>
+                  <p>
+                    The ice-cream business demerger became effective on 1 December 2025. Kwality Wall&apos;s,
+                    Cornetto and Magnum are not presented here as current HUL brands.
+                  </p>
+                  <a href="https://www.hul.co.in/files/annual-report-2025-26.pdf" target="_blank" rel="noreferrer">
+                    HUL Integrated Annual Report 2025–26 <ExternalLink aria-hidden="true" size={11} />
+                  </a>
+                </div>
+              ) : null}
+
+              {isPhClaimsCase ? (
+                <div className="blocker-alert" role="note">
+                  <div>
+                    <strong>Incubate — blocked on claims</strong>
+                    <p>Build comparative substantiation and legal-review capability before any claim-bearing activation.</p>
+                  </div>
+                </div>
+              ) : null}
 
               <div style={{ marginTop: "var(--s5)" }}>
                 <ScoreBar

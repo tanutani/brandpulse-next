@@ -2,6 +2,7 @@ import { ArrowRight, Beaker, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 import { HowItWorksLink } from "@/components/shell/how-it-works-link";
+import { ACT_OPPORTUNITY_ID } from "@/lib/demo/journey";
 
 /**
  * The cover. One sentence, one preview, one primary action. Everything
@@ -21,7 +22,10 @@ export default function Home() {
 
           <div className="cover-actions">
             <Link className="btn btn-primary" href="/opportunities">
-              Open live decision room <ArrowRight aria-hidden="true" size={16} />
+              Start Rexona guided demo <ArrowRight aria-hidden="true" size={16} />
+            </Link>
+            <Link className="btn btn-secondary" href={`/opportunities/${ACT_OPPORTUNITY_ID}`}>
+              See an ACT decision
             </Link>
             <HowItWorksLink />
           </div>
@@ -38,6 +42,7 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="journey-previews">
         <aside className="use-case-preview" aria-label="Rexona use case preview">
           <div className="use-case-head">
             <span>Use case</span>
@@ -67,6 +72,34 @@ export default function Home() {
             </div>
           </div>
         </aside>
+        <aside className="use-case-preview is-act-preview" aria-label="Surf Excel use case preview">
+          <div className="use-case-head">
+            <span>90-second ACT contrast</span>
+            <strong>Surf Excel · India</strong>
+          </div>
+          <div className="use-case-body">
+            <h2>First-monsoon muddy play</h2>
+            <p>
+              Weather, search, social and commerce agree. Inventory, claim support and creator rights
+              were prepared before the rain arrived.
+            </p>
+            <div className="use-case-shift">
+              <div>
+                <span>Prepared decision</span>
+                <span className="route-badge route-act_now">Act now</span>
+              </div>
+              <div>
+                <span>Consequential gate</span>
+                <strong>Human approval</strong>
+              </div>
+            </div>
+            <div className="use-case-result">
+              <span>Monitored outcome</span>
+              <strong>Descriptive only · no causal claim</strong>
+            </div>
+          </div>
+        </aside>
+        </div>
       </section>
     </div>
   );

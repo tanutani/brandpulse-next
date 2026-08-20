@@ -18,19 +18,19 @@ export function SprintStudio({ contract }: { contract: OpportunityContract }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const stored = new LocalJourneyStore(window.localStorage).load();
+    const stored = new LocalJourneyStore(window.localStorage).load(contract.contractId);
     queueMicrotask(() => {
       setJourney(stored);
-      if (stored?.sprint) setSprint(stored.sprint);
+      if (stored?.kind === "test" && stored.sprint) setSprint(stored.sprint);
       setReady(true);
     });
-  }, []);
+  }, [contract.contractId]);
 
   const validation = useMemo(() => validateSprint(sprint), [sprint]);
   const eligible = journey?.scope === "four_city" && journey.assetMode === "rights_safe_creator";
 
   function registerSprint() {
-    if (!journey || !eligible) return;
+    if (!journey || journey.kind !== "test" || !eligible) return;
     const locked = lockSprint(sprint, "2026-08-15T12:10:00.000Z");
     const next = { ...journey, sprint: locked, outcome: null, decisions: [], selectedVariantId: null };
     new LocalJourneyStore(window.localStorage).save(next);
@@ -48,7 +48,7 @@ export function SprintStudio({ contract }: { contract: OpportunityContract }) {
           registering spend.
         </p>
         <Link className="btn btn-primary" href={`/resolver/${contract.opportunity.id}`}>
-          Return to Portfolio Resolver
+          Return to ownership view
         </Link>
       </section>
     );
@@ -62,7 +62,7 @@ export function SprintStudio({ contract }: { contract: OpportunityContract }) {
         <section className="decision-surface">
           <div className="decision-surface-head">
             <div>
-              <p>Causal Sprint · pre-registered</p>
+              <p>Bounded test · pre-registered</p>
               <h2>One decision, fixed before exposure</h2>
             </div>
             <span className="mode-chip">

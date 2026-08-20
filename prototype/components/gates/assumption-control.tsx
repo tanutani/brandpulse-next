@@ -142,7 +142,7 @@ export function AssumptionControl({
             <p className="section-kicker">Sensitivity · team thresholds</p>
             <h3>Concentrated evidence lowers Proof</h3>
           </div>
-          <RouteBadge route={decision.route} />
+          <RouteBadge route={decision.route} actionMode={contract.actionMode} />
         </div>
 
         <ScoreBar label="Proof" score={proof.score} weakest />

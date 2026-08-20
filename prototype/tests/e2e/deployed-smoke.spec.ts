@@ -14,7 +14,7 @@ test.describe("deployed prototype", () => {
 
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Attention is not demand." })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Open live decision room/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Start Rexona guided demo/i })).toBeVisible();
     await expect(page.getByRole("note")).toContainText(/Unofficial Techtonic Season 8 concept/i);
     await page.screenshot({ path: testInfo.outputPath("deployed-cover.png"), fullPage: true });
 

@@ -2,7 +2,7 @@ import { OpportunityList } from "@/components/pulse/opportunity-list";
 import { SignalRoom } from "@/components/pulse/signal-room";
 import { SkepticPanel } from "@/components/pulse/skeptic-panel";
 import { SynthesisPanel } from "@/components/pulse/synthesis-panel";
-import { HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
+import { ACT_OPPORTUNITY_ID, HERO_OPPORTUNITY_ID } from "@/lib/demo/journey";
 import { loadFixtureBundle } from "@/lib/fixtures";
 import { getWeakestGate } from "@/lib/routing/select-route";
 import { getSignalReplay } from "@/lib/signals/signal-replay";
@@ -25,7 +25,12 @@ export default function PulseRoomPage() {
       evidenceCount: contract.opportunity.evidence.length,
       weakestGate: `${weakest.gate} ${weakest.score}`,
       route: contract.recommendedRoute,
-      primary: contract.opportunity.id === HERO_OPPORTUNITY_ID,
+      actionMode: contract.actionMode,
+      primary: contract.opportunity.id === HERO_OPPORTUNITY_ID
+        ? "guided" as const
+        : contract.opportunity.id === ACT_OPPORTUNITY_ID
+          ? "act" as const
+          : null,
     };
   });
 

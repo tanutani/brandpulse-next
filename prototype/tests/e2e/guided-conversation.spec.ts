@@ -18,7 +18,7 @@ test("guide messages advance only when the real action succeeds", async ({ page 
 
   // Clicking an unrelated control must not advance the tour.
   await page.getByRole("link", { name: /Scalp skinification/i }).click();
-  await page.goBack();
+  await page.goto("/opportunities");
   await expect(guide).toContainText("1/11");
 
   await page.getByRole("button", { name: /Replay signal/i }).click();
@@ -118,7 +118,7 @@ test("the guide reaches the Learning Ledger and finishes", async ({ page }) => {
   await page.goto(`/resolver/${hero}`);
   await page.getByRole("button", { name: "Four in-stock cities" }).click();
   await page.getByRole("button", { name: "Rights-safe creator" }).click();
-  await page.getByRole("link", { name: /Design the Causal Sprint/i }).click();
+  await page.getByRole("link", { name: /Go to Bounded test/i }).click();
   await page.getByRole("button", { name: /Lock sprint rules/i }).click();
   await page.getByRole("link", { name: /Review activation package/i }).click();
 
@@ -129,7 +129,7 @@ test("the guide reaches the Learning Ledger and finishes", async ({ page }) => {
   await page.getByRole("button", { name: /Approve corrected variant/i }).click();
   await page.getByRole("button", { name: /Reveal synthetic result/i }).click();
 
-  await expect(page.locator(bubble)).toContainText("Learning Ledger keeps the whole chain");
+  await expect(page.locator(bubble)).toContainText("Decision history keeps the whole chain");
   await page.getByRole("button", { name: "Finish" }).click();
   await expect(page.locator(bubble)).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Restart guide" })).toBeVisible();

@@ -42,10 +42,12 @@ export function GuideBubble() {
     }
 
     const rect = target.getBoundingClientRect();
+    const bubbleHeight = document.querySelector<HTMLElement>("[data-testid='guide-bubble']")
+      ?.getBoundingClientRect().height ?? 190;
     // Prefer below the control; flip above when there is not enough room.
     const below = rect.bottom + GAP;
-    const fitsBelow = below + 190 < window.innerHeight;
-    const top = fitsBelow ? below : Math.max(MARGIN, rect.top - 190 - GAP);
+    const fitsBelow = below + bubbleHeight < window.innerHeight;
+    const top = fitsBelow ? below : Math.max(MARGIN, rect.top - bubbleHeight - GAP);
     const left = Math.min(
       Math.max(MARGIN, rect.left + rect.width / 2 - BUBBLE_WIDTH / 2),
       Math.max(MARGIN, window.innerWidth - BUBBLE_WIDTH - MARGIN),
