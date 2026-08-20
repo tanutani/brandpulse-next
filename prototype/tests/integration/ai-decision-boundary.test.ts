@@ -109,7 +109,11 @@ describe("model output cannot reach a consequential decision", () => {
     expect(fallback?.mode).toBe("precomputed_fallback");
     expect(afterLive).toEqual(baseline);
     expect(afterFallback).toEqual(baseline);
-    expect(baseline).toEqual({ proofScore: 68, route: "test", readiness: 68 });
+    // Readiness is 63 rather than 68 because the stored assessment now holds the
+    // unresolved starting state, where national stock is the weakest gate. What
+    // this test guards is that the number is identical before and after the model
+    // runs, not what the number happens to be.
+    expect(baseline).toEqual({ proofScore: 68, route: "test", readiness: 63 });
   });
 
   it("leaves the scope and rights controls deterministic either side of a live call", async () => {

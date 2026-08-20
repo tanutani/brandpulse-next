@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-import bundledContracts from "@/public/data/opportunity-contracts.json";
+import { buildContracts } from "@/lib/fixtures/build-contract";
+import { USE_CASE_SOURCES } from "@/lib/fixtures/source";
 import { OpportunityContractSchema } from "@/lib/contracts/opportunity";
 import type { FixtureBundle, FixtureLoader } from "@/lib/contracts/fixtures";
 import type { OpportunityContract } from "@/lib/contracts/opportunity";
@@ -55,7 +56,20 @@ const FixtureBundleSchema = z
     });
   });
 
-const parsedBundle = FixtureBundleSchema.parse(bundledContracts);
+/**
+ * Contracts are derived from the authored inputs in lib/fixtures/source, not read
+ * from JSON. Scores and routes are return values of the same scorers the app uses,
+ * so a stored number cannot contradict the engine that claims to produce it. The
+ * committed JSON is a generated artifact for review; a drift test keeps it honest.
+ *
+ * The invariants below are now largely tautological — keep them anyway, because
+ * they guard the builder rather than the data.
+ */
+const parsedBundle = FixtureBundleSchema.parse({
+  fixtureVersion: "1.0.0",
+  generatedAt: "2026-08-15T08:30:00.000Z",
+  contracts: buildContracts(USE_CASE_SOURCES),
+});
 
 export const fixtureBundle: FixtureBundle = parsedBundle;
 

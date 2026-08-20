@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import type { ProofInputs } from "@/lib/contracts";
-import { loadFixtureBundle } from "@/lib/fixtures";
+import { findOpportunityContract, loadFixtureBundle } from "@/lib/fixtures";
+import { createPortfolioCandidates } from "@/lib/portfolio/hero-portfolio";
+import { resolvePortfolio } from "@/lib/portfolio/resolve-owner";
 import { selectRoute } from "@/lib/routing/select-route";
 import { calculateProof } from "@/lib/scoring/proof";
 
@@ -29,19 +31,27 @@ function heroProofInputs(sourceConcentration: number): ProofInputs {
 
 describe("static fixture to deterministic route", () => {
   it("validates the hero bundle and routes the focused scope to Test", () => {
-    const hero = loadFixtureBundle().contracts[0];
-    const proof = calculateProof(heroProofInputs(0));
-    const decision = selectRoute({
+    // The stored contract now opens on the unresolved starting position, so the
+    // focused scope has to be resolved here rather than read off the fixture.
+    const hero = findOpportunityContract("opp-extra-time-sweat-confidence")!;
+    const resolution = resolvePortfolio({
+      candidates: createPortfolioCandidates(hero, "four_city", "rights_safe_creator"),
       opportunity: hero.opportunity,
-      proof,
-      permission: hero.brandAssessments[0].permission,
-      preparedness: hero.brandAssessments[0].preparedness,
-      blockers: [],
+      scope: "four_city",
+      assetMode: "rights_safe_creator",
       evaluatedAt: "2026-08-15T08:30:00.000Z",
     });
+    const rexona = resolution.candidates.find(({ brandId }) => brandId === "rexona")!;
 
-    expect(proof.score).toBe(68);
-    expect(decision).toMatchObject({ route: "test", readiness: 68, weakestGate: "proof" });
+    expect(rexona.proof.score).toBe(68);
+    expect(rexona.decision).toMatchObject({ route: "test", readiness: 68, weakestGate: "proof" });
+  });
+
+  it("opens on Watch before scope and rights are resolved", () => {
+    const hero = findOpportunityContract("opp-extra-time-sweat-confidence")!;
+
+    expect(hero.recommendedRoute).toBe("watch");
+    expect(hero.routeReasonCodes).toContain("RIGHTS_MATCH_FOOTAGE_UNAVAILABLE");
   });
 
   it("applies the documented source-concentration sensitivity and downgrades to Watch", () => {

@@ -32,10 +32,19 @@ describe("hero journey (locked before the contract-source refactor)", () => {
       ),
     );
 
+    // Permission and Preparedness for the hero moved deliberately when contracts
+    // started deriving from the same brand inputs the resolver uses. Before the
+    // refactor the contract screen showed Rexona 86 / Dove 59 / Axe 72 while the
+    // resolver computed 91 / 72 / 63 for the same brands from the same weights —
+    // two screens, two answers, and Dove and Axe ranked in opposite orders.
+    // Permission does not vary with scope or rights, so only one of those could
+    // be right. Preparedness now reflects the stored starting state (national
+    // scope, unlicensed match footage) instead of a combination no control could
+    // reproduce. Every other number is unchanged.
     expect(snapshot).toEqual([
-      "opp-extra-time-sweat-confidence:rexona:68:86:76:68",
-      "opp-extra-time-sweat-confidence:dove:68:59:81:59",
-      "opp-extra-time-sweat-confidence:axe:68:72:69:68",
+      "opp-extra-time-sweat-confidence:rexona:68:91:63:63",
+      "opp-extra-time-sweat-confidence:dove:68:72:68:68",
+      "opp-extra-time-sweat-confidence:axe:68:63:70:63",
       "opp-scalp-skinification:dove-hair:68:78:42:42",
       "opp-scalp-skinification:sunsilk:68:73:38:38",
       "opp-scalp-skinification:tresemme:68:62:36:36",
@@ -50,9 +59,17 @@ describe("hero journey (locked before the contract-source refactor)", () => {
       (contract) => `${contract.opportunity.id}:${contract.recommendedRoute}`,
     );
 
+    // The hero now opens on Watch, which is what national scope plus unlicensed
+    // match footage actually earns and what the landing page already claimed.
+    // Test is what the resolver grants once scope and rights are fixed.
+    //
+    // Scalp moved from incubate to watch because incubate was never reachable
+    // for it: the ladder returns watch for a remediable mandatory blocker, and
+    // incubate additionally needs Proof >= 75 where this signal scores 68. The
+    // stored "incubate" was authored by hand and the engine never agreed with it.
     expect(routes).toEqual([
-      "opp-extra-time-sweat-confidence:test",
-      "opp-scalp-skinification:incubate",
+      "opp-extra-time-sweat-confidence:watch",
+      "opp-scalp-skinification:watch",
       "opp-single-creator-cooling-challenge:ignore",
     ]);
   });
@@ -102,21 +119,20 @@ describe("hero journey (locked before the contract-source refactor)", () => {
 
 describe("collapsed gate components", () => {
   it("recognises a collapsed placeholder as not re-scorable", () => {
-    // 24 of 27 stored gates are a single component repeating the score. The proof
-    // sensitivity panel reads named inputs off this array, so it must be able to
-    // tell the two shapes apart rather than computing on absent values.
     expect(hasFullProofComponents([
       { name: "shared opportunity proof", value: 68, weight: 1, evidenceIds: [] },
     ])).toBe(false);
+  });
 
-    const heroProof = findOpportunityContract(HERO)!.brandAssessments.find(
-      ({ brandId }) => brandId === "rexona",
-    )!.proof;
-    expect(hasFullProofComponents(heroProof.components)).toBe(true);
-
-    const doveProof = findOpportunityContract(HERO)!.brandAssessments.find(
-      ({ brandId }) => brandId === "dove",
-    )!.proof;
-    expect(hasFullProofComponents(doveProof.components)).toBe(false);
+  it("gives every derived gate the real six components", () => {
+    // The whole point of deriving contracts: no gate can be a placeholder any
+    // more, because components are produced by the scorer rather than authored.
+    for (const contract of loadFixtureBundle().contracts) {
+      for (const assessment of contract.brandAssessments) {
+        expect(hasFullProofComponents(assessment.proof.components)).toBe(true);
+        expect(assessment.permission.components).toHaveLength(6);
+        expect(assessment.preparedness.components).toHaveLength(6);
+      }
+    }
   });
 });

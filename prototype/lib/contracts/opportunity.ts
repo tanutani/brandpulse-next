@@ -96,6 +96,15 @@ export const HumanDecisionSchema = z
   })
   .strict();
 
+/** A documented input the decision rests on, named so it can be varied and audited. */
+export const AssumptionSchema = z
+  .object({
+    label: z.string(),
+    value: z.unknown(),
+    evidenceType: EvidenceTypeSchema,
+  })
+  .strict();
+
 export const OpportunityContractSchema = z
   .object({
     schemaVersion: z.literal("1.0.0"),
@@ -106,21 +115,14 @@ export const OpportunityContractSchema = z
     brandAssessments: z.array(BrandAssessmentSchema).min(3),
     recommendedRoute: RouteSchema,
     routeReasonCodes: z.array(z.string()).min(1),
-    assumptions: z.array(
-      z
-        .object({
-          label: z.string(),
-          value: z.unknown(),
-          evidenceType: EvidenceTypeSchema,
-        })
-        .strict(),
-    ),
+    assumptions: z.array(AssumptionSchema),
     causalSprint: CausalSprintSchema.nullable().optional(),
     humanDecisions: z.array(HumanDecisionSchema),
     outcome: z.object({}).passthrough().nullable().optional(),
   })
   .strict();
 
+export type Assumption = z.infer<typeof AssumptionSchema>;
 export type ComponentScore = z.infer<typeof ComponentScoreSchema>;
 export type GateAssessment = z.infer<typeof GateAssessmentSchema>;
 export type EvidenceItem = z.infer<typeof EvidenceItemSchema>;
